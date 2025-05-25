@@ -246,7 +246,7 @@
                                 <li>
                                     <a href="#" class="sidebar-item flex items-center px-3 py-3 rounded-lg">
                                         <i class="fas fa-book mr-3"></i>
-                                        Koleksi Buku
+                                        Chats history
                                     </a>
                                 </li>
                                 <li>
@@ -258,13 +258,7 @@
                                 <li>
                                     <a href="#" class="sidebar-item flex items-center px-3 py-3 rounded-lg">
                                         <i class="fas fa-handshake mr-3"></i>
-                                        Peminjaman
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="sidebar-item flex items-center px-3 py-3 rounded-lg">
-                                        <i class="fas fa-undo mr-3"></i>
-                                        Pengembalian
+                                        Intents
                                     </a>
                                 </li>
                             </ul>
@@ -310,92 +304,7 @@
             </aside>
 
             <!-- Main Content -->
-            <main class="flex-1 main-content">
-                <!-- Breadcrumb -->
-                <div class="p-4 border-b border-gray-200">
-                    <nav class="breadcrumb">
-                        <a href="#">Home</a> / <a href="#">Dashboard</a> / <span class="text-black font-bold">Overview</span>
-                    </nav>
-                </div>
-
-                <!-- Page Content -->
-                <div class="p-6">
-                    <div class="mb-6">
-                        <h2 class="handwriting text-3xl font-bold mb-2">Dashboard Overview</h2>
-                        <p class="text-gray-600">Selamat datang di sistem perpustakaan Bina Patria</p>
-                    </div>
-
-                    <!-- Sample cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div class="card p-6 rounded-lg">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="handwriting text-xl font-bold">Total Buku</h3>
-                                    <p class="text-3xl font-bold text-blue-600">1,234</p>
-                                </div>
-                                <i class="fas fa-book text-3xl text-blue-500"></i>
-                            </div>
-                        </div>
-
-                        <div class="card p-6 rounded-lg">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="handwriting text-xl font-bold">Anggota Aktif</h3>
-                                    <p class="text-3xl font-bold text-green-600">567</p>
-                                </div>
-                                <i class="fas fa-users text-3xl text-green-500"></i>
-                            </div>
-                        </div>
-
-                        <div class="card p-6 rounded-lg">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="handwriting text-xl font-bold">Dipinjam</h3>
-                                    <p class="text-3xl font-bold text-orange-600">89</p>
-                                </div>
-                                <i class="fas fa-handshake text-3xl text-orange-500"></i>
-                            </div>
-                        </div>
-
-                        <div class="card p-6 rounded-lg">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="handwriting text-xl font-bold">Terlambat</h3>
-                                    <p class="text-3xl font-bold text-red-600">12</p>
-                                </div>
-                                <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content placeholder -->
-                    <div class="card p-6 rounded-lg">
-                        <h3 class="handwriting text-2xl font-bold mb-4">Recent Activities</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                <i class="fas fa-book-open mr-3 text-blue-500"></i>
-                                <div>
-                                    <p class="font-semibold">Buku "Harry Potter" dipinjam oleh John Doe</p>
-                                    <p class="text-sm text-gray-500">2 jam yang lalu</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                <i class="fas fa-user-plus mr-3 text-green-500"></i>
-                                <div>
-                                    <p class="font-semibold">Anggota baru: Jane Smith terdaftar</p>
-                                    <p class="text-sm text-gray-500">5 jam yang lalu</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                <i class="fas fa-undo mr-3 text-purple-500"></i>
-                                <div>
-                                    <p class="font-semibold">Buku "The Great Gatsby" dikembalikan</p>
-                                    <p class="text-sm text-gray-500">1 hari yang lalu</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <main class="flex-1 main-content">                
             </main>
         </div>
 

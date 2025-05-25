@@ -117,3 +117,4 @@ timestamp,input_text,predicted_intent,is_ood,confidence,energy_score,detection_m
 2025-05-16 00:16:25,ya,confirm,False,0.9717757105827332,-5.386950969696045,combined
 2025-05-16 00:17:16,enggak kok bang,denied,False,0.9806344509124756,-5.7324910163879395,combined
 2025-05-16 00:17:31,terimakasih aku pergi,goodbye,False,0.9756609797477722,-5.29248046875,combined
+2025-05-25 22:32:46,cariin buku,cari_buku,False,0.9802038669586182,-5.4514336585998535,combined
