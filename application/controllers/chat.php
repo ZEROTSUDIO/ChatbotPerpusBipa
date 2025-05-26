@@ -92,13 +92,42 @@ class chat extends CI_Controller
 					$result['next_action'] = $next_action;
 				}
 				// Simpan percakapan ke database           
-				$data = [
-					'user' => $user_id,
-					'user_message' => $message,
-					'bot_response' => $result['response']
+				$chatData = [
+					'user'          => $user_id,
+					'user_message'  => $message,
+					'bot_response'  => $result['response']
 				];
 				$this->db->db_debug = TRUE;
-				$this->chatModel->saveChat('chats', $data);
+				$this->chatModel->saveChat('chats', $chatData);
+
+				// Dapatkan chat_id yang baru saja di-insert
+				$chat_id = $this->db->insert_id();
+
+				// 2. Simpan detail prediksi ke chat_detail
+				$detailData = [
+					'user_id'        => $user_id,
+					'chat_id'        => $chat_id,
+					'intent'         => $responseData['intent'],
+					'confident_score'=> $responseData['confidence'],
+					'energy'         => $responseData['energy_score'],
+					'ood'            => $responseData['is_ood'] ? 1 : 0,
+					// 'timestamp'    => otomatis CURRENT_TIMESTAMP
+				];
+				$this->chatModel->saveChatDetail('chat_detail', $detailData);
+
+				// Dapatkan detail_id yang baru saja di-insert
+				$detail_id = $this->db->insert_id();
+
+				// 3. Simpan class probabilities ke class_probability
+				//$responseData['class_probabilities'] adalah array ['intent' => score, ...]
+				foreach ($responseData['class_probabilities'] as $cls => $score) {
+					$probData = [
+						'prediction_id'  => $detail_id,
+						'intent_class'  => $cls,
+						'probability'         => $score
+					];
+					$this->chatModel->saveClassProbability('class_probabilities', $probData);
+				}				
 			}
 		} else {
 			error_log("Flask API error: HTTP $httpcode");

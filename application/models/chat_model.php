@@ -6,6 +6,16 @@ class Chat_model extends CI_Model
     {
         $this->db->insert($table, $data);
     }
+	public function saveChatDetail($table, $data)
+    {
+        return $this->db->insert($table, $data);
+    }
+
+    // Simpan ke tabel class_probability
+    public function saveClassProbability($table, $data)
+    {
+        return $this->db->insert($table, $data);
+    }
 
     public function getChatHistory($table)
     {
