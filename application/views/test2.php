@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <style>
         /* Dashboard Custom CSS - consistent with chat interface */
         body {
@@ -303,6 +303,42 @@
             </div>
 
             <!-- Navigation -->
+			<!-- Header actions -->
+            <div class="flex items-center space-x-4">
+                <!-- Notifications -->
+                <button class="bg-white border-2 border-black rounded-full p-2 hover:bg-gray-100 transition-colors relative">
+                    <i class="fas fa-bell"></i>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </button>
+
+                <!-- Search -->
+                <button class="bg-white border-2 border-black rounded-full p-2 hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                <!-- Profile dropdown -->
+                <div class="profile-dropdown">
+                    <button class="bg-white border-2 border-black rounded-full p-2 hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="dropdown-content rounded-lg">
+                        <div class="px-4 py-3 border-b border-gray-200">
+                            <p class="font-bold handwriting text-lg">Admin User</p>
+                            <p class="text-sm">admin@perpusbipa.com</p>
+                            <p class="text-xs text-gray-500">ID: ADM001</p>
+                        </div>
+                        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <i class="fas fa-user-edit mr-2"></i> Edit Profile
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <i class="fas fa-cog mr-2"></i> Settings
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100 rounded-b-lg">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
             <nav>
                 <div class="mb-6">
                     <h3 class="handwriting text-lg font-bold mb-3 px-3 sidebar-text">Menu Utama</h3>
@@ -713,7 +749,24 @@
                         </table>
                     </div>
                 </div>
-            </div>
+				<div class="container mt-5 p-4 bg-white shadow-md rounded-lg">
+				  <h2 class="text-2xl font-semibold mb-4">Edit Response for Intent: <span class="text-blue-500"></span></h2>
+
+				  <form action="<?= base_url('admin/save_response') ?>" method="post">
+					<input type="hidden" name="intent" value="">
+					
+					<div class="mb-4">
+					  <label for="response" class="form-label font-medium">Response Text</label>
+					  <textarea id="response" name="response" class="form-control"></textarea>
+					</div>
+
+					<div class="flex space-x-4">
+					  <button type="submit" class="btn btn-primary">Save</button>
+					  <a href="<?= base_url('admin/responses') ?>" class="btn btn-secondary">Cancel</a>
+					</div>
+				  </form>
+				</div>				
+			</div>
 
             <!-- Chatbot Section -->
             <div id="chatbot-content" class="content-section hidden">
@@ -914,5 +967,22 @@
             }
         });
     </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>	
+	<script>
+	  $(document).ready(function() {
+		$('#response').summernote({
+		  height: 300,
+		  tabsize: 2,
+		  placeholder: 'Type your dynamic response here...',
+		  toolbar: [
+			['style', ['bold', 'italic', 'underline', 'clear']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['insert', ['link']],
+			['view', ['codeview']]
+		  ]
+		});
+	  });
+	</script>
 </body>
 </html>							
