@@ -1,6 +1,6 @@
 // Dashboard JavaScript
 $(document).ready(function () {
-	// Sidebar toggle functionality
+	/* Sidebar toggle functionality
 	$("#sidebar-toggle").click(function () {
 		const sidebar = $("#sidebar");
 		const mainWrapper = $("#main-wrapper");
@@ -52,21 +52,10 @@ $(document).ready(function () {
 			$("#mobile-backdrop").removeClass("show");
 		}
 	});
+	*/
 
 	// Initialize charts
 	initializeCharts();
-
-	$("#response").summernote({
-		height: 300,
-		tabsize: 2,
-		placeholder: "Type your dynamic response here...",
-		toolbar: [
-			["style", ["bold", "italic", "underline", "clear"]],
-			["para", ["ul", "ol", "paragraph"]],
-			["insert", ["link"]],
-			["view", ["codeview"]],
-		],
-	});
 });
 
 function initializeCharts() {
