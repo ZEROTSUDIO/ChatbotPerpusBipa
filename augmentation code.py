@@ -8,6 +8,7 @@ import time
 import os
 import json
 import matplotlib.pyplot as plt
+import numpy as np
 from nltk.corpus import wordnet
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from deep_translator import GoogleTranslator
@@ -20,13 +21,19 @@ nltk.download('wordnet', quiet=True)
 nltk.download('omw-1.4', quiet=True)
 
 # =========[ KONFIGURASI ]=========
-INPUT_FILE = "train.xlsx" # @param {"type":"string"}
-DATA_TYPE = "test" # @param ["train", "val", "test"]
-TARGET_SAMPLES_PER_CLASS = 400    # @param {type:"integer"} Target jumlah sampel per kelas
+# After your drive mount and FName setup, add:
+DATASET_SAVE_PATH = f"{MODEL_SAVE_PATH}/dataset"
+# Create directories if they don't exist
+os.makedirs(DATASET_SAVE_PATH, exist_ok=True)
+os.makedirs(f"{DATASET_SAVE_PATH}/reports", exist_ok=True)
+
+INPUT_FILE = "/content/ChatbotPerpusBipa/train.xlsx" # @param {"type":"string"}
+DATA_TYPE = "train" # @param ["train", "val", "test"]
+TARGET_SAMPLES_PER_CLASS = 1000    # @param {type:"integer"} Target jumlah sampel per kelas
 NOISE_INTENSITY = 0.7             # @param {type:"number"} Control how aggressive augmentations are (0.1-1.0)
 USE_PARAPHRASE_MODEL = True       # @param {type:"boolean"} Aktifkan atau matikan paraphrase
 USE_BACK_TRANSLATION = True       # @param {type:"boolean"} Aktifkan atau matikan back-translation
-MIN_AUGMENTATIONS_PER_SAMPLE = 1  # @param {type:"integer"} Minimum augmentasi per sampel asli
+MIN_AUGMENTATIONS_PER_SAMPLE = 2  # @param {type:"integer"} Minimum augmentasi per sampel asli
 MAX_AUGMENTATIONS_PER_SAMPLE = 20  # @param {type:"integer"} Maximum augmentasi per sampel asli (reduced from 10)
 BATCH_SIZE = 16                   # @param {type:"integer"} Untuk batch processing
 PARAPHRASE_RATIO = 0.4            # @param {type:"number"} Maksimal 40% dari total augmentasi adalah paraphrase
@@ -395,7 +402,7 @@ def augment_text_with_tracking(text, intent, intensity=1.0):
 	# Global method usage control - tambahkan ini
     global augmentation_method_counts
     total_augmentations = sum(augmentation_method_counts.values())
-    
+
     # Jika common_phrase sudah terlalu banyak, kurangi probabilitasnya
     common_phrase_ratio = augmentation_method_counts.get('common_phrase', 0) / max(1, total_augmentations)
     if common_phrase_ratio > 0.25:  # Jika lebih dari 25%
@@ -403,7 +410,7 @@ def augment_text_with_tracking(text, intent, intensity=1.0):
         skip_common_phrase = True
     else:
         skip_common_phrase = False
-		
+
     # Protect intent-critical words
     protected = []
     if intent in protected_intent_words:
@@ -449,18 +456,18 @@ def augment_text_with_tracking(text, intent, intensity=1.0):
     if method_choices:
         # Weighted selection untuk mengurangi dominasi method tertentu
         method_weights = {
-            'synonym': 3, 'back_translate': 2, 'slang': 2, 'swap': 2, 
+            'synonym': 3, 'back_translate': 2, 'slang': 2, 'swap': 2,
             'deletion': 2, 'phonetic': 2, 'char_noise': 1,
             'common_phrase': 1,  # Kurangi weight common_phrase
             'short_text': 2
         }
-        
+
         # Filter method_choices berdasarkan weight
         weighted_choices = []
         for method in method_choices:
             weight = method_weights.get(method, 1)
             weighted_choices.extend([method] * weight)
-        
+
         # Sample dengan replacement untuk menghindari dominasi
         selected_methods = []
         for _ in range(min(num_methods, len(method_choices))):
@@ -562,6 +569,7 @@ def plot_augmentation_methods():
         autotext.set_fontweight('bold')
 
     plt.tight_layout()
+    plt.savefig(f"{DATASET_SAVE_PATH}/reports/augmentation_methods_distribution.png", dpi=300, bbox_inches='tight')
     plt.show()
 
     # Print statistik detail
@@ -631,25 +639,170 @@ def plot_distribution(data, title):
     plt.xticks(rotation=45)
     plt.grid(axis='y', linestyle='--', alpha=0.5)
     plt.tight_layout()
+    filename = title.lower().replace(" ", "_").replace("distribution", "dist")
+    plt.savefig(f"{DATASET_SAVE_PATH}/reports/{filename}.png", dpi=300, bbox_inches='tight')
     plt.show()
 
+# ADD: New function to save comprehensive report
+def save_augmentation_report(final_df, original_df, time_taken, output_path):
+    """Save a comprehensive text report of the augmentation process"""
+    report_path = f"{DATASET_SAVE_PATH}/reports/augmentation_report.txt"
+
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write("="*60 + "\n")
+        f.write("DATASET AUGMENTATION REPORT\n")
+        f.write("="*60 + "\n\n")
+
+        # Original statistics
+        f.write("ORIGINAL DATASET:\n")
+        f.write("-" * 20 + "\n")
+        original_counts = Counter(original_df['intent'])
+        for intent, count in original_counts.items():
+            f.write(f"  {intent}: {count}\n")
+        f.write(f"Total original samples: {len(original_df)}\n\n")
+
+        # Final statistics
+        f.write("FINAL DATASET:\n")
+        f.write("-" * 20 + "\n")
+        final_counts = Counter(final_df['intent'])
+        for intent, count in final_counts.items():
+            orig = original_counts.get(intent, 0)
+            added = count - orig
+            f.write(f"  {intent}: {count} total ({orig} original + {added} augmented)\n")
+        f.write(f"Total final samples: {len(final_df)}\n\n")
+
+        # Method statistics
+        f.write("AUGMENTATION METHODS USED:\n")
+        f.write("-" * 30 + "\n")
+        total_augmented = sum(augmentation_method_counts.values())
+        for method, count in sorted(augmentation_method_counts.items(), key=lambda x: x[1], reverse=True):
+            percentage = (count / total_augmented) * 100 if total_augmented > 0 else 0
+            f.write(f"  {method:20s}: {count:6d} ({percentage:5.1f}%)\n")
+
+        f.write(f"\nProcessing time: {time_taken:.2f} seconds\n")
+        f.write(f"Augmentation ratio: {len(final_df) / len(original_df):.2f}x\n")
+
+    print(f"Comprehensive report saved to: {report_path}")
+
 # =========[ MAIN PROCESS ]=========
+# Add target method ratios at module level
+TARGET_METHOD_RATIOS = {
+    'synonym': 0.25, 'back_translate': 0.15, 'slang': 0.15,
+    'swap': 0.12, 'deletion': 0.10, 'phonetic': 0.10,
+    'char_noise': 0.08, 'common_phrase': 0.05
+}
+
+def get_adaptive_weights(base_weights, current_counts, total_target):
+    """Adjust weights based on current usage to maintain balance"""
+    adjusted_weights = base_weights.copy()
+    total_current = sum(current_counts.values())
+    
+    if total_current > 0:
+        for method in adjusted_weights:
+            current_ratio = current_counts.get(method, 0) / total_current
+            target_ratio = base_weights[method]
+            
+            # Reduce weight if method is overused
+            if current_ratio > target_ratio * 1.5:
+                adjusted_weights[method] *= 0.5
+            # Increase weight if method is underused
+            elif current_ratio < target_ratio * 0.5:
+                adjusted_weights[method] *= 1.5
+    
+    return adjusted_weights
+
+def get_adaptive_method_selection(text_length, intensity, current_counts, total_augmentations, methods):
+    """Get methods with adaptive weighting based on current distribution"""
+    
+    if text_length <= 3:
+        base_weights = {'slang': 0.4, 'short_text': 0.3, 'synonym': 0.2, 'common_phrase': 0.1}
+        num_methods = min(2, int(intensity * 2))
+    else:
+        base_weights = TARGET_METHOD_RATIOS.copy()
+        num_methods = min(2, int(intensity * 1.5))
+    
+    # Apply adaptive weighting
+    if total_augmentations > 50:  # Only adjust after some data
+        adjusted_weights = get_adaptive_weights(base_weights, current_counts, total_augmentations)
+    else:
+        adjusted_weights = base_weights
+    
+    # Select methods based on adjusted weights
+    available_methods = [m for m in adjusted_weights.keys() if m in methods]
+    if available_methods:
+        weights = [adjusted_weights[m] for m in available_methods]
+        weights_sum = sum(weights)
+        if weights_sum > 0:
+            normalized_weights = [w/weights_sum for w in weights]
+            try:
+                selected = np.random.choice(
+                    available_methods, 
+                    size=min(num_methods, len(available_methods)), 
+                    p=normalized_weights,
+                    replace=False
+                )
+                return list(selected)
+            except ValueError:
+                # Fallback to random selection
+                return random.sample(available_methods, min(num_methods, len(available_methods)))
+    
+    return []
+
+def validate_method_distribution(target_ratios, actual_counts, tolerance=0.1):
+    """Check if method distribution is within acceptable range"""
+    total = sum(actual_counts.values())
+    if total == 0:
+        return True
+    
+    for method, target_ratio in target_ratios.items():
+        actual_ratio = actual_counts.get(method, 0) / total
+        if abs(actual_ratio - target_ratio) > tolerance:
+            return False
+    return True
+
+def controlled_paraphrase_generation(texts_with_quotas, model, tokenizer):
+    """Generate paraphrases with better control over quantity and quality"""
+    results = []
+    
+    for text, quota in texts_with_quotas:
+        if quota <= 0:
+            continue
+            
+        try:
+            # Generate multiple candidates
+            candidates = batch_paraphrase(model, tokenizer, [text], batch_size=1)
+            valid_paraphrases = []
+            
+            for para in candidates:
+                if len(valid_paraphrases) >= quota:
+                    break
+                if para and validate_augmentation(text, para):
+                    valid_paraphrases.append(para)
+            
+            results.extend(valid_paraphrases)
+            
+        except Exception as e:
+            print(f"Error in controlled paraphrase generation: {e}")
+            continue
+    
+    return results
+
 def main():
-    """Main process for dataset augmentation"""
+    """Main process for dataset augmentation with improved distribution control"""
     # Set up file paths based on chosen data type
     if DATA_TYPE == "train":
         OUTPUT_FILE = "train.csv"
+        OUTPUT_FILES = f"{DATASET_SAVE_PATH}/train_augmented.csv"
+        output_files = OUTPUT_FILES
         input_file = INPUT_FILE
         output_file = OUTPUT_FILE
     elif DATA_TYPE == "val":
-        # If different paths needed for validation
         OUTPUT_FILE = "val.csv"
         input_file = INPUT_FILE.replace("train", "val")
         output_file = OUTPUT_FILE.replace("train", "val")
     elif DATA_TYPE == "test":
-        # If different paths needed for test
         OUTPUT_FILE = "test.csv"
-        input_file = INPUT_FILE.replace("train", "train")
+        input_file = INPUT_FILE.replace("train", "test")
         output_file = OUTPUT_FILE.replace("train", "test")
     else:
         input_file = INPUT_FILE
@@ -673,7 +826,7 @@ def main():
         if count >= TARGET_SAMPLES_PER_CLASS:
             augmentation_factors[intent] = 1  # Minimum factor
         else:
-            factor = max(1, min(10, TARGET_SAMPLES_PER_CLASS / count))  # Reduced max factor from 10 to 5
+            factor = max(1, min(10, TARGET_SAMPLES_PER_CLASS / count))
             augmentation_factors[intent] = factor
 
     print("\nAugmentation factors:")
@@ -681,7 +834,7 @@ def main():
         print(f"  {intent}: {factor:.2f}x")
 
     # Start augmentation process
-    print("Starting balanced augmentation...")
+    print("Starting balanced augmentation with improved distribution control...")
     start_time = time.time()
 
     augmented_results = defaultdict(list)
@@ -693,89 +846,150 @@ def main():
         text = row['text']
         augmented_results[intent].append(text)
 
-    # Then determine augmentation targets for each intent
-    # Then determine augmentation targets for each intent
+    # Initialize available methods for adaptive selection
+    available_methods = {
+        'synonym': replace_with_synonym,
+        'back_translate': back_translate if USE_BACK_TRANSLATION else None,
+        'slang': lambda t, intent=None: apply_slang_typo(t, intent or 'general', 1.0),
+        'common_phrase': add_common_phrase,
+        'short_text': lambda t, intent=None: short_text_augmentation(t, intent or 'general'),
+        'swap': random_swap,
+        'deletion': random_deletion,
+        'phonetic': phonetic_augmentation,
+        'char_noise': lambda t: character_noise(t, 1.0),
+        'typo': add_typo
+    }
+    
+    # Remove None methods
+    available_methods = {k: v for k, v in available_methods.items() if v is not None}
+
+    # Process each intent with controlled augmentation
     for intent, factor in augmentation_factors.items():
-      original_count = intent_counts[intent]
-      intent_df = df[df['intent'] == intent]
+        original_count = intent_counts[intent]
+        intent_df = df[df['intent'] == intent]
 
-      for _, row in tqdm(intent_df.iterrows(), desc=f"Augmenting '{intent}'", total=len(intent_df)):
-        text = row['text']
+        print(f"\nProcessing intent '{intent}' with factor {factor:.2f}x")
 
-        # Calculate needed augmentations for this sample
-		# Calculate needed augmentations for this sample
-        num_augmentations = max(
-          MIN_AUGMENTATIONS_PER_SAMPLE,
-          min(MAX_AUGMENTATIONS_PER_SAMPLE, int(factor * 2.0))
-        )
+        for _, row in tqdm(intent_df.iterrows(), desc=f"Augmenting '{intent}'", total=len(intent_df)):
+            text = row['text']
 
-        # Hitung alokasi yang seimbang
-        paraphrase_quota = int(num_augmentations * PARAPHRASE_RATIO) if USE_PARAPHRASE_MODEL else 0
-        regular_quota = num_augmentations - paraphrase_quota
+            # Calculate needed augmentations for this sample
+            num_augmentations = max(
+                MIN_AUGMENTATIONS_PER_SAMPLE,
+                min(MAX_AUGMENTATIONS_PER_SAMPLE, int(factor * 2.0))
+            )
 
-        # BATASI PARAPHRASE - hanya tambahkan sesuai quota
-        if USE_PARAPHRASE_MODEL and paraphrase_quota > 0:
-          for _ in range(paraphrase_quota):
-            paraphrase_candidates[intent].append(text)
+            # Calculate balanced allocation
+            paraphrase_quota = int(num_augmentations * PARAPHRASE_RATIO) if USE_PARAPHRASE_MODEL else 0
+            regular_quota = num_augmentations - paraphrase_quota
 
-        # Regular augmentations dengan quota yang seimbang
-        backup_augmentations = max(1, regular_quota)
-		
-        attempts = 0
-        augmentations_created = 0
+            # Add to paraphrase candidates with quota
+            if USE_PARAPHRASE_MODEL and paraphrase_quota > 0:
+                paraphrase_candidates[intent].append((text, paraphrase_quota))
 
-        while augmentations_created < backup_augmentations and attempts < backup_augmentations * 4:
-          attempts += 1
-          intensity = min(1.0, NOISE_INTENSITY + (factor - 1) * 0.2)
-          aug_text, methods_used = augment_text_with_tracking(text, intent, intensity)
+            # Regular augmentations with adaptive method selection
+            attempts = 0
+            augmentations_created = 0
+            max_attempts = regular_quota * 4
 
-          if aug_text.lower() != text.lower() and validate_augmentation(text, aug_text):
-            augmented_results[intent].append(aug_text)
-            augmentations_created += 1
+            while augmentations_created < regular_quota and attempts < max_attempts:
+                attempts += 1
+                
+                # Get current augmentation counts for adaptive selection
+                total_augmentations = sum(augmentation_method_counts.values())
+                
+                # Check distribution balance periodically
+                if total_augmentations > 0 and total_augmentations % 100 == 0:
+                    is_balanced = validate_method_distribution(
+                        TARGET_METHOD_RATIOS, 
+                        augmentation_method_counts, 
+                        tolerance=0.15
+                    )
+                    if not is_balanced and total_augmentations % 500 == 0:  # Less frequent logging
+                        print(f"  Adjusting method selection for better balance at {total_augmentations} augmentations...")
 
-    # Batch paraphrase additional samples if needed    
+                # Use adaptive method selection
+                text_length = len(text.split())
+                intensity = min(1.0, NOISE_INTENSITY + (factor - 1) * 0.2)
+                
+                selected_methods = get_adaptive_method_selection(
+                    text_length, intensity, augmentation_method_counts, 
+                    total_augmentations, available_methods
+                )
+
+                if not selected_methods:
+                    # Fallback to random selection
+                    method_choices = list(available_methods.keys())
+                    if len(text.split()) <= 3:
+                        method_choices = [m for m in method_choices if m in ['slang', 'short_text', 'synonym', 'common_phrase']]
+                    selected_methods = random.sample(method_choices, min(2, len(method_choices)))
+
+                # Apply selected methods
+                aug_text = text
+                methods_used = []
+                
+                for method_name in selected_methods:
+                    if method_name in available_methods:
+                        method = available_methods[method_name]
+                        old_text = aug_text
+                        
+                        try:
+                            # Apply method with appropriate parameters
+                            if method_name in ['slang', 'short_text']:
+                                aug_text = method(aug_text, intent)
+                            else:
+                                aug_text = method(aug_text)
+                            
+                            # Track if method actually changed the text
+                            if aug_text != old_text:
+                                methods_used.append(method_name)
+                                augmentation_method_counts[method_name] += 1
+                                
+                        except Exception as e:
+                            print(f"Error applying {method_name}: {e}")
+                            aug_text = old_text  # Revert on error
+
+                # Validate and add augmentation
+                if (aug_text.lower() != text.lower() and 
+                    validate_augmentation(text, aug_text) and 
+                    methods_used):  # Ensure at least one method was applied
+                    
+                    augmented_results[intent].append(aug_text)
+                    augmentations_created += 1
+
+        print(f"  Created {sum(len(augmented_results[intent]) - intent_counts[intent] for intent in [intent])} regular augmentations for '{intent}'")
+
+    # Process paraphrases with controlled generation
     if USE_PARAPHRASE_MODEL and model is not None:
-      print("\nApplying paraphrase model in batches...")
-
-      for intent, texts in paraphrase_candidates.items():
-        if not texts:  # Skip jika tidak ada kandidat
-          continue
-
-        print(f"  Processing {len(texts)} texts for intent '{intent}'")
-
-        # BATASI jumlah teks yang diproses untuk paraphrase
-        max_paraphrase_for_intent = int(TARGET_SAMPLES_PER_CLASS * PARAPHRASE_RATIO)
-        texts_to_process = texts[:max_paraphrase_for_intent]  # Batasi input
-
-        # Process in batches
-        paraphrased = batch_paraphrase(model, tokenizer, texts_to_process, BATCH_SIZE)
-
-        # Add valid paraphrases dengan kontrol
-        valid_count = 0
-        paraphrase_added = 0
+        print("\nApplying controlled paraphrase generation...")
         
-        for orig, para in zip(texts_to_process, paraphrased):
-          if (para and validate_augmentation(orig, para) and 
-              paraphrase_added < max_paraphrase_for_intent):
-            augmented_results[intent].append(para)
-            valid_count += 1
-            paraphrase_added += 1
-            augmentation_method_counts['batch_paraphrase'] += 1
-
-        print(f"    Added {valid_count} valid paraphrases (limit: {max_paraphrase_for_intent})")
+        for intent, text_quota_pairs in paraphrase_candidates.items():
+            if not text_quota_pairs:
+                continue
+                
+            print(f"  Processing {len(text_quota_pairs)} texts for intent '{intent}'")
+            
+            # Use controlled paraphrase generation
+            paraphrased = controlled_paraphrase_generation(text_quota_pairs, model, tokenizer)
+            
+            # Add to results and track
+            for para in paraphrased:
+                augmented_results[intent].append(para)
+                augmentation_method_counts['batch_paraphrase'] += 1
+            
+            print(f"    Added {len(paraphrased)} controlled paraphrases")
 
     # Balance the data
-    print("Balancing final dataset...")
+    print("\nBalancing final dataset...")
     balanced_data = balance_samples(augmented_results, TARGET_SAMPLES_PER_CLASS, intent_counts)
-    # After all augmentation is done, check if classes are balanced
-    # After all augmentation is done, check if classes are balanced
-    target_class_size = TARGET_SAMPLES_PER_CLASS
     
-    # Balance classes to target size, maintaining method diversity
+    # Final balancing to target size with method diversity preservation
+    target_class_size = TARGET_SAMPLES_PER_CLASS
+
     for intent in balanced_data:
         current_samples = balanced_data[intent]
         orig_count = intent_counts.get(intent, 0)
-        
+
         if len(current_samples) > target_class_size:
             # Keep all original data
             original_data = current_samples[:orig_count]
@@ -791,6 +1005,7 @@ def main():
         elif len(current_samples) < target_class_size:
             # Keep all data if under target
             balanced_data[intent] = current_samples
+
     # Create final balanced dataframe
     rows = []
     for intent, texts in balanced_data.items():
@@ -799,7 +1014,7 @@ def main():
 
     final_df = pd.DataFrame(rows)
 
-    # Print final statistics
+    # Print final statistics with distribution analysis
     print("\nFinal dataset statistics:")
     final_counts = Counter(final_df['intent'])
     for intent, count in final_counts.items():
@@ -809,17 +1024,44 @@ def main():
 
     # Save to file
     final_df.to_csv(output_file, index=False)
+    if DATA_TYPE == "train":
+        final_df.to_csv(output_files, index=False)
     print(f"\nSaved balanced dataset to {output_file}")
-	
-	# Print method distribution statistics
+    
+    # Save method statistics
+    stats_path = f"{DATASET_SAVE_PATH}/reports/method_statistics.json"
+    with open(stats_path, 'w', encoding='utf-8') as f:
+        json.dump(dict(augmentation_method_counts), f, indent=2, ensure_ascii=False)
+    print(f"Method statistics saved to: {stats_path}")
+
+    # Enhanced method distribution analysis
     print(f"\nMethod distribution analysis:")
     total_augmented_only = sum(augmentation_method_counts.values())
     if total_augmented_only > 0:
+        # Show detailed statistics
         for method, count in sorted(augmentation_method_counts.items(), key=lambda x: x[1], reverse=True):
             percentage = (count / total_augmented_only) * 100
             print(f"  {method:20s}: {count:6d} ({percentage:5.1f}%)")
-            
-        # Check if paraphrase dominates
+
+        # Distribution quality check
+        is_well_distributed = validate_method_distribution(
+            TARGET_METHOD_RATIOS, 
+            augmentation_method_counts, 
+            tolerance=0.2  # More lenient for final check
+        )
+        
+        print(f"\n  Distribution quality: {'GOOD' if is_well_distributed else 'NEEDS IMPROVEMENT'}")
+        
+        # Show target vs actual ratios
+        print(f"\n  Target vs Actual Ratios:")
+        for method, target_ratio in TARGET_METHOD_RATIOS.items():
+            actual_count = augmentation_method_counts.get(method, 0)
+            actual_ratio = actual_count / total_augmented_only if total_augmented_only > 0 else 0
+            deviation = abs(actual_ratio - target_ratio)
+            status = "✓" if deviation <= 0.2 else "✗"
+            print(f"    {method:15s}: {actual_ratio:.3f} (target: {target_ratio:.3f}, dev: {deviation:.3f}) {status}")
+
+        # Check for specific issues
         paraphrase_count = augmentation_method_counts.get('batch_paraphrase', 0)
         paraphrase_pct = (paraphrase_count / total_augmented_only) * 100 if total_augmented_only > 0 else 0
         if paraphrase_pct > 50:
@@ -827,24 +1069,22 @@ def main():
         else:
             print(f"  Good balance: Paraphrase at {paraphrase_pct:.1f}%")
 
+    # Plot distributions and methods
     try:
-        print("Plotting augmentation methods...")
+        print("\nGenerating visualizations...")
         plot_augmentation_methods()
-    except Exception as e:
-        print(f"Error plotting augmentation methods: {e}")
-
-    # Plot distributions
-    try:
-        print("Plotting class distributions...")
         plot_distribution(df, "Original Distribution")
         plot_distribution(final_df, "Augmented Distribution")
     except Exception as e:
-        print(f"Error plotting distributions: {e}")
+        print(f"Error generating visualizations: {e}")
 
-    # Calculate statistics
+    # Calculate final statistics and generate report
     original_total = len(df)
     augmented_total = len(final_df)
     time_taken = time.time() - start_time
+    
+    # Save comprehensive report
+    save_augmentation_report(final_df, df, time_taken, output_file)
 
     print(f"\nSummary:")
     print(f"  Original samples: {original_total}")
@@ -852,6 +1092,9 @@ def main():
     print(f"  Added samples: {augmented_total - original_total}")
     print(f"  Augmentation ratio: {augmented_total / original_total:.2f}x")
     print(f"  Processing time: {time_taken:.2f} seconds")
+    print(f"  Method distribution quality: {'GOOD' if is_well_distributed else 'NEEDS IMPROVEMENT'}")
+
+    return final_df
 
 if __name__ == "__main__":
     main()
