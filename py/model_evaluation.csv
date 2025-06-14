@@ -126,3 +126,9 @@ timestamp,input_text,predicted_intent,is_ood,confidence,energy_score,detection_m
 2025-05-26 11:58:41,aku pergi,goodbye,False,0.9648464918136597,-4.9958176612854,combined
 2025-05-26 12:12:33,carikan buku bs,cari_buku,False,0.9812023639678955,-5.493532657623291,combined
 2025-05-26 12:13:40,iya,confirm,False,0.9762176275253296,-5.4991021156311035,combined
+2025-06-14 12:28:13,"Permisi, perpusnya buka jam berapa ya?",jam_layanan,False,0.9826287031173706,-5.5298614501953125,combined
+2025-06-14 12:28:41,carikan buku,cari_buku,False,0.9800527691841125,-5.45190954208374,combined
+2025-06-14 12:29:32,iya,confirm,False,0.9762176275253296,-5.4991021156311035,combined
+2025-06-14 12:51:52,nigga,greeting,False,0.9518641233444214,-5.0594868659973145,combined
+2025-06-14 13:14:05,exit,unknown,True,0.5252519845962524,-3.391531467437744,combined
+2025-06-14 13:15:04,aku pergi,goodbye,False,0.9648464918136597,-4.9958176612854,combined

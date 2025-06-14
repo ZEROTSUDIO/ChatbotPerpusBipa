@@ -1,0 +1,411 @@
+intent,text
+fasilitas,"Pagi, mau tanya tentang sebuah musholla di Perpustakaan?"
+denied,tak nak
+denied,batalkan saja 
+confirm,YEEEAAAHHH
+cari_buku,selamat pagi mau cari buku tentang machine learning ada tidak?
+cara_pinjam,saya bisa pinjam langsung atau harus isi formulir?
+peraturan,apa semua pengunjung harus isi buku tamu?
+goodbye,"oke silakan, terima kasih ya, sangat informatif."
+jam_layanan,saya bisa datang setelah kuliah jam 4 sore?
+goodbye,Fuck YouIm Out
+denied,"emoh, ga butuh sekarang"
+goodbye,Fuck You Im Out .
+jam_layanan,excuse me perpustakaan weekend buka ga kak?
+keanggotaan,halo kak kartu anggota saya rusak bisa diganti tidak?
+denied,g
+confirm,betul lanjutkan bang lah
+jam_layanan,buka sampai jam berapa kalau hari Jumat?
+cari_buku,ada kitab tentang kecerdasan buatan di sini?
+cara_pinjam,siang kak tolong jelaskan step by step cara pinjam buku dong makasih
+cari_buku,Bisa bantu cariin Buku Biografi Supriono?
+peraturan,boleh ngajak teman diskusi pelan di ruang baca?
+goodbye,udahan dulu ya makasih banget
+cara_pinjam,gmn prosedur kalau mau pinjam buku untuk seminggu?
+cari_buku,: saya bertanya lokasi dari buku psikologi klinis.
+fasilitas,"Explain me, ada area santai atau area beristirahat ga?"
+cari_buku,saya mau tau lokasi buku tentang psikologi klinis
+peraturan,hai admin boleh tidur di ruang baca kalau capek?
+fasilitas,bisa pakai colokan listrik buat laptop?
+greeting,"Halo bot, kamu ihdup?"
+confirm,sip mantap
+peraturan,NB: mau tanya denda keterlambatan per harinya berapa ya?
+goodbye,"Baiklah terima kasih banyak, kak "
+goodbye,Ini pencerahan terima kasih 
+cara_pinjam,saya udah punya kartu tinggal tunjukin aja?
+greeting,Selamat malam apakah masih bisa dilayani?
+cara_pinjam,hai admin durasi peminjaman buku maksimal berapa lama?
+keanggotaan,saya jadi SMA bisa daftar anak anggota?
+greeting,"Hai Admin, bisa kasih info?"
+confirm,"Gaskan, min!"
+jam_layanan,kapan terakhir pengunjung bisa masuk?
+confirm,boleh tuh
+goodbye,sudah terjawab semua wassalamualaikum
+greeting,"hai, halo, ada pertanyaan yang ingin ditanyakan ."
+peraturan,ada aturan soal pakaian di perpus?
+cari_buku,buku hukum internasional edisi 2020 tersedia?
+keanggotaan,"Siang kak infokan tentang keanggotaan perpustakaan umum,"
+keanggotaan,siang kak info keanggotaan perpustakaan untuk umum dong makasih
+peraturan,apa semua harus pengunjung isi buku tamu?
+cari_buku,hyy kak ada koleksi buku sejarah Indonesia ga?
+greeting,assalamualaikum mau minta bantuan nih
+cari_buku,koleksi komik atau manga juga disediakan?
+cara_pinjam,excuse me kalau mau buku caranya gimana?
+confirm,betul banget itu yang butuh aku
+cara_pinjam,kalau udah nemu bukunya cara pinjamnya gimana?
+fasilitas,Ada ruang kecil untuk berkonsultasi dengan kelompok ``
+denied,engga usah kelamaan juga
+fasilitas,"Hmm... Kak, ada fasilitas AC di ruang baca saya?"
+keanggotaan,kalo ga punya kartu anggota boleh pinjam buku?
+cara_pinjam,"Saya sudah punya kartu, tunjukkan saja?"
+goodbye,"Oke, terima kasih banyak, sist "
+cari_buku,: Bisa bantu cariin buku biografi sami-sunga?
+peraturan,Saya harus tinggal di ruang baca?
+keanggotaan,Apakah anggota diperbolehkan membawa laptop mereka sendiri ke ruang baca?
+cari_buku,bisa bantu cariin buku biografi Soekarno?
+peraturan,kalau ketahuan merusak buku kena sanksi apa?
+cari_buku,halo kak koleksi bkuu agama lengkap ga di sini?
+fasilitas,ruang multimedia-nya aktif sekarang?
+cara_pinjam,Apakah meminjam buku harus meminta izin terlebih dahulu?
+cara_pinjam,Harus daftar dulu untuk meminjam buku?
+fasilitas,Bisakah kita memakai colokan listrik pada laptop?
+peraturan,"Permisi, apakah aturan untuk mahasiswa asing sama dengan aturan lokal?"
+cara_pinjam,selamat pagi prosedur pengembalian buku yang terlambat bagaimana?
+jam_layanan,Kapan terakhir kali pengunjung masuk?
+peraturan,permisi aturan untuk mahasiswa asing sama ga dgn lokal?
+fasilitas,permisi toilet ada di lantai berapa ya?
+peraturan,excuse me boleh charge hp di ruang baca ga?
+jam_layanan,Buka sampai jam berapa jika jumat?
+denied,enggak deh!
+cara_pinjam,"Selamat sore, bolehkah meminjam lebih dari 3 buku sekaligus?"
+cari_buku,halo kak koleksi buku agama lengkap ga di sini?
+confirm,ya gpp
+greeting,"Halo bot, kamu hidup?"
+confirm,betul banget itu yang aku butuh
+peraturan,siang kak tolong info tata tertib lengkap perpustakaan dong makasih
+greeting,"Pagi, aku disini."
+fasilitas,ruang baca di lantai atas bebas dipakai siapa aja?
+cara_pinjam,saya bisa pinjam langsung atau harus isi formulir? dong
+cara_pinjam,"Malam kak, tolong jelaskan step by stepnya untuk meminjam buku ini, jika ada."
+peraturan,teman ngajak boleh diskusi pelan di ruang baca?
+peraturan,saya harus diam di ruang baca ya?
+fasilitas,Saya bisa mencetak atau fotokopi dari sini?
+cari_buku,"Siang pak, tolong carikan buku tentang kepemimpinan dong,"
+peraturan,selamat sore ada larangan khusus untuk anak-anak tidak?
+confirm,oke bang itu solusi yang tepat
+confirm,"Benar sekali, itu yang saya butuhkan ..."
+fasilitas,"Siang, bagi informasi fasilitas apa yang tersedia di perpustakaan, silakan saja."
+greeting,Ada respon nggak nih?
+denied,Jangan sampai sampai sejauh itu merepotkan 
+denied,engga usah kelamaan juga min
+goodbye,oke makasih infonya sangat membantu
+fasilitas,ada tempat untuk baca sambil diskusi pelan-pelan? lah
+greeting,"Hai Admin, ada pertanyaan yang ingin Anda tanyakan "
+peraturan,harus scan kartu setiap masuk ya?
+keanggotaan,halo kak saya mahasiswa daerah bisa jadi member ga?
+greeting,"Aslmkm, mau minta maaf nih "
+cari_buku,bantu bisa cariin buku biografi Soekarno?
+confirm,ya itu boleh caranya
+confirm,ya banget boleh itu caranya
+cara_pinjam,halo kak mau cara tanya perpanjang pinjaman buku gimana?
+cari_buku,ada buku tentang kecerdasan buatan di sini?
+denied,batalkan itu
+cara_pinjam,Harus daftar dulu dulu ga buay buku?
+cara_pinjam,excuse me kalau mau booking buku caranya gimana?
+denied,Nooo I DONt want.
+peraturan,slmt sore ada larangan khusus untuk anak-anak tidak?
+keanggotaan,jadi anggota bayar atau gratis?
+confirm,tepat bang itu solusi yang oke
+peraturan,Bawa makanan ringan ke ruang baca?
+jam_layanan,aktif sampai jam berapa kalau hari Jumat?
+peraturan,"Halo, kak, peraturan penggunaan laptop di Perpustakaan seperti apa?"
+jam_layanan,Apakah saya bisa masuk setelah kuliah jam 4 sore?
+cari_buku,excuse me buku-buku bahasa Inggris ada di lantai berapa?
+cari_buku,saya mau tau lokasi kitab tentang psikologi klinis
+jam_layanan,siang kak info jam layanan perpustakaan dong makasih
+greeting,"P, Periksa Fungsi"
+greeting,"assalamualaikum, nyoba doang lah"
+keanggotaan,saya anak SMA bisa dfatar jadi anggota?
+confirm,"Baiklah, Bang, itu solusi yang akurat."
+keanggotaan,anggota perpus dapat akses semua buku ya?
+fasilitas,siang kak info fasilitas yang tersedia di perpus dong makasih
+denied,G:
+keanggotaan,"Selamat sore, ada persyaratan untuk menjadi anggota perpustakaan apa?"
+greeting,"Hy bot, kamu hidup?"
+goodbye,wes puas jawabannya terima kasih
+denied,tidak usah repot-repot begitu
+jam_layanan,apakah boleh masuk perpus jam istirahat siang?
+fasilitas,Apakah ada tempat untuk dibaca saat diskusi perlahan?
+confirm,ayo dong
+fasilitas,admin ada tempat parkir khusus untuk pengunjung perpus?
+goodbye,fuck you out
+denied,hell nah nigga sih
+goodbye,yaudah gw pergi
+keanggotaan,"Pagi kak, ada info terkait keanggotaan perpustakaan umum di sini ya..."
+cara_pinjam,hai admin durasi lama? buku maksimal berapa peminjaman
+denied,Eh ngga usah lama-lama juga 
+jam_layanan,gw bisa datang setelah kuliah jam 4 sore?
+denied,ga mau.
+jam_layanan,saya datang sore masih bisa pinjam buku ga?
+keanggotaan,jadi anggota bayar gratis?
+cari_buku,saya cari novel klasik katalog yang bisa dicek?
+confirm,oke cocok banget sama kebutuhan
+fasilitas,halo kak ruang diskusi bisa dibooking ga?
+fasilitas,tempat duduk yang di pojok itu bisa dipakai mahasiswa?
+cara_pinjam,selamat pagi prosedur pengembalian bagaimana? yang terlambat buku
+keanggotaan,hai admin bisa bantu info cara keanggotaan?
+greeting,permisi mau tanya-tanya dong
+denied,Hell Nah Niganiga
+cara_pinjam,permisi bisa pinjam buku tanpa kartu anggota ga?
+fasilitas,"Maaf, apakah ada kantin dan caffe di perpustakaan?"
+confirm,k
+cari_buku,halo kak ada koleksi buku sejarah Indonesia ga?
+goodbye,oke terima kasih atas infonya sangat membantu
+greeting,salam sejahtera
+peraturan,boleh telepon di dalam perpustakaan?
+keanggotaan,saya baru bisa daftar jadi anggota?
+goodbye,Adios Negros
+peraturan,"Halo, kak mau tanya tentang aturan jam malam di Perpustakaan?"
+greeting,selamat malam masih bisa dilayani?
+confirm,Alright Nigga 
+fasilitas,selamat pagi mau tanya ada mushola di perpustakaan tidak?
+denied,hell nah nigga ah
+denied,nggak tertarik!
+goodbye,oke sampai ketemu lagi nanti
+confirm,wise choice!
+cari_buku,sy mau tau lokasi buku tentang psikologi klinis
+denied,ga pengen
+confirm,gaskan min!
+denied,gausah repot report min
+jam_layanan,"Apakah saya datang pada tanggal merah, masih bisa?"
+confirm,: oke bang itu saran yang bagus 
+goodbye,"Oke, siap untuk memberikan bimbingan ini ,"
+cari_buku,"Maaf, apakah saya bisa membantu menyediakan buku statistik untuk penelitian Anda?"
+cara_pinjam,harus daftar buku? ga buat pinjam dulu
+cara_pinjam,maaf mau tidak? bisa pinjam buku lewat online nanya
+denied,skip aja
+confirm,I will do love it
+greeting,"Halo, bisakah kamu membalas?"
+fasilitas,"Maaf, apakah ada kantin dan restoran di dalam perpustakaan?"
+cari_buku,edisi hukum internasional buku 2020 tersedia?
+keanggotaan,w udah daftar tapi belum punya kartu bisa dipakai?
+goodbye,baiklah terima kasih atas bantuannya
+jam_layanan,halo admin jam buka perpus hari ini sampai jam berapa?
+jam_layanan,saya ke perpus malam ini masih dilayani?
+goodbye,yaudah gw pergi!
+denied,"ga mau,"
+denied,"Uh, gausah "
+keanggotaan,"Jika tidak memiliki kartu anggota, Anda bisa meminjam buku?"
+confirm,wise choice
+peraturan,permisi aturan untuk mahasiswa asing sama ga dengan lokal?
+goodbye,sudah dapat pencerahan terima kasih
+keanggotaan,"Selamat sore. Persyaratan pendaftaran anggota perpus, boleh minta tolong?"
+peraturan,halo kak mau tanya peraturan jam malam di perpustakaan gimana?
+greeting,"selamat pagi, saya disini"
+jam_layanan,"Kalau saya datang Minggu, apakah perpustakaan akan dibuka?"
+fasilitas,excuse me ada ruang santai atau area istirahat ga?
+jam_layanan,halo kak mau tanya perpus hari libur buka tidak?
+jam_layanan,halo kak mau tanya perpus hari buka libur tidak?
+greeting,"Halo, apakah kamu bisa dibalas?"
+jam_layanan,Jam berapa kalau hari Jumat dibuka?
+denied,"Emoh, tidak membutuhkannya sekarang"
+cara_pinjam,ada batas maksimal bacaan yang bisa dipinjam?
+cara_pinjam,harus daftar dulu ga buat pinjam buku?
+peraturan,peraturan untuk kamera ke dalam gimana?
+fasilitas,selamat sore ada fasilitas scanner untuk dokumen tidak?
+goodbye,ya sudah gue keluar.
+confirm,"Oh, benar, lanjutkan bang."
+fasilitas,ada akses wifi buat pengunjung umum?
+jam_layanan,permisi mau tanya perpus tutup jam berapa ya?
+greeting,assalamualaikum mau bertanya nih
+greeting,cek cek halo? Mencoba!
+confirm,Alright Nigga
+peraturan,kalau telat balikin bkoo dendanya berapa?
+greeting,selamet siang apakah anda disana?
+peraturan,boleh bawa makanan ringan ke ruang baca?
+jam_layanan,excuse me perpustakaan weekend buka kak?
+peraturan,Bolehkah teman-temanmu diajak diskusi pelan di ruang baca?
+keanggotaan,halo kak saya mahasiswa luar daerah bisa jadi member ga?
+fasilitas,hai admin ada tempat parkir khusus untuk pengunjung perpus?
+keanggotaan,gimana caranya kalau saya mau jadi anggota perpus?
+denied,nggak usah sampai segitu repotnya
+denied,Tidak usah dibuat susah :)
+fasilitas,perpus nyediain loker penyimpanan barang?
+fasilitas,ada ruang rapat kecil untuk belajar kelompok?
+peraturan,"Selamat pagi, bisakah Anda membawa tas besar ke ruang baca atau tidak?"
+cara_pinjam,"Halo, Kak. Cara cek status kredit buku gimana?"
+goodbye,puas dengan jawabannya terima kasih 
+fasilitas,halo kak ada fasilitas AC di ruang baca ga?
+confirm,gua setuju
+keanggotaan,kalo ga punya kartu anggota pinjam buku?
+goodbye,"omke, saya akan keluar sekarang "
+cara_pinjam,selamat buku bisa pinjam lebih dari 3 sore sekaligus ga?
+confirm,betul lanjutkan bang
+jam_layanan,siang info jam layanan perpustakaan dong makasih
+goodbye,oke siap terima kasih bimbingannya
+peraturan,boleh telepon perpustakaan? dalam di
+keanggotaan,"Info SIS sore tentang keanggotaan perpustakaan untuk umum, terima kasih"
+jam_layanan,Maaf mau tanya apakah gedung perpustakaan sabtu minggu masih buka?
+keanggotaan,"Pagi, mau daftar member perpustakaan, bagaimana caranya?"
+greeting,hai admin ada yang pengen ditanyakan
+greeting,selamat bisa masih malam dilayani?
+denied,tidak sekarang ya
+cari_buku,saya cari novel klasik ada katalog yang bisa dicek?
+peraturan,selamat pagi boleh bawa tas besar ke ruang baca tidak?
+cara_pinjam,setelah milih buku bawa ke mana buat diproses?
+confirm,yaudah oke
+keanggotaan,permisi mau tanya syarat jadi anggota perpus apa aja?
+confirm,oke bang itu solusi tepat
+jam_layanan,"Selamat Siang, Apakah Perpustakaan Raya buka?"
+denied,enggak deh
+jam_layanan,saya mau datang tanggal merah masih bisa?
+cari_buku,"Selamat pagi, mau cari buku tentang metode pembelajaran mesin tidak?"
+peraturan,"Selamat sore, ada larangan khusus untuk bayi?"
+cari_buku,"Halo, kak, ada koleksi buku agama yang lengkap?"
+confirm,betul abnget itu yang aku butuh
+goodbye,"Oh, cukup oke, terima kasih ya kak."
+fasilitas,"Permisi, fasilitas toilet ada di lantai berapa?"
+denied,"Tidak saat ini, ya."
+cara_pinjam,"Halo kak, bagaimana cara mempertahankan pinjaman buku?"
+cara_pinjam,pinjam buku perlu minta izin dulu?
+cara_pinjam,Sistem peminjaman sekarang menggunakan barcode atau manual?
+fasilitas,Ruang baca lantai atas bebas untuk siapa saja?
+denied,nggak tertarik
+jam_layanan,Apakah mungkin untuk masuk kuliah jam istirahat siang?
+greeting,OYO
+goodbye,"Sudah dijawab semua, wasalamualaikum."
+confirm,deal
+cari_buku,permisi bisa bantu carikan buku statistik untuk penelitian?
+goodbye,oke cukup segitu aja wassalamualaikum
+keanggotaan,saya kehilangan kartu masuk? bisa masih
+jam_layanan,kalau saya datang hari minggu perpustakaan buka ga?
+fasilitas,saya bisa nge-print atau fotokopi dari sini?
+cari_buku,hai admin ada buku novel terbaru karya penulis Indonesia?
+jam_layanan,selamat pagi bisa tanya jam operasional perpustakaan?
+goodbye,Oke siap untuk berterima kasih kepada Anda
+greeting,"Selamat sore, bisakah kita minta maaf?"
+greeting,selamat sore bisa minta
+keanggotaan,maaf mau nanya kalau bukan sivitas boleh daftar tidak?
+cara_pinjam,halo kak cara cek status peminjaman buku bagaimana?
+greeting,are you on?
+keanggotaan,hai admin bisa bantu info prosedur perpanjang keanggotaan?
+confirm,"Benar banget, itulah yang saya butuhkan"
+goodbye,oke makasih ya sangat informatif
+keanggotaan,selamat sore persyaratan daftar anggota perpus apa ya?
+goodbye,ckp sekian saja terima kasih
+fasilitas,ada akses wifi buat pengunjung umum? deh
+confirm,I would love that
+jam_layanan,ane bisa datang setelah kuliah jam 4 sore?
+goodbye,im gonna go
+cari_buku,saya mau cari buku kedokteran yang bisa dibaca di tempat
+cari_buku,": excuse me, buku-buku bahasa inggris ada di lantai berapa?"
+cara_pinjam,"tolong, bisa pinjam buku tanpa Kartu Anggota?"
+greeting,selamat siang apakah anda disana?
+fasilitas,Apakah tempat duduk di sudut itu bisa digunakan oleh mahasiswa?
+keanggotaan,Jadi anggota gratis atau bayar?
+cara_pinjam,Tolong dijawab ya prosedur meminjam buku referensi gimana terima kasih :
+jam_layanan,saya bisa ke perpustakaan jam 7 malam?
+goodbye,oke terima kasih banyak ya kak
+greeting,hai admin bisa kasih info ga?
+jam_layanan,: Kapan terakhir kali pengunjung bisa masuk?
+denied,denied
+keanggotaan,excuse me saya guru bisa jadi anggota perpustakaan ga?
+denied,NOOO I DON’T WANT IT
+cari_buku,selamat sore ada buku tentang entrepreneurship tidak ya?
+denied,"Baiklah sekarang, ya "
+denied,"udah, nggak usah lah"
+cara_pinjam,q udah punya kartu tinggal tunjukin aja?
+cari_buku,komik atau manga juga disediakan?
+jam_layanan,kalau long weekend gini perpus buka atau tutup?
+cara_pinjam,gimana prosedur kalau mau pinjam buku untuk seminggu?
+denied,nggak sampai segitu repotnya
+cara_pinjam,halo kak mau tanya cara perpanjang pinjaman buku gimana?
+peraturan,Maaf nih. Maaf saya ingin bertanya kode pintu masuk perpustakaan ada ga?
+keanggotaan,hai admin bisa bantu info tentang perpanjangan keanggotaan?
+goodbye,sudah cukup makasih ya kak
+greeting,"assalamualaikum, nyoba doang"
+keanggotaan,saya bukan mahasiswa sini boleh masuk perpus?
+goodbye,oke noted terima kasih sarannya
+goodbye,"Yah, yaudah, aku pergi."
+goodbye,oke noted trims kasih sarannya
+jam_layanan,"Siang kak tolong berikan jam layanan perpustakaan, terima kasih"
+peraturan,halo kak peraturan penggunaan laptop di perpus bagaimana?
+greeting,Cek kabar? Coba!
+peraturan,Harus scan kartu pada awal masuk ya?
+peraturan,kak peraturan penggunaan laptop di perpus bagaimana?
+jam_layanan,kalau sy datang hari minggu perpustakaan buka ga?
+greeting,"kamu apakah Halo, bisa dibalas?"
+fasilitas,Ada internet yang bisa diakses oleh pengunjung umum?
+denied,g!
+cari_buku,Ada buku referensi untuk skripsi teknik?
+goodbye,sudah makasih ya kak
+fasilitas,ruang baca di lantai atas siapa dipakai bebas aja?
+jam_layanan,halo admin jam buka hari ini sampai jam berapa?
+greeting,oy
+confirm,ya itu boleh banget caranya
+cari_buku,Saya ingin tahu lokasi Buku Psikologi Klinis .
+cara_pinjam,Sistem pinjamannya hari ini menggunakan barcode atau manual?
+cari_buku,saya mau cari literatur kedokteran yang bisa dibaca di tempat
+cari_buku,Selamat pagi ingin menemukan buku tentang pembelajaran mesin atau tidak?
+goodbye,fuck you im out
+cara_pinjam,permisi dapat meminjam buku tanpa kartu anggota atau tidak?
+greeting,"hai admin, bisa bilang apa saja?"
+confirm,anjut bos
+keanggotaan,saya kehilangan kartu masih bisa masuk?
+cari_buku,saya cari jurnal ekonomi ada?
+keanggotaan,"Maaf saya akan bertanya, itu seharusnya tidak ada sivitas akademika, bolehkah daftar?"
+greeting,cek halomu? coba!
+goodbye,yaudah gw cabut
+cara_pinjam,kalau pinjam buku digital caranya beda?
+jam_layanan,selamat siang perpustakaan ya? raya buka tidak hari
+confirm,approved
+greeting,selamat siang disana? anda apakah
+fasilitas,Perpus menyediakan loker penyimpanan barang?
+keanggotaan,hai admin bisa bantu info cara perpanjang keanggotaan?
+peraturan,kalau telat balikin buku dendanya berapa?
+denied,hell nah nigga
+jam_layanan,hai kak perpus bulan puasa jam berapa tutupnya?
+peraturan,excuse me boleh ga? hp di ruang baca charge
+jam_layanan,"Selamat siang, apakah perpustakaan hari raya buka?"
+goodbye,Baiklah terima kasih 
+cari_buku,ada buku-buku referensi untuk skripsi teknik?
+keanggotaan,saya baru pindahan bisa daftar jadi anggota?
+cari_buku,siang kak tolong carikan buku tentang leadership dong makasih
+fasilitas,permisi fasilitas toilet ada di lantai berapa ya?
+fasilitas,apakah ada komputer umum di perpus?
+peraturan,Ada aturan tentang pakaian di Perpustakaan?
+fasilitas,"Excuse me, ada ruang santai atau ruang tamu?"
+fasilitas,"Halo Kak, Ruang Diskusi bisa dipesan ga?"
+cari_buku,A: mau tanya ada buku komputasi awan ga ya?
+cari_buku,hai admin ada bacaan novel terbaru karya penulis Indonesia?
+keanggotaan,maaf mau nanya kalau bukan sivitas akademika boleh list tidak?
+goodbye,"Udahan dulu ya, aku senang sekali "
+greeting,Periksa halo? Mencoba!
+cara_pinjam,selamat sore bisa pinjam lebih dari 3 buku sekaligus ga?
+jam_layanan,: apakah aku mau ke kampus malam ini masih dilayani?
+denied,males ah!
+greeting,"halo, salam kenal saya "
+fasilitas,"Siapa ruang baca di lantai atas, siapa yang bebas digunakan?"
+peraturan,boleh bawa ringan ke ruang baca?
+jam_layanan,Halo kak mau tanya perpus buka hari libur?
+keanggotaan,saya anak SMA bisa daftar jadi anggota?
+greeting,selamat sore bisa minta tolong?
+jam_layanan,selamat siang perpustakaan hari raya buka tidak ya?
+denied,tidak usah repot-repot beigtu
+denied,engga usah dibuat susah bro
+denied,engga usah dibuat susah
+keanggotaan,selamat pagi mau daftar anggota perpustakaan caranya gimana?
+confirm,oke cocok banget sama kebutuhannya
+peraturan,mau tanya dong denda keterlambatan per berapa ya terima kasih
+confirm,approved.
+keanggotaan,Anggota perpustakaan dapat mengakses semua buku ya?
+goodbye,makasih bang
+confirm,gua setuju!
+peraturan,"halo kak, peraturan penggunaan laptop di setiap UKM itu apa?"
+cara_pinjam,sistem pinjam sekarang pake barcode atau manual?
+fasilitas,tanya mau dong ada lift untuk ke lantai atas terima kasih
+cari_buku,Maaf. Bolehkah saya membantu menemukan buku statistik untuk penelitian Anda?
+confirm,would I love that
+greeting,"P, Check fungsi."
+keanggotaan,anggota bisa bawa laptop sendiri ke ruang baca?
+confirm,anjut bos!
