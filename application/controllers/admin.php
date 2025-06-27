@@ -12,12 +12,24 @@ class Admin extends CI_Controller
         // if (!$this->session->userdata('admin_logged_in')) {
         //     redirect('admin/login');
         // }
+        $this->load->model('m_account');
         $this->load->model('response_model');
+        $this->load->model('user_model');
+    }
+
+    private function render($view, $data = [])
+    {
+        $user_id = $this->session->userdata('id');
+        $data['user'] = $this->m_account->getUserById($user_id);
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view($view, $data);
+        $this->load->view('admin/footer', $data);
     }
 
     public function index()
-    {
-        $this->dashboard();
+    {        
+        $this->render('admin/dashboard');
     }
 
     public function dashboard()
@@ -35,13 +47,10 @@ class Admin extends CI_Controller
         $data['title'] = 'Users Management';
 
         // In real application, you would load users from database
-        // $this->load->model('User_model');
-        // $data['users'] = $this->User_model->get_all_users();
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/users');
-        $this->load->view('admin/footer');
+        
+        $data['users'] = $this->user_model->get_all_users();
+        $this->render('admin/users', $data);     
+        //$this->render('admin/users', $data);     
     }
 
     public function chats()
@@ -65,12 +74,9 @@ class Admin extends CI_Controller
 
         // In real application, you would load intents from database
         // $this->load->model('Intent_model');
-        // $data['intents'] = $this->Intent_model->get_all_intents();
-
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/intents', $data);
-        $this->load->view('admin/footer');
+        // $data['intents'] = $this->Intent_model->get_all_intents();        
+        $this->render('admin/intents', $data);        
+        
     }
 
     // AJAX endpoint for updating intent responses

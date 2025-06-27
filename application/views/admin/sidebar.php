@@ -19,7 +19,7 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div>
-                    <p class="font-bold handwriting text-lg">Admin User</p>
+                    <p class="font-bold handwriting text-lg"><?= $user->nama; ?></p>
                     <p class="text-xs text-gray-500">ID: ADM001</p>
                 </div>
             </div>
