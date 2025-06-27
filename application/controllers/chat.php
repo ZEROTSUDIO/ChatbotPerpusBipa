@@ -31,6 +31,7 @@ class chat extends CI_Controller
 		// Shuffle and pick 3
 		shuffle($allSuggestions);
 		$randomSuggestions = array_slice($allSuggestions, 0, 3);
+		
 		$user_id = $this->session->userdata('id');
 
 		// Ambil data pengguna dari tabel users
