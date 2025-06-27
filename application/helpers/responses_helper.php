@@ -9,9 +9,7 @@ function get_bot_response($intent, $data = null)
     $response_entry = $CI->response_model->get_response_by_intent($intent);
 
     if (!$response_entry) {
-        return [
-            'response' => '<p>Maaf, Sir, saya belum bisa memproses permintaan tersebut.</p>'
-        ];
+        $response_entry = $CI->response_model->get_response_by_intent('unknown');
     }
 
     // ===== 👇 PLACEHOLDER REPLACEMENT (like {{nama}}) =========
