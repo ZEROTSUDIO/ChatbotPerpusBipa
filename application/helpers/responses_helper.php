@@ -1,5 +1,5 @@
 <?php
-
+//test
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (!function_exists('get_bot_response')) {
