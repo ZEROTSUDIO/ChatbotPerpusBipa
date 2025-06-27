@@ -15,7 +15,7 @@
             <h1 class="handwriting text-4xl font-bold mb-4">User Management</h1>
             <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
                 <input type="text" placeholder="Search users..." class="px-4 py-2 border-2 border-black rounded-lg w-full sm:w-auto">
-                <button  id="addNewUser" class="bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
+                <button id="addNewUser" class="bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
                     <i class="fas fa-plus mr-2"></i>Add User
                 </button>
             </div>
@@ -68,8 +68,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="<?= base_url('admin/user_detail/') . $user->id ?>" class="text-blue-600 hover:text-blue-800 mr-3">
+                                            <i class="fas fa-user-circle"></i>
+                                        </a>
                                         <button class="edit-user text-blue-600 hover:text-blue-900 mr-3" data-id="<?= $user->id ?>">
-                                            <i class="fas fa-edit"><?= $user->id ?></i>
+                                            <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="delete-user text-red-600 hover:text-red-900" data-id="<?= $user->id ?>">
                                             <i class="fas fa-trash"></i>

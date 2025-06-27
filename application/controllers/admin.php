@@ -75,7 +75,7 @@ class Admin extends CI_Controller
         // In real application, you would load intents from database
         // $this->load->model('Intent_model');
         // $data['intents'] = $this->Intent_model->get_all_intents();        
-        $this->render('admin/intents', $data);
+        $this->render('admin/intents', $data); 
     }
 
     // AJAX endpoint for updating intent responses
@@ -290,5 +290,26 @@ class Admin extends CI_Controller
         $id = $this->input->post('id');
         $this->user_model->delete_user($id);
         echo json_encode(['success' => true, 'message' => 'User berhasil dihapus.']);
+    }
+
+    public function user_detail($id)
+    {
+        $this->load->model('user_model');
+        $this->load->model('chat_model');
+
+        $user = $this->user_model->get_user_by_id($id);
+        if (!$user) {
+            show_404();
+        }
+
+        $chats = $this->chat_model->getChatHistoryByUser('chats', $id);
+
+        $data = [
+            'user' => $user,
+            'chats' => $chats,
+            'active_controller' => 'user'
+        ];
+
+        $this->render('admin/user_detail', $data);
     }
 }

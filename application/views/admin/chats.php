@@ -54,62 +54,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15 10:30:45</td>
                         </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#CHT002</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#USR002</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CHAT_20240115_002</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">library_hours</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.98</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.91</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">No</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15 11:15:22</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#CHT003</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#USR003</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CHAT_20240115_003</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">general_inquiry</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.67</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.72</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Yes</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15 14:20:33</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#CHT004</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#USR004</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CHAT_20240115_004</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">book_search</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.89</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.88</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">No</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15 15:45:12</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#CHT005</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#USR005</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CHAT_20240115_005</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs">account_help</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.94</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.87</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">No</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15 16:30:08</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
