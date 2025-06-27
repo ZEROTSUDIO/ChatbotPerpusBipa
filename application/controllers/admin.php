@@ -28,7 +28,7 @@ class Admin extends CI_Controller
     }
 
     public function index()
-    {        
+    {
         $this->render('admin/dashboard');
     }
 
@@ -47,9 +47,9 @@ class Admin extends CI_Controller
         $data['title'] = 'Users Management';
 
         // In real application, you would load users from database
-        
+
         $data['users'] = $this->user_model->get_all_users();
-        $this->render('admin/users', $data);     
+        $this->render('admin/users', $data);
         //$this->render('admin/users', $data);     
     }
 
@@ -75,8 +75,7 @@ class Admin extends CI_Controller
         // In real application, you would load intents from database
         // $this->load->model('Intent_model');
         // $data['intents'] = $this->Intent_model->get_all_intents();        
-        $this->render('admin/intents', $data);        
-        
+        $this->render('admin/intents', $data);
     }
 
     // AJAX endpoint for updating intent responses
@@ -126,18 +125,6 @@ class Admin extends CI_Controller
             ]);
         }
     }
-
-    // Example method for handling user actions
-    public function delete_user($user_id)
-    {
-        // In real application, you would delete from database
-        // $this->load->model('User_model');
-        // $result = $this->User_model->delete_user($user_id);
-
-        $this->session->set_flashdata('success', 'User deleted successfully');
-        redirect('admin/users');
-    }
-
 
     //intents
     public function get_response()
@@ -214,5 +201,94 @@ class Admin extends CI_Controller
                 'message' => 'Failed to delete response'
             ]);
         }
+    }
+
+    public function get_user()
+    {
+        $id = $this->input->post('id');
+        $user = $this->user_model->get_user_by_id($id);
+
+        if ($user) {
+            echo json_encode([
+                'success' => true,
+                'data' => $user
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Response not found'
+            ]);
+        }
+    }
+
+    public function create_user()
+    {
+        $name = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $confirm = $this->input->post('confirm');
+
+        if ($password !== $confirm) {
+            echo json_encode(['success' => false, 'message' => 'Password dan konfirmasi tidak cocok.']);
+            return;
+        }
+
+        // Cek apakah email sudah digunakan
+        if ($this->user_model->email_exists($email)) {
+            echo json_encode(['success' => false, 'message' => 'Email sudah digunakan oleh pengguna lain.']);
+            return;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $data = [
+            'nama' => $name,
+            'email' => $email,
+            'password' => $hashedPassword,
+            'date' => date('Y-m-d H:i:s')
+        ];
+
+        $this->user_model->create_user($data);
+        echo json_encode(['success' => true, 'message' => 'User berhasil ditambahkan.']);
+    }
+
+    // Update existing user
+    public function update_user()
+    {
+        $id = $this->input->post('id');
+        $name = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $confirm = $this->input->post('confirm');
+
+        // Cek apakah email berubah dan sudah dipakai user lain
+        if ($this->user_model->email_exists($email, $id)) {
+            echo json_encode(['success' => false, 'message' => 'Email sudah digunakan oleh pengguna lain.']);
+            return;
+        }
+
+        $data = [
+            'nama' => $name,
+            'email' => $email
+        ];
+
+        if (!empty($password)) {
+            if ($password !== $confirm) {
+                echo json_encode(['success' => false, 'message' => 'Password dan konfirmasi tidak cocok.']);
+                return;
+            }
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        $this->user_model->update_user($id, $data);
+        echo json_encode(['success' => true, 'message' => 'User berhasil diperbarui.']);
+    }
+
+    // Delete user
+    public function delete_user()
+    {
+        $id = $this->input->post('id');
+        $this->user_model->delete_user($id);
+        echo json_encode(['success' => true, 'message' => 'User berhasil dihapus.']);
     }
 }

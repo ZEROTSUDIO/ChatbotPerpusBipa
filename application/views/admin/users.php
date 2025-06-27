@@ -15,7 +15,7 @@
             <h1 class="handwriting text-4xl font-bold mb-4">User Management</h1>
             <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
                 <input type="text" placeholder="Search users..." class="px-4 py-2 border-2 border-black rounded-lg w-full sm:w-auto">
-                <button class="bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
+                <button  id="addNewUser" class="bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
                     <i class="fas fa-plus mr-2"></i>Add User
                 </button>
             </div>
@@ -61,13 +61,17 @@
                                         <?= date('Y-m-d', strtotime($user->date)) ?>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="status-badge status-online">Active</span>
+                                        <span class="value-colorize" data-value="<?= $user->chats_sum ?>">
+                                            <!--span class="status-badge status-online">Active</span-->
+                                            <?= htmlspecialchars($user->chats_sum) ?>
+                                        </span>
                                     </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button class="text-blue-600 hover:text-blue-900 mr-3">
-                                            <i class="fas fa-edit"></i>
+                                        <button class="edit-user text-blue-600 hover:text-blue-900 mr-3" data-id="<?= $user->id ?>">
+                                            <i class="fas fa-edit"><?= $user->id ?></i>
                                         </button>
-                                        <button class="text-red-600 hover:text-red-900">
+                                        <button class="delete-user text-red-600 hover:text-red-900" data-id="<?= $user->id ?>">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
@@ -84,8 +88,101 @@
         </div>
     </main>
 </div>
+
+<div id="addUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="bg-white border-2 border-black rounded-lg p-6 w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="handwriting text-2xl font-bold">Add New User</h3>
+                <button id="closeAddUserModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="addUserForm">
+                <div class="mb-4">
+                    <label for="addUserName" class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+                    <input type="text" id="addUserName" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="addUserEmail" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="addUserEmail" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="addUserPassword" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="addUserPassword" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="addUserPasswordConfirm" class="block text-sm font-medium text-gray-700 mb-2">Ulangi Password</label>
+                    <input type="password" id="addUserPasswordConfirm" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelAddUser" class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-green-600">
+                        Add User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="editUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="bg-white border-2 border-black rounded-lg p-6 w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="handwriting text-2xl font-bold">Edit User</h3>
+                <button id="closeEditUserModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="editUserForm">
+                <!-- hidden field for ID -->
+                <input type="hidden" id="editUserId">
+
+                <div class="mb-4">
+                    <label for="editUserName" class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+                    <input type="text" id="editUserName" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="editUserEmail" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="editUserEmail" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="editUserPassword" class="block text-sm font-medium text-gray-700 mb-2">Password (Opsional)</label>
+                    <input type="password" id="editUserPassword" class="w-full px-3 py-2 border-2 border-black rounded-lg" placeholder="Kosongkan jika tidak ingin diubah">
+                </div>
+
+                <div class="mb-6">
+                    <label for="editUserPasswordConfirm" class="block text-sm font-medium text-gray-700 mb-2">Ulangi Password</label>
+                    <input type="password" id="editUserPasswordConfirm" class="w-full px-3 py-2 border-2 border-black rounded-lg" placeholder="Kosongkan jika tidak ingin diubah">
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelEditUser" class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600">
+                        Update User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
+
         // Show Add User Modal
         $('#addNewUser').click(function() {
             $('#addUserName').val('');
@@ -238,5 +335,22 @@
                 }
             });
         });
+    });
+</script>
+<script>
+    document.querySelectorAll('.value-colorize').forEach(el => {
+        const value = parseInt(el.dataset.value);
+        const min = 0;
+        const max = 100; // Change as needed
+
+        // Clamp and normalize
+        const normalized = Math.max(0, Math.min(1, (value - min) / (max - min)));
+
+        // Hue from red (0) to green (120)
+        const hue = Math.round(normalized * 120);
+        const hsl = `hsl(${hue}, 80%, 45%)`;
+
+        el.style.color = hsl;
+        el.style.fontWeight = 'bold';
     });
 </script>
