@@ -75,7 +75,7 @@ class Admin extends CI_Controller
         // In real application, you would load intents from database
         // $this->load->model('Intent_model');
         // $data['intents'] = $this->Intent_model->get_all_intents();        
-        $this->render('admin/intents', $data); 
+        $this->render('admin/intents', $data);
     }
 
     // AJAX endpoint for updating intent responses
@@ -309,7 +309,22 @@ class Admin extends CI_Controller
             'chats' => $chats,
             'active_controller' => 'user'
         ];
-
+        //===
+        $intent_dist = $this->chat_model->get_intent_distribution_by_user($id);
+        $intent_labels = array_column($intent_dist, 'intent');
+        $intent_values = array_column($intent_dist, 'total');
+        $data['intent_labels'] = $intent_labels;
+        $data['intent_values'] = $intent_values;
+        //===
+        $confidence_data = $this->chat_model->get_confidence_over_time_by_user($id);        
+        $confidence_timestamps = array_column($confidence_data, 'timestamp');
+        $confidence_scores = array_map('floatval', array_column($confidence_data, 'confident_score'));
+        $data['confidence_timestamps'] = $confidence_timestamps;
+        $data['confidence_scores'] = $confidence_scores;
+        //===
+        $chat_detail_rows = $this->chat_model->get_chat_detail_by_user($id);
+        $data['chat_detail'] = $chat_detail_rows;
+        
         $this->render('admin/user_detail', $data);
     }
 }

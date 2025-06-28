@@ -52,6 +52,7 @@ class Chat_model extends CI_Model
 
     public function get_chat_volume_by_period($period = 7)
     {
+
         $sql = "SELECT 
                     DATE(timestamp) as date,
                     COUNT(*) as count
@@ -138,5 +139,30 @@ class Chat_model extends CI_Model
         if ($previous == 0) return 0;
 
         return (($current - $previous) / $previous) * 100;
+    }
+
+    public function get_intent_distribution_by_user($user_id)
+    {
+        $this->db->select('intent, COUNT(*) as total');
+        $this->db->from('chat_detail');
+        $this->db->where('user_id', $user_id);
+        $this->db->group_by('intent');
+        $this->db->order_by('total', 'DESC');
+        return $this->db->get()->result_array();
+    }
+
+    public function get_confidence_over_time_by_user($user_id)
+    {
+        $this->db->select('timestamp, confident_score');
+        $this->db->from('chat_detail');
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('timestamp', 'ASC');
+        return $this->db->get()->result_array();
+    }
+    public function get_chat_detail_by_user($user_id)
+    {
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('timestamp', 'ASC');
+        return $this->db->get('chat_detail')->result_array();
     }
 }
