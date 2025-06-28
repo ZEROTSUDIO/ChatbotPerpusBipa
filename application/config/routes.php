@@ -52,3 +52,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['api/stats/overview'] = 'api/stats_overview';
+$route['api/stats/charts'] = 'api/stats_charts';
+$route['dashboard/statistics'] = 'dashboard/statistics';
+$route['api/stats/intent-performance'] = 'api/stats_intent_performance';
+$route['api/stats/recent-activity'] = 'api/stats_recent_activity';
+$route['api/stats/volume'] = 'api/stats_volume';
+
+
