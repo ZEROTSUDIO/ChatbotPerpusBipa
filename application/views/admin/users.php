@@ -68,7 +68,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="<?= base_url('admin/user_detail/') . $user->id ?>" class="text-blue-600 hover:text-blue-800 mr-3">
+                                        <a href="<?= base_url('admin/user_detail/') . $user->id ?>" class="text-green-600 hover:text-blue-800 mr-3">
                                             <i class="fas fa-user-circle"></i>
                                         </a>
                                         <button class="edit-user text-blue-600 hover:text-blue-900 mr-3" data-id="<?= $user->id ?>">

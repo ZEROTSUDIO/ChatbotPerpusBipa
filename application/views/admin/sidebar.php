@@ -12,30 +12,6 @@
             <h1 class="text-xl font-bold handwriting">Perpus Bipa</h1>
         </div>
 
-        <!-- Profile Section -->
-        <div class="bg-gray-100 border-2 border-black rounded-lg p-4 mb-6">
-            <div class="flex items-center mb-3">
-                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-lg mr-3">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div>
-                    <p class="font-bold handwriting text-lg"><?= $user->nama; ?></p>
-                    <p class="text-xs text-gray-500">ID: ADM001</p>
-                </div>
-            </div>
-            <div class="space-y-1">
-                <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded">
-                    <i class="fas fa-user-edit mr-2 text-xs"></i> Edit Profile
-                </a>
-                <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded">
-                    <i class="fas fa-cog mr-2 text-xs"></i> Settings
-                </a>
-                <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded text-red-600">
-                    <i class="fas fa-sign-out-alt mr-2 text-xs"></i> Logout
-                </a>
-            </div>
-        </div>
-
         <!-- Navigation -->
         <nav>
             <ul class="space-y-2">
@@ -69,6 +45,29 @@
                 </li>
             </ul>
         </nav>
+        <!-- Profile Section -->
+        <div class="bg-gray-100 border-2 border-black rounded-lg p-4 mt-6 fixed bottom-4">
+            <div class="flex items-center mb-3">
+                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-lg mr-3">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <p class="font-bold handwriting text-lg"><?= $user->nama; ?></p>
+                    <p class="text-xs text-gray-500"><?= $user->email; ?></p>
+                </div>
+            </div>
+            <div class="space-y-1">
+                <!--a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded">
+                    <i class="fas fa-user-edit mr-2 text-xs"></i> Edit Profile
+                </a>
+                <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded">
+                    <i class="fas fa-cog mr-2 text-xs"></i> Settings
+                </a-->
+                <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded text-red-600">
+                    <i class="fas fa-sign-out-alt mr-2 text-xs"></i> Logout
+                </a>
+            </div>
+        </div>
     </div>
 </aside>
 
