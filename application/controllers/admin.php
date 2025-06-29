@@ -15,8 +15,9 @@ class Admin extends CI_Controller
         $this->load->model('m_account');
         $this->load->model('response_model');
         $this->load->model('user_model');
-        $this->load->model('statistic_model');
-        $this->load->model('user_detail_model');
+        $this->load->model('chat_model');
+        //$this->load->model('statistic_model');
+        //$this->load->model('user_detail_model');
         $this->load->library('pagination');
     }
 
@@ -291,5 +292,51 @@ class Admin extends CI_Controller
         $this->user_model->delete_user($id);
         echo json_encode(['success' => true, 'message' => 'User berhasil dihapus.']);
     }
-    
+
+    public function user_detail($user_id)
+    {
+        // Validasi user_id
+        if (!is_numeric($user_id)) {
+            show_404();
+        }
+
+        // Ambil data user
+        $data['user'] = $this->user_model->get_user_by_id($user_id);
+        if (!$data['user']) {
+            show_404();
+        }
+
+        // Ambil data statistik user
+        $data['user_stats'] = $this->chat_model->get_user_stats($user_id);
+
+        // Ambil history chats
+        $data['chat_history'] = $this->chat_model->get_user_chat_history($user_id);
+
+        // Ambil detail chats dengan confidence score
+        $data['chat_details'] = $this->chat_model->get_user_chat_details($user_id);
+
+        // Ambil data untuk chart OOD vs Non-OOD
+        $data['ood_stats'] = $this->chat_model->get_ood_stats($user_id);
+
+        // Ambil daftar intent untuk filter
+        $data['intents'] = $this->chat_model->get_user_intents($user_id);
+
+        $data['user_id'] = $user_id;
+        $data['title'] = 'Detail Pengguna - ' . $data['user']->nama;
+
+        $this->load->view('admin/user_detail', $data);
+    }
+
+    // AJAX endpoint untuk filter berdasarkan intent
+    public function get_chat_details_by_intent()
+    {
+        $user_id = $this->input->post('user_id');
+        $intent = $this->input->post('intent');
+
+        $chat_details = $this->chat_model->get_user_chat_details($user_id, $intent);
+
+        echo json_encode($chat_details);
+        log_message('error', 'POST user_id: ' . $this->input->post('user_id'));
+        log_message('error', 'POST intent: ' . $this->input->post('intent'));
+    }
 }

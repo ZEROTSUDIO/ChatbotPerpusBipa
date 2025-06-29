@@ -35,9 +35,93 @@ class Chat_model extends CI_Model
         return $this->db->get($table)->result_array(); // bukan ->result()
 
     }
+    //========================================
+
+    public function get_user_stats($user_id)
+    {
+        // Hitung total chats
+        $this->db->select('COUNT(*) as total_chats');
+        $this->db->from('chats');
+        $this->db->where('user', $user_id);
+        $total_chats = $this->db->get()->row()->total_chats;
+
+        return array(
+            'total_chats' => $total_chats
+        );
+    }
+
+    public function get_user_chat_history($user_id)
+    {
+        $this->db->select('c.*, cd.intent, cd.confident_score, cd.energy, cd.ood');
+        $this->db->from('chats c');
+        $this->db->join('chat_detail cd', 'c.id = cd.chat_id', 'left');
+        $this->db->where('c.user', $user_id);
+        $this->db->order_by('c.timestamp', 'DESC');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_user_chat_details($user_id, $intent = null)
+    {
+        $this->db->select('c.id, c.user_message, c.bot_response, c.timestamp, cd.intent, cd.confident_score, cd.energy, cd.ood');
+        $this->db->from('chats c');
+        $this->db->join('chat_detail cd', 'c.id = cd.chat_id', 'inner');
+        $this->db->where('c.user', $user_id);
+
+        if ($intent && $intent != 'all') {
+            $this->db->where('cd.intent', $intent);
+        }
+
+        $this->db->order_by('c.timestamp', 'DESC');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+    
+
+    public function get_ood_stats($user_id)
+    {
+        // OOD = 1, Non-OOD = 0
+        $this->db->select('cd.ood, COUNT(*) as count');
+        $this->db->from('chat_detail cd');
+        $this->db->join('chats c', 'cd.chat_id = c.id', 'inner');
+        $this->db->where('c.user', $user_id);
+        $this->db->group_by('cd.ood');
+        $query = $this->db->get();
+
+        $result = $query->result();
+        $stats = array('ood' => 0, 'non_ood' => 0);
+
+        foreach ($result as $row) {
+            if ($row->ood == 1) {
+                $stats['ood'] = $row->count;
+            } else {
+                $stats['non_ood'] = $row->count;
+            }
+        }
+
+        return $stats;
+    }
+
+    public function get_user_intents($user_id)
+    {
+        $this->db->distinct();
+        $this->db->select('cd.intent');
+        $this->db->from('chat_detail cd');
+        $this->db->join('chats c', 'cd.chat_id = c.id', 'inner');
+        $this->db->where('c.user', $user_id);
+        $this->db->where('cd.intent IS NOT NULL');
+        $this->db->order_by('cd.intent', 'ASC');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
 
     //==============================================================//
-/*
+    /*
+
     public function get_total_chats($period = null)
     {
         $this->db->select('COUNT(*) as total');
