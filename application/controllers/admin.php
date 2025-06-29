@@ -15,6 +15,9 @@ class Admin extends CI_Controller
         $this->load->model('m_account');
         $this->load->model('response_model');
         $this->load->model('user_model');
+        $this->load->model('statistic_model');
+        $this->load->model('user_detail_model');
+        $this->load->library('pagination');
     }
 
     private function render($view, $data = [])
@@ -36,10 +39,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Dashboard';
 
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/dashboard');
-        $this->load->view('admin/footer');
+        $this->render('admin/dashboard', $data);
     }
 
     public function users()
@@ -291,40 +291,5 @@ class Admin extends CI_Controller
         $this->user_model->delete_user($id);
         echo json_encode(['success' => true, 'message' => 'User berhasil dihapus.']);
     }
-
-    public function user_detail($id)
-    {
-        $this->load->model('user_model');
-        $this->load->model('chat_model');
-
-        $user = $this->user_model->get_user_by_id($id);
-        if (!$user) {
-            show_404();
-        }
-
-        $chats = $this->chat_model->getChatHistoryByUser('chats', $id);
-
-        $data = [
-            'user' => $user,
-            'chats' => $chats,
-            'active_controller' => 'user'
-        ];
-        //===
-        $intent_dist = $this->chat_model->get_intent_distribution_by_user($id);
-        $intent_labels = array_column($intent_dist, 'intent');
-        $intent_values = array_column($intent_dist, 'total');
-        $data['intent_labels'] = $intent_labels;
-        $data['intent_values'] = $intent_values;
-        //===
-        $confidence_data = $this->chat_model->get_confidence_over_time_by_user($id);        
-        $confidence_timestamps = array_column($confidence_data, 'timestamp');
-        $confidence_scores = array_map('floatval', array_column($confidence_data, 'confident_score'));
-        $data['confidence_timestamps'] = $confidence_timestamps;
-        $data['confidence_scores'] = $confidence_scores;
-        //===
-        $chat_detail_rows = $this->chat_model->get_chat_detail_by_user($id);
-        $data['chat_detail'] = $chat_detail_rows;
-        
-        $this->render('admin/user_detail', $data);
-    }
+    
 }

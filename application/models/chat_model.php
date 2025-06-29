@@ -37,7 +37,7 @@ class Chat_model extends CI_Model
     }
 
     //==============================================================//
-
+/*
     public function get_total_chats($period = null)
     {
         $this->db->select('COUNT(*) as total');
@@ -165,4 +165,5 @@ class Chat_model extends CI_Model
         $this->db->order_by('timestamp', 'ASC');
         return $this->db->get('chat_detail')->result_array();
     }
+    */
 }
