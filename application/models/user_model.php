@@ -63,7 +63,7 @@ class user_model extends CI_Model
         $this->db->where('intent', $intent);
         $query = $this->db->get('users');
         return $query->row(); // Return single row (object) or null
-    */
+    
 
     public function get_active_users_count($period = 30)
     {
@@ -120,5 +120,5 @@ class user_model extends CI_Model
     public function get_total_registered_users()
     {
         return $this->db->count_all('users');
-    }
+    }*/
 }
