@@ -57,7 +57,7 @@
                                             $total = $ood_stats['ood'] + $ood_stats['non_ood'];
                                             $accuracy = $total > 0 ? round(($ood_stats['non_ood'] / $total) * 100, 1) : 0;
                                             echo $accuracy . '%';
-                                            ?> 
+                                            ?>
                                         </p>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
 <script>
     // Initialize Chart
     document.addEventListener('DOMContentLoaded', function() {
-        paginateTable('myTableId', 10, 'myPaginationId');
+        paginationInstance = new TablePagination('myTableId', 10, 'myPaginationId');
     });
     const ctx = document.getElementById('oodChart').getContext('2d');
     const oodChart = new Chart(ctx, {
@@ -250,6 +250,7 @@
             }
         }
     });
+
     // Filter functionality
     document.getElementById('intentFilter').addEventListener('change', function() {
         const intent = this.value;
@@ -337,11 +338,13 @@
                 }
 
                 document.getElementById('chatDetailsTable').innerHTML = html;
+                paginationInstance = new TablePagination('myTableId', 10, 'myPaginationId');
             })
             .catch(async (error) => {
                 const text = await error.text?.();
                 console.error('Fetch error:', error, text);
                 document.getElementById('chatDetailsTable').innerHTML = '<tr><td colspan="7" class="text-center py-4 text-red-500">Error loading data</td></tr>';
+                document.getElementById('myPaginationId').innerHTML = '';
             });
 
     });
@@ -382,43 +385,94 @@
         }
     });
 
-    function paginateTable(tableId, rowsPerPage, paginationId) {
-        const table = document.getElementById(tableId);
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const pagination = document.getElementById(paginationId);
-        let currentPage = 1;
+    class TablePagination {
+        constructor(tableId, rowsPerPage, paginationId) {
+            this.table = document.getElementById(tableId);
+            this.tbody = this.table.querySelector('tbody');
+            this.pagination = document.getElementById(paginationId);
+            this.rowsPerPage = rowsPerPage;
+            this.currentPage = 1;
 
-        function displayRows(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            rows.forEach((row, index) => {
+            this.init();
+        }
+
+        init() {
+            this.rows = Array.from(this.tbody.querySelectorAll('tr'));
+            this.totalPages = Math.ceil(this.rows.length / this.rowsPerPage);
+
+            // Only show pagination if there are more rows than rowsPerPage
+            if (this.rows.length > this.rowsPerPage) {
+                this.displayRows(this.currentPage);
+                this.updatePagination();
+            } else {
+                // Clear pagination if not needed
+                this.pagination.innerHTML = '';
+                // Show all rows
+                this.rows.forEach(row => row.style.display = '');
+            }
+        }
+
+        displayRows(page) {
+            const start = (page - 1) * this.rowsPerPage;
+            const end = start + this.rowsPerPage;
+            this.rows.forEach((row, index) => {
                 row.style.display = (index >= start && index < end) ? '' : 'none';
             });
         }
 
-        function updatePagination() {
-            pagination.innerHTML = '';
-            const totalPages = Math.ceil(rows.length / rowsPerPage);
+        updatePagination() {
+            this.pagination.innerHTML = '';
 
-            for (let i = 1; i <= totalPages; i++) {
+            // Previous button
+            if (this.currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.textContent = '← Previous';
+                prevBtn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
+                prevBtn.addEventListener('click', () => {
+                    this.currentPage--;
+                    this.displayRows(this.currentPage);
+                    this.updatePagination();
+                });
+                this.pagination.appendChild(prevBtn);
+            }
+
+            // Page numbers
+            for (let i = 1; i <= this.totalPages; i++) {
                 const btn = document.createElement('button');
                 btn.textContent = i;
                 btn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
-                if (i === currentPage) btn.classList.add('bg-blue-500', 'text-white');
+                if (i === this.currentPage) {
+                    btn.classList.add('bg-blue-500', 'text-white');
+                    btn.classList.remove('hover:bg-gray-300');
+                }
 
                 btn.addEventListener('click', () => {
-                    currentPage = i;
-                    displayRows(currentPage);
-                    updatePagination();
+                    this.currentPage = i;
+                    this.displayRows(this.currentPage);
+                    this.updatePagination();
                 });
 
-                pagination.appendChild(btn);
+                this.pagination.appendChild(btn);
             }
-        }
 
-        // Initialize
-        displayRows(currentPage);
-        updatePagination();
+            // Next button
+            if (this.currentPage < this.totalPages) {
+                const nextBtn = document.createElement('button');
+                nextBtn.textContent = 'Next →';
+                nextBtn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
+                nextBtn.addEventListener('click', () => {
+                    this.currentPage++;
+                    this.displayRows(this.currentPage);
+                    this.updatePagination();
+                });
+                this.pagination.appendChild(nextBtn);
+            }
+
+            // Show page info
+            const pageInfo = document.createElement('span');
+            pageInfo.textContent = ` Page ${this.currentPage} of ${this.totalPages} `;
+            pageInfo.className = 'px-3 py-1 text-sm text-gray-600';
+            this.pagination.appendChild(pageInfo);
+        }
     }
 </script>

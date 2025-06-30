@@ -132,6 +132,18 @@ class Chat_model extends CI_Model
         );
     }
 
+    public function get_users()
+    {
+        // Hitung total chats
+        $this->db->select('COUNT(*) as total_users');
+        $this->db->from('users');
+        $total_users = $this->db->get()->row()->total_users;
+
+        return array(
+            'total_users' => $total_users
+        );
+    }
+
     public function get_chat_history()
     {
         $this->db->select('c.*, u.nama, cd.intent, cd.confident_score, cd.energy, cd.ood');
@@ -150,7 +162,7 @@ class Chat_model extends CI_Model
         $this->db->from('chats c');
         $this->db->join('chat_detail cd', 'c.id = cd.chat_id', 'inner');
         $this->db->join('users u', 'u.id = c.user', 'left');
-        
+
         if ($intent && $intent != 'all') {
             $this->db->where('cd.intent', $intent);
         }
@@ -172,18 +184,36 @@ class Chat_model extends CI_Model
         $query = $this->db->get();
 
         $result = $query->result();
-        $stats = array('ood' => 0, 'non_ood' => 0);
 
+        // Inisialisasi default jika tidak ada data
+        $stats = array(
+            'ood' => 0,
+            'non_ood' => 0,
+            'non_ood_percentage' => 0.0
+        );
+
+        // Iterasi hasil query dan mapping ke array stats
         foreach ($result as $row) {
             if ($row->ood == 1) {
-                $stats['ood'] = $row->count;
-            } else {
-                $stats['non_ood'] = $row->count;
+                $stats['ood'] = (int) $row->count;
+            } elseif ($row->ood == 0) {
+                $stats['non_ood'] = (int) $row->count;
             }
+        }
+
+        // Hitung total data
+        $total = $stats['ood'] + $stats['non_ood'];
+
+        // Hitung persentase non-OOD jika total lebih dari nol
+        if ($total > 0) {
+            $percentage = ($stats['non_ood'] / $total) * 100;
+            // Bulatkan ke 2 desimal jika perlu
+            $stats['oods'] = round($percentage, 2);
         }
 
         return $stats;
     }
+
 
     public function get_intents()
     {

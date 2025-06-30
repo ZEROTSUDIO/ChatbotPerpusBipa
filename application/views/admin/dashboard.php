@@ -19,11 +19,11 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-white text-sm opacity-80">Total Users</p>
-                        <p class="text-white text-3xl font-bold handwriting">1,247</p>
+                        <p class="text-white text-3xl font-bold handwriting"><?php echo $total_users['total_users']; ?></p>
                     </div>
                     <i class="fas fa-users text-white text-2xl opacity-80"></i>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" hidden>
                     <span class="text-green-200 text-sm">↑ 12% from last month</span>
                 </div>
             </div>
@@ -31,12 +31,12 @@
             <div class="card green p-6 rounded-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-white text-sm opacity-80">Active Chats</p>
-                        <p class="text-white text-3xl font-bold handwriting">89</p>
+                        <p class="text-white text-sm opacity-80">Total Chats</p>
+                        <p class="text-white text-3xl font-bold handwriting"><?php echo $the_stats['total_chats']; ?></p>
                     </div>
                     <i class="fas fa-comments text-white text-2xl opacity-80"></i>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" hidden>
                     <span class="text-green-200 text-sm">↑ 8% from yesterday</span>
                 </div>
             </div>
@@ -44,12 +44,18 @@
             <div class="card orange p-6 rounded-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-white text-sm opacity-80">Messages Today</p>
-                        <p class="text-white text-3xl font-bold handwriting">3,421</p>
+                        <p class="text-white text-sm opacity-80">Presisi</p>
+                        <p class="text-white text-3xl font-bold handwriting">
+                            <?php
+                            $total = $ood_stats['ood'] + $ood_stats['non_ood'];
+                            $accuracy = $total > 0 ? round(($ood_stats['non_ood'] / $total) * 100, 1) : 0;
+                            echo $accuracy . '%';
+                            ?>
+                        </p>
                     </div>
                     <i class="fas fa-envelope text-white text-2xl opacity-80"></i>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" hidden>
                     <span class="text-red-200 text-sm">↓ 3% from yesterday</span>
                 </div>
             </div>
@@ -58,11 +64,26 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-white text-sm opacity-80">Bot Accuracy</p>
-                        <p class="text-white text-3xl font-bold handwriting">94.2%</p>
+                        <p class="text-white text-3xl font-bold handwriting">
+                            <?php
+                            $average = 0;
+                            $totalSum = 0;
+                            $totalCount = 0;
+                            foreach ($chat_details as $detail) {
+                                if (!empty($detail->confident_score)) {
+                                    $score = floatval($detail->confident_score);
+                                    $totalSum += $score;
+                                    $totalCount++;
+                                }
+                            }
+                            $average = $totalCount > 0 ? $totalSum / $totalCount : 0;
+                            echo round($average, 4) . "%";
+                            ?>
+                        </p>
                     </div>
                     <i class="fas fa-robot text-white text-2xl opacity-80"></i>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" hidden>
                     <span class="text-green-200 text-sm">↑ 2% from last week</span>
                 </div>
             </div>
@@ -73,7 +94,7 @@
             <div class="bg-gray-50 px-6 py-4 border-b">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-xl font-bold text-gray-800">Recent Activity</h3>
-					<!-- Add this near your intent filter -->					
+                    <!-- Add this near your intent filter -->
                     <div class="flex items-center space-x-2">
                         <label for="intentFilter" class="text-sm text-gray-600">Filter Intent:</label>
                         <select id="intentFilter" class="border border-gray-300 rounded px-3 py-1 text-sm">
@@ -197,13 +218,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         paginationInstance = new TablePagination('myTableId', 10, 'myPaginationId');
     });
-    
+
     document.getElementById('intentFilter').addEventListener('change', function() {
         const intent = this.value;
-        
+
         // Show loading
         document.getElementById('chatDetailsTable').innerHTML = '<tr><td colspan="8" class="text-center py-4">Loading...</td></tr>';
-        
+
         // Clear pagination while loading
         document.getElementById('myPaginationId').innerHTML = '';
 
@@ -293,7 +314,7 @@
 
                 // Update table content
                 document.getElementById('chatDetailsTable').innerHTML = html;
-                
+
                 // Reinitialize pagination with new data
                 paginationInstance = new TablePagination('myTableId', 10, 'myPaginationId');
             })
@@ -350,14 +371,14 @@
             this.pagination = document.getElementById(paginationId);
             this.rowsPerPage = rowsPerPage;
             this.currentPage = 1;
-            
+
             this.init();
         }
-        
+
         init() {
             this.rows = Array.from(this.tbody.querySelectorAll('tr'));
             this.totalPages = Math.ceil(this.rows.length / this.rowsPerPage);
-            
+
             // Only show pagination if there are more rows than rowsPerPage
             if (this.rows.length > this.rowsPerPage) {
                 this.displayRows(this.currentPage);
@@ -369,7 +390,7 @@
                 this.rows.forEach(row => row.style.display = '');
             }
         }
-        
+
         displayRows(page) {
             const start = (page - 1) * this.rowsPerPage;
             const end = start + this.rowsPerPage;
@@ -377,10 +398,10 @@
                 row.style.display = (index >= start && index < end) ? '' : 'none';
             });
         }
-        
+
         updatePagination() {
             this.pagination.innerHTML = '';
-            
+
             // Previous button
             if (this.currentPage > 1) {
                 const prevBtn = document.createElement('button');
@@ -393,7 +414,7 @@
                 });
                 this.pagination.appendChild(prevBtn);
             }
-            
+
             // Page numbers
             for (let i = 1; i <= this.totalPages; i++) {
                 const btn = document.createElement('button');
@@ -412,7 +433,7 @@
 
                 this.pagination.appendChild(btn);
             }
-            
+
             // Next button
             if (this.currentPage < this.totalPages) {
                 const nextBtn = document.createElement('button');
@@ -425,7 +446,7 @@
                 });
                 this.pagination.appendChild(nextBtn);
             }
-            
+
             // Show page info
             const pageInfo = document.createElement('span');
             pageInfo.textContent = ` Page ${this.currentPage} of ${this.totalPages} `;
@@ -434,8 +455,8 @@
         }
     }
 
-    // Legacy support - keep the old function name for compatibility
+    /* Legacy support - keep the old function name for compatibility
     function paginateTable(tableId, rowsPerPage, paginationId) {
         return new TablePagination(tableId, rowsPerPage, paginationId);
-    }
+    }*/
 </script>

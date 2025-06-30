@@ -44,7 +44,9 @@ class Admin extends CI_Controller
 
     public function dashboard()
     {
-        $data['user_stats'] = $this->chat_model->get_stats();
+        $data['the_stats'] = $this->chat_model->get_stats();
+
+        $data['total_users'] = $this->chat_model->get_users();
 
         // Ambil history chats
         $data['chat_history'] = $this->chat_model->get_chat_history();
