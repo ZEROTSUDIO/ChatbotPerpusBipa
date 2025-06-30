@@ -32,6 +32,7 @@ class Auth extends CI_Controller
                     $data_session = array(
                         'id' => $user->id,
                         'email' => $user->email,
+                        'level' => $user->level,
                         'status' => 'telah_login'
                     );
                     $this->session->set_userdata($data_session);
@@ -103,6 +104,7 @@ class Auth extends CI_Controller
 		$data_session = array(
 			'id'     => $user_id,
 			'email'  => $email,
+            'level' => $user->level,
 			'status' => 'telah_login'
 		);
 		$this->session->set_userdata($data_session);

@@ -120,12 +120,11 @@ class Chat_model extends CI_Model
 
     //=====================================
 
-    public function get_stats($user_id)
+    public function get_stats()
     {
         // Hitung total chats
         $this->db->select('COUNT(*) as total_chats');
         $this->db->from('chats');
-        $this->db->where('user', $user_id);
         $total_chats = $this->db->get()->row()->total_chats;
 
         return array(
@@ -133,25 +132,25 @@ class Chat_model extends CI_Model
         );
     }
 
-    public function get_chat_history($user_id)
+    public function get_chat_history()
     {
-        $this->db->select('c.*, cd.intent, cd.confident_score, cd.energy, cd.ood');
+        $this->db->select('c.*, u.nama, cd.intent, cd.confident_score, cd.energy, cd.ood');
         $this->db->from('chats c');
         $this->db->join('chat_detail cd', 'c.id = cd.chat_id', 'left');
-        $this->db->where('c.user', $user_id);
+        $this->db->join('users u', 'u.id = c.user', 'left');
         $this->db->order_by('c.timestamp', 'DESC');
         $query = $this->db->get();
 
         return $query->result();
     }
 
-    public function get_chat_details($user_id, $intent = null)
+    public function get_chat_details($intent = null)
     {
-        $this->db->select('c.id, c.user_message, c.bot_response, c.timestamp, cd.intent, cd.confident_score, cd.energy, cd.ood');
+        $this->db->select('c.id, u.nama, c.user_message, c.bot_response, c.timestamp, cd.intent, cd.confident_score, cd.energy, cd.ood');
         $this->db->from('chats c');
         $this->db->join('chat_detail cd', 'c.id = cd.chat_id', 'inner');
-        $this->db->where('c.user', $user_id);
-
+        $this->db->join('users u', 'u.id = c.user', 'left');
+        
         if ($intent && $intent != 'all') {
             $this->db->where('cd.intent', $intent);
         }
@@ -163,13 +162,12 @@ class Chat_model extends CI_Model
     }
 
 
-    public function get_the_ood_stats($user_id)
+    public function get_the_ood_stats()
     {
         // OOD = 1, Non-OOD = 0
         $this->db->select('cd.ood, COUNT(*) as count');
         $this->db->from('chat_detail cd');
         $this->db->join('chats c', 'cd.chat_id = c.id', 'inner');
-        $this->db->where('c.user', $user_id);
         $this->db->group_by('cd.ood');
         $query = $this->db->get();
 
@@ -187,13 +185,12 @@ class Chat_model extends CI_Model
         return $stats;
     }
 
-    public function get_intents($user_id)
+    public function get_intents()
     {
         $this->db->distinct();
         $this->db->select('cd.intent');
         $this->db->from('chat_detail cd');
         $this->db->join('chats c', 'cd.chat_id = c.id', 'inner');
-        $this->db->where('c.user', $user_id);
         $this->db->where('cd.intent IS NOT NULL');
         $this->db->order_by('cd.intent', 'ASC');
         $query = $this->db->get();

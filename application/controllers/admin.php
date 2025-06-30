@@ -22,6 +22,9 @@ class Admin extends CI_Controller
         if (!$this->session->userdata('status') || $this->session->userdata('status') !== 'telah_login') {
             redirect('auth/login?alert=belum_login');
         }
+        if ($this->session->userdata('level') !== '1') {
+            redirect('chat?alert=forbidden');
+        }
     }
 
     private function render($view, $data = [])
@@ -41,8 +44,21 @@ class Admin extends CI_Controller
 
     public function dashboard()
     {
-        $data['title'] = 'Dashboard';
+        $data['user_stats'] = $this->chat_model->get_stats();
 
+        // Ambil history chats
+        $data['chat_history'] = $this->chat_model->get_chat_history();
+
+        // Ambil detail chats dengan confidence score
+        $data['chat_details'] = $this->chat_model->get_chat_details();
+
+        // Ambil data untuk chart OOD vs Non-OOD
+        $data['ood_stats'] = $this->chat_model->get_the_ood_stats();
+
+        // Ambil daftar intent untuk filter
+        $data['intents'] = $this->chat_model->get_intents();                
+
+        $data['title'] = 'Dashboard';
         $this->render('admin/dashboard', $data);
     }
 
@@ -250,8 +266,8 @@ class Admin extends CI_Controller
         $name = $this->input->post('nama');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-		$level = $this->input->post('level');
-        $confirm = $this->input->post('confirm');		
+        $level = $this->input->post('level');
+        $confirm = $this->input->post('confirm');
 
         if ($password !== $confirm) {
             echo json_encode(['success' => false, 'message' => 'Password dan konfirmasi tidak cocok.']);
@@ -268,7 +284,7 @@ class Admin extends CI_Controller
             'nama' => $name,
             'email' => $email,
             'password' => $password,
-			'level' => $level,
+            'level' => $level,
             'date' => date('Y-m-d H:i:s')
         ];
 
@@ -283,7 +299,7 @@ class Admin extends CI_Controller
         $name = $this->input->post('nama');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-		$level = $this->input->post('level');
+        $level = $this->input->post('level');
         $confirm = $this->input->post('confirm');
 
         // Cek apakah email berubah dan sudah dipakai user lain
@@ -295,7 +311,7 @@ class Admin extends CI_Controller
         $data = [
             'nama' => $name,
             'email' => $email,
-			'level' => $level
+            'level' => $level
         ];
 
         if (!empty($password)) {
@@ -362,6 +378,16 @@ class Admin extends CI_Controller
 
         echo json_encode($chat_details);
         log_message('error', 'POST user_id: ' . $this->input->post('user_id'));
+        log_message('error', 'POST intent: ' . $this->input->post('intent'));
+    }
+    public function get_chat_details_by_intent2()
+    {
+        
+        $intent = $this->input->post('intent');
+
+        $chat_details = $this->chat_model->get_chat_details($intent);
+
+        echo json_encode($chat_details);        
         log_message('error', 'POST intent: ' . $this->input->post('intent'));
     }
 }

@@ -63,7 +63,7 @@
                 <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded">
                     <i class="fas fa-cog mr-2 text-xs"></i> Settings
                 </a-->
-                <a href="<?php echo base_url('admin/intents'); ?>" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded text-red-600">
+                <a href="<?php echo base_url('auth/logout'); ?>" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded text-red-600">
                     <i class="fas fa-sign-out-alt mr-2 text-xs"></i> Logout
                 </a>
             </div>

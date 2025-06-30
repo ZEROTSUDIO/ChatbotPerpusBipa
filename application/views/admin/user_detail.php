@@ -47,6 +47,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-percentage text-purple-500 text-2xl mr-3"></i>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Akurasi</p>
+                                        <p class="text-2xl font-bold text-purple-600">
+                                            <?php
+                                            $total = $ood_stats['ood'] + $ood_stats['non_ood'];
+                                            $accuracy = $total > 0 ? round(($ood_stats['non_ood'] / $total) * 100, 1) : 0;
+                                            echo $accuracy . '%';
+                                            ?> 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="bg-green-50 p-4 rounded-lg">
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
@@ -62,21 +77,6 @@
                                     <div>
                                         <p class="text-sm text-gray-600">OOD</p>
                                         <p class="text-2xl font-bold text-red-600"><?php echo $ood_stats['ood']; ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <div class="flex items-center">
-                                    <i class="fas fa-percentage text-purple-500 text-2xl mr-3"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Akurasi</p>
-                                        <p class="text-2xl font-bold text-purple-600">
-                                            <?php
-                                            $total = $ood_stats['ood'] + $ood_stats['non_ood'];
-                                            $accuracy = $total > 0 ? round(($ood_stats['non_ood'] / $total) * 100, 1) : 0;
-                                            echo $accuracy . '%';
-                                            ?>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -355,7 +355,6 @@
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
-
 
     // Modal functions
     function handleChatButtonClick(button) {
