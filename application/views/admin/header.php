@@ -18,7 +18,7 @@
         .sidebar.hidden { transform: translateX(-100%); }
         .main-wrapper { margin-left: 250px; transition: margin-left 0.3s ease; }
         .main-wrapper.full { margin-left: 0; }
-        .sidebar-toggle { position: fixed; top: 20px; left: 20px; z-index: 50; background: white; border: 2px solid black; padding: 10px; border-radius: 5px; display: none; }
+        .sidebar-toggle { position: fixed; top: 20px; right: 0; background: white; border: 2px solid black; padding: 10px; border-radius: 5px; display: none; }
         .card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .card.green { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
         .card.orange { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }

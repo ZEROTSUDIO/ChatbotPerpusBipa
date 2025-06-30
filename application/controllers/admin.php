@@ -19,6 +19,9 @@ class Admin extends CI_Controller
         //$this->load->model('statistic_model');
         //$this->load->model('user_detail_model');
         $this->load->library('pagination');
+        if (!$this->session->userdata('status') || $this->session->userdata('status') !== 'telah_login') {
+            redirect('auth/login?alert=belum_login');
+        }
     }
 
     private function render($view, $data = [])
@@ -62,10 +65,9 @@ class Admin extends CI_Controller
         // $this->load->model('Chat_model');
         // $data['chats'] = $this->Chat_model->get_all_chats();
 
-        $this->load->view('admin/header', $data);
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/chats');
-        $this->load->view('admin/footer');
+        
+        $this->render('admin/chats', $data);
+        
     }
 
     public function intents()
@@ -324,7 +326,7 @@ class Admin extends CI_Controller
         $data['user_id'] = $user_id;
         $data['title'] = 'Detail Pengguna - ' . $data['user']->nama;
 
-        $this->load->view('admin/user_detail', $data);
+        $this->render('admin/user_detail', $data);
     }
 
     // AJAX endpoint untuk filter berdasarkan intent

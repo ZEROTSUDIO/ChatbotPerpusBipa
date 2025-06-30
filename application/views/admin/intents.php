@@ -31,7 +31,7 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         <?php if (!empty($responses)): ?>
-                            <?php $colors = ['blue', 'green', 'purple', 'yellow', 'indigo', 'pink', 'red', 'cyan']; ?>
+                            <?php $colors = ['blue', 'green', 'purple', 'yellow', 'indigo', 'pink', 'red', 'cyan', 'teal', 'orange']; ?>
                             <?php foreach ($responses as $key => $response): ?>
                                 <?php $color = $colors[$key % count($colors)]; ?>
                                 <tr data-id="<?= $response->id ?>">

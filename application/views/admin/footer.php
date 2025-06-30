@@ -5,11 +5,13 @@
             $('#sidebar-toggle').click(function() {
                 $('#sidebar').toggleClass('show');
                 $('#mobile-backdrop').toggleClass('hidden');
+                $('#sidebar-toggle').addClass('hidden');
             });
 
             // Mobile backdrop click to close sidebar
             $('#mobile-backdrop').click(function() {
                 $('#sidebar').removeClass('show');
+                $('#sidebar-toggle').removeClass('hidden');
                 $(this).addClass('hidden');
             });
 
@@ -19,6 +21,7 @@
                     if (!$(event.target).closest('#sidebar, #sidebar-toggle').length) {
                         $('#sidebar').removeClass('show');
                         $('#mobile-backdrop').addClass('hidden');
+                        $('#sidebar-toggle').removeClass('hidden');
                     }
                 }
             });

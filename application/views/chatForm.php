@@ -39,6 +39,11 @@
                             <p class="text-sm"><?= $user->email; ?></p>
                             <p class="text-xs text-gray-500">ID: <?= $user->id; ?></p>
                         </div>
+                        <?php if ($user->level==1): ?>
+                        <a href="<?php echo site_url('admin'); ?>" onclick="return confirm('pergi ke dashboard admin??')" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <i class="fas fa-book mr-2"></i> Admin
+                        </a>
+                        <?php endif; ?>
                         <a href="<?php echo site_url($active_controller . '/clear'); ?>" onclick="return confirm('Yakin ingin menghapus semua riwayat chat Anda?')" class="flex items-center px-4 py-2 hover:bg-gray-100">
                             <i class="fas fa-trash mr-2"></i> Hapus Riwayat
                         </a>
