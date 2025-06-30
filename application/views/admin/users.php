@@ -29,6 +29,7 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Join Date</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Chats</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -57,6 +58,13 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <?= htmlspecialchars($user->email) ?>
                                     </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <?php if ($user->level == 1): ?>
+                                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">Admin</span>
+                                        <?php else: ?>
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">User</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <?= date('Y-m-d', strtotime($user->date)) ?>
                                     </td>
@@ -82,7 +90,7 @@
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="4" class="px-6 py-4 text-center text-gray-500">No User found</td>
+                                <td colspan="7" class="px-6 py-4 text-center text-gray-500">No User found</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
@@ -111,6 +119,14 @@
                 <div class="mb-4">
                     <label for="addUserEmail" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                     <input type="email" id="addUserEmail" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="addUserLevel" class="block text-sm font-medium text-gray-700 mb-2">Level</label>
+                    <select id="addUserLevel" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                        <option value="1">Admin</option>
+                        <option value="2" selected>User</option>
+                    </select>
                 </div>
 
                 <div class="mb-4">
@@ -161,6 +177,14 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="editUserLevel" class="block text-sm font-medium text-gray-700 mb-2">Level</label>
+                    <select id="editUserLevel" class="w-full px-3 py-2 border-2 border-black rounded-lg" required>
+                        <option value="1">Admin</option>
+                        <option value="2">User</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
                     <label for="editUserPassword" class="block text-sm font-medium text-gray-700 mb-2">Password (Opsional)</label>
                     <input type="password" id="editUserPassword" class="w-full px-3 py-2 border-2 border-black rounded-lg" placeholder="Kosongkan jika tidak ingin diubah">
                 </div>
@@ -183,6 +207,7 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
 
@@ -190,6 +215,7 @@
         $('#addNewUser').click(function() {
             $('#addUserName').val('');
             $('#addUserEmail').val('');
+            $('#addUserLevel').val('2'); // Default to User
             $('#addUserPassword').val('');
             $('#addUserPasswordConfirm').val('');
             $('#addUserModal').removeClass('hidden');
@@ -211,6 +237,7 @@
                         $('#editUserId').val(response.data.id);
                         $('#editUserName').val(response.data.nama);
                         $('#editUserEmail').val(response.data.email);
+                        $('#editUserLevel').val(response.data.level || '2'); // Default to User if level not set
                         $('#editUserPassword').val('');
                         $('#editUserPasswordConfirm').val('');
                         $('#editUserModal').removeClass('hidden');
@@ -265,6 +292,7 @@
             e.preventDefault();
             const name = $('#addUserName').val();
             const email = $('#addUserEmail').val();
+            const level = $('#addUserLevel').val();
             const password = $('#addUserPassword').val();
             const confirm = $('#addUserPasswordConfirm').val();
 
@@ -279,7 +307,9 @@
                 data: {
                     nama: name,
                     email: email,
-                    password: password
+                    level: level,
+                    password: password,
+					confirm: confirm
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -302,6 +332,7 @@
             const id = $('#editUserId').val();
             const name = $('#editUserName').val();
             const email = $('#editUserEmail').val();
+            const level = $('#editUserLevel').val();
             const password = $('#editUserPassword').val();
             const confirm = $('#editUserPasswordConfirm').val();
 
@@ -313,7 +344,9 @@
             const postData = {
                 id: id,
                 nama: name,
-                email: email
+                email: email,
+                level: level,
+				confirm: confirm
             };
 
             if (password !== '') {

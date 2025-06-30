@@ -41,8 +41,8 @@ class Chat_model extends CI_Model
     {
         // Hitung total chats
         $this->db->select('COUNT(*) as total_chats');
-        $this->db->from('chats');
-        $this->db->where('user', $user_id);
+        $this->db->from('chat_detail');
+        $this->db->where('user_id', $user_id);
         $total_chats = $this->db->get()->row()->total_chats;
 
         return array(

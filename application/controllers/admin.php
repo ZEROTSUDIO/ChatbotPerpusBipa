@@ -250,7 +250,8 @@ class Admin extends CI_Controller
         $name = $this->input->post('nama');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-        $confirm = $this->input->post('confirm');
+		$level = $this->input->post('level');
+        $confirm = $this->input->post('confirm');		
 
         if ($password !== $confirm) {
             echo json_encode(['success' => false, 'message' => 'Password dan konfirmasi tidak cocok.']);
@@ -263,12 +264,11 @@ class Admin extends CI_Controller
             return;
         }
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
         $data = [
             'nama' => $name,
             'email' => $email,
-            'password' => $hashedPassword,
+            'password' => $password,
+			'level' => $level,
             'date' => date('Y-m-d H:i:s')
         ];
 
@@ -283,6 +283,7 @@ class Admin extends CI_Controller
         $name = $this->input->post('nama');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
+		$level = $this->input->post('level');
         $confirm = $this->input->post('confirm');
 
         // Cek apakah email berubah dan sudah dipakai user lain
@@ -293,7 +294,8 @@ class Admin extends CI_Controller
 
         $data = [
             'nama' => $name,
-            'email' => $email
+            'email' => $email,
+			'level' => $level
         ];
 
         if (!empty($password)) {
@@ -301,7 +303,7 @@ class Admin extends CI_Controller
                 echo json_encode(['success' => false, 'message' => 'Password dan konfirmasi tidak cocok.']);
                 return;
             }
-            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+            $data['password'] = $password;
         }
 
         $this->user_model->update_user($id, $data);

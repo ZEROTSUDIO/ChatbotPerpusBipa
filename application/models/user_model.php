@@ -19,9 +19,9 @@ class user_model extends CI_Model
     public function get_all_users()
     {
         $this->db->order_by('date', 'DESC');
-        $this->db->select('users.id, users.nama, users.email, users.date, COUNT(chats.id) as chats_sum');
+        $this->db->select('users.id, users.nama, users.email, users.date, users.level, COUNT(chat_detail.user_id) as chats_sum');
         $this->db->from('users');
-        $this->db->join('chats', 'chats.user = users.id', 'left'); // Left join to include users without posts
+        $this->db->join('chat_detail', 'chat_detail.user_id = users.id', 'left'); // Left join to include users without posts
         $this->db->group_by('users.id');
         $query = $this->db->get();
         return $query->result();
