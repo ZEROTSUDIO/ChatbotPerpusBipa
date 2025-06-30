@@ -20,12 +20,12 @@
     <main class="p-6">
         <div class="mb-6">
             <h1 class="handwriting text-4xl font-bold mb-4">Chat Tests</h1>
-            <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                <button id="btnGantiA" class="bg-blue-700 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
+            <div class="flex flex-col sm:flex-row gap-4 justify-start items-start sm:items-center">
+                <button id="btnGantiA" class="text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-black-500 transition-colors">
                     <i class="fas fa-plus mr-2"></i>Test model
                 </button>
 
-                <button id="btnGantiB" class="bg-blue-700 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
+                <button id="btnGantiB" class="text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-black-600 transition-colors">
                     <i class="fas fa-plus mr-2"></i>Use Model
                 </button>
             </div>
@@ -336,36 +336,40 @@
     const btnA = document.getElementById("btnGantiA");
     const btnB = document.getElementById("btnGantiB");
 
-    // Tambahkan class aktif untuk tombol A saat awal load
-    btnA.classList.add("bg-blue-700");
+    // Fungsi helper untuk set tombol ON style
+    function setButtonOn(btn) {
+        btn.classList.remove("bg-white", "text-black", "border", "border-black");
+        btn.classList.add("bg-black", "text-white");
+    }
 
-    // Tampilkan output awal
-    document.getElementById("output").textContent = "Hasil: " + variable1;
+    // Fungsi helper untuk set tombol OFF style
+    function setButtonOff(btn) {
+        btn.classList.remove("bg-black", "text-white");
+        btn.classList.add("bg-white", "text-black", "border", "border-black");
+    }
 
-    // Fungsi untuk handle klik tombol
+    // Fungsi untuk handle toggle
     function setActive(value) {
         variable1 = value;
 
-        // Reset style semua tombol
-        btnA.classList.remove("bg-blue-700");
-        btnB.classList.remove("bg-blue-700");
-
-        // Tambahkan class active ke tombol yang sesuai
         if (value === "A") {
             activeController = "chat_test";
-            console.log(activeController);
-            btnA.classList.add("bg-blue-700");
+            console.log("Active controller:", activeController);
+            setButtonOn(btnA);
+            setButtonOff(btnB);
         } else {
             activeController = "chat";
-            console.log(activeController);
-            btnB.classList.add("bg-blue-700");
+            console.log("Active controller:", activeController);
+            setButtonOn(btnB);
+            setButtonOff(btnA);
         }
-
-        // Update UI
-        document.getElementById("output").textContent = "Hasil: " + variable1;
     }
 
-    // Event listener
+    // Initial state saat halaman load
+    setButtonOn(btnA);
+    setButtonOff(btnB);
+
+    // Event listeners
     btnA.addEventListener("click", () => setActive("A"));
     btnB.addEventListener("click", () => setActive("B"));
 </script>
