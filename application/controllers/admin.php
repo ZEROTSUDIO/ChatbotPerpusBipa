@@ -59,15 +59,36 @@ class Admin extends CI_Controller
 
     public function chats()
     {
-        $data['title'] = 'Chat Reports';
+        $allSuggestions = [
+            "halo selamat pagi",
+            "Woigh kocak besok minggu tutup ga perpusnya?",
+            "Permisi, perpusnya buka jam berapa ya?",
+            "Apa aja aturanye?",
+            "bagaimana cara menjadi anggota?",
+            "Assalamualaikum, saya ingin pake!",
+            "saya ingin pinjam buku",
+            "Bisa carikan saya buku?",
+            "Apa saja fasilitas disini?",
+            "Bagaimana cara meminjam buku?"
+        ];
 
-        // In real application, you would load chat data from database
-        // $this->load->model('Chat_model');
-        // $data['chats'] = $this->Chat_model->get_all_chats();
+        // Shuffle and pick 3
+        shuffle($allSuggestions);
+        $randomSuggestions = array_slice($allSuggestions, 0, 3);
 
-        
+        $user_id = $this->session->userdata('id');
+
+        // Ambil data pengguna dari tabel users
+        $user = $this->m_account->getUserById($user_id);
+        $data = [
+            'suggestions' => $randomSuggestions,
+            'active_controller' => 'chat',
+            'chats' => $this->chat_model->getChatHistoryByUser('chats', $user_id), // Gunakan tabel 'chats2',
+            'user' => $user
+        ];
+
+
         $this->render('admin/chats', $data);
-        
     }
 
     public function intents()

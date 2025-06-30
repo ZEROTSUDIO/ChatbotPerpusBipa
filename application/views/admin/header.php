@@ -26,7 +26,7 @@
         .table-wrapper { background: white; border: 2px solid black; border-radius: 10px; overflow: hidden; }
         .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
         .status-online { background: #dcfce7; color: #166534; }
-        .status-offline { background: #fee2e2; color: #991b1b; }
+        .status-offline { background: #fee2e2; color: #991b1b; }        
         
         @media (max-width: 768px) {
             .sidebar { transform: translateX(-100%); }

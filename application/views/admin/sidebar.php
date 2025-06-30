@@ -30,17 +30,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('admin/chats'); ?>"
-                        class="sidebar-item <?php echo $this->uri->segment(2) == 'chats' ? 'bg-blue-100 border-l-4 border-blue-500' : ''; ?> flex items-center px-3 py-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-comments mr-3 text-lg"></i>
-                        <span>Chat Reports</span>
-                    </a>
-                </li>
-                <li>
                     <a href="<?php echo base_url('admin/intents'); ?>"
                         class="sidebar-item <?php echo $this->uri->segment(2) == 'intents' ? 'bg-blue-100 border-l-4 border-blue-500' : ''; ?> flex items-center px-3 py-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-robot mr-3 text-lg"></i>
                         <span>Intent Responses</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url('admin/chats'); ?>"
+                        class="sidebar-item <?php echo $this->uri->segment(2) == 'chats' ? 'bg-blue-100 border-l-4 border-blue-500' : ''; ?> flex items-center px-3 py-3 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-comments mr-3 text-lg"></i>
+                        <span>Chat Test</span>
                     </a>
                 </li>
             </ul>

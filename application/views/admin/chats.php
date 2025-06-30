@@ -1,3 +1,10 @@
+<style>
+    /* Tambahan class Tailwind-like jika dibutuhkan manual */
+    .btn-switch {
+        @apply bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors;
+    }
+</style>
+<link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet">
 <!-- Main Wrapper -->
 <div id="main-wrapper" class="main-wrapper">
     <!-- Header -->
@@ -5,59 +12,360 @@
         <div class="breadcrumb">
             <span class="text-gray-500">Dashboard</span>
             <span class="mx-2">/</span>
-            <span class="font-semibold">Chat Reports</span>
+            <span class="font-semibold">Chat Test</span>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="p-6">
         <div class="mb-6">
-            <h1 class="handwriting text-4xl font-bold mb-4">Chat Reports</h1>
+            <h1 class="handwriting text-4xl font-bold mb-4">Chat Tests</h1>
             <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                <input type="text" placeholder="Search chats..." class="px-4 py-2 border-2 border-black rounded-lg w-full sm:w-auto">
-                <select class="px-4 py-2 border-2 border-black rounded-lg">
-                    <option value="">All Status</option>
-                    <option value="active">Active</option>
-                    <option value="completed">Completed</option>
-                    <option value="pending">Pending</option>
-                </select>
+                <button id="btnGantiA" class="bg-blue-700 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-plus mr-2"></i>Test model
+                </button>
+
+                <button id="btnGantiB" class="bg-blue-700 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-plus mr-2"></i>Use Model
+                </button>
             </div>
         </div>
+        <div class="bg-white border-2 border-black rounded-lg p-10 w-full">
+            <div class="flex flex-col space-y-4 flex-grow overflow-y-auto bg-white/80 p-4 rounded-lg" id="chat-container">
+                <!-- Welcome message -->
+                <div class="flex items-start space-x-3 message-container">
+                    <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                        <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                        <p>Halo <?= $user->nama; ?>, Ada yang bisa saya bantu dengan rekomendasikan buku?</p>
+                        <div class="timestamp">Hari ini, <?php echo date('H:i'); ?></div>
+                    </div>
+                </div>
 
-        <div class="table-wrapper">
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Chat ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Intent</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Confidence</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Energy</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">OOD</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#CHT001</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#USR001</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CHAT_20240115_001</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">book_recommendation</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.92</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0.85</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">No</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15 10:30:45</td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+                <?php if (empty($chats)): ?>
+                    <!-- Chat suggestions only shown when no chat history -->
+                    <div class="flex flex-col space-y-3 mt-4 ml-12 items-end">
+                        <h2>Contoh untuk memulai</h2>
+                        <?php foreach ($suggestions as $text): ?>
+                            <div class="chat-suggestion bg-white/90 p-3 rounded-lg border-2 border-black max-w-[80%] hover:bg-gray-50">
+                                <p class="handwriting"><?= htmlspecialchars($text) ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
+
+                <?php foreach ($chats as $chat): ?>
+                    <div class="flex items-end justify-end space-x-3 message-container">
+                        <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                            <p class="text-right font-bold handwriting text-lg"><?= $user->nama; ?></p>
+                            <p><?= $chat['user_message'] ?></p>
+                            <div class="timestamp text-right"><?= $chat['timestamp'] ?></div>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 message-container">
+                        <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                            <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                            <p><?= $chat['bot_response'] ?></p>
+                            <div class="timestamp"><?= $chat['timestamp'] ?></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Input form -->
+            <div class="mt-5 border-t-2 border-gray-200 pt-4">
+                <form id="chat-form" class="flex items-center space-x-3">
+                    <input type="text" id="message" name="message" placeholder="Tulis pesan Anda disini..." class="flex-grow p-3 border-2 border-black rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    <button type="submit" class="p-3 rounded-xl bg-white border-2 border-black hover:bg-gray-100 transition-colors h-12 w-12 flex items-center justify-center">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </main>
 </div>
+<script>
+    $(document).ready(function() {
+        let waitingForRecommendation = false;
+        let wait_confirmation = false;
+
+        function scrollToBottom() {
+            var chatContainer = document.getElementById('chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        scrollToBottom();
+
+        // Handle chat suggestion clicks
+        $('.chat-suggestion').on('click', function() {
+            const suggestionText = $(this).find('p').text();
+            $('#message').val(suggestionText);
+            $('#chat-form').submit();
+        });
+
+        $('#chat-form').submit(function(e) {
+            e.preventDefault();
+
+            // Prevent user input while bot is typing
+            if ($('#typing-indicator').length > 0) {
+                console.log("Bot masih mengetik, kirim pesan diblokir.");
+                return;
+            }
+
+            var message = $('#message').val();
+            if (message.trim() === '') return;
+
+            // Hide suggestion bubbles when user sends a message
+            $('.chat-suggestion').slideUp(300, function() {
+                $(this).remove();
+            });
+
+            const now = new Date();
+            const timestamp = now.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            $('#chat-container').append(`
+            <div class="flex items-end justify-end space-x-3 message-container">
+                <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                    <p class="text-right font-bold handwriting text-lg">${userName}</p>
+                    <p>${message}</p>
+                    <div class="timestamp text-right">${timestamp}</div>
+                </div>
+                <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        `);
+
+            $('#message').val('');
+            scrollToBottom();
+
+            $('#chat-container').append(`
+            <div class="flex items-start space-x-3" id="typing-indicator">
+                <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="bg-white p-4 rounded-lg border-2 border-black max-w-[80%]">
+                    <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                    <p>Mengetik<span class="typing-dots">...</span></p>
+                </div>
+            </div>
+        `);
+            scrollToBottom();
+
+            console.log("waitingForRecommendation:", waitingForRecommendation);
+            console.log("wait_confirmation:", wait_confirmation);
+
+            if (waitingForRecommendation) {
+                $.ajax({
+                    url: `${baseUrl}${activeController}/sendbook`,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        message: message
+                    }),
+                    dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        $('#typing-indicator').remove();
+
+                        let responseHtml = `
+                        <div class="flex items-start space-x-3 message-container">
+                            <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                                <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                                <div>${response.response}</div>
+                                <div class="timestamp">${timestamp}</div>
+                            </div>
+                        </div>`;
+
+                        // Tambahkan tombol "Lihat lebih banyak" jika low_recommendation
+                        if (response.low_recommendation) {
+                            responseHtml += `
+                            <div class="flex justify-start mb-3 ml-14 mt-2">
+                                <button id="more-recommendation-btn" class="handwriting bg-white px-4 py-2 border-2 border-black rounded-lg shadow-sm hover:bg-gray-50 transition-all">
+                                    Lihat lebih banyak rekomendasi
+                                </button>
+                            </div>`;
+                        }
+
+                        $('#chat-container').append(responseHtml);
+
+                        waitingForRecommendation = false;
+                        wait_confirmation = true;
+                        scrollToBottom();
+                    },
+                    error: function(xhr) {
+                        $('#typing-indicator').remove();
+
+                        let serverResponse = "Terjadi kesalahan saat merekomendasikan buku. Silakan coba lagi.";
+                        try {
+                            serverResponse = JSON.parse(xhr.responseText).response || serverResponse;
+                        } catch (e) {}
+
+                        $('#chat-container').append(`
+                        <div class="flex items-start space-x-3 message-container">
+                            <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                                <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                                <div>${serverResponse}</div>
+                                <div class="timestamp">${timestamp}</div>
+                            </div>
+                        </div>
+                    `);
+                        waitingForRecommendation = false;
+                        wait_confirmation = false;
+                        scrollToBottom();
+                    }
+                });
+                return;
+            }
+
+            // Normal intent
+            $.ajax({
+                url: `${baseUrl}${activeController}/send`,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    message: message,
+                    wait_confirmation: wait_confirmation
+                }),
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    $('#typing-indicator').remove();
+
+                    let responseHtml = `
+                    <div class="flex items-start space-x-3 message-container">
+                        <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                            <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                            <div>${response.response}</div>
+                            <div class="timestamp">${timestamp}</div>
+                        </div>
+                    </div>`;
+
+                    // Tambah tombol "Lihat lebih banyak rekomendasi" jika low_recommendation
+                    if (response.low_recommendation) {
+                        responseHtml += `
+                        <div class="flex justify-start mb-3 ml-14 mt-2">
+                            <button id="more-recommendation-btn" class="handwriting bg-white px-4 py-2 border-2 border-black rounded-lg shadow-sm hover:bg-gray-50 transition-all">
+                                Lihat lebih banyak rekomendasi
+                            </button>
+                        </div>`;
+                    }
+
+                    $('#chat-container').append(responseHtml);
+                    scrollToBottom();
+
+                    // Handle next action
+                    if (response.next_action === 'wait_book_recommendation') {
+                        waitingForRecommendation = true;
+                        wait_confirmation = false;
+                    } else if (response.next_action === 'confirmation') {
+                        waitingForRecommendation = true;
+                        wait_confirmation = true;
+                    } else {
+                        waitingForRecommendation = false;
+                        wait_confirmation = false;
+                    }
+                },
+                error: function() {
+                    $('#typing-indicator').remove();
+                    $('#chat-container').append(`
+                    <div class="flex items-start space-x-3 message-container">
+                        <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                            <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+                            <p>Maaf, terjadi kesalahan. Silakan coba lagi.</p>
+                            <div class="timestamp">${timestamp}</div>
+                        </div>
+                    </div>
+                `);
+                    scrollToBottom();
+                }
+            });
+        });
+
+        // Event delegation for handling "Lihat lebih banyak rekomendasi" button
+        $(document).on('click', '#more-recommendation-btn', function() {
+            const message = "Lanjutkan rekomendasi buku";
+            $('#message').val(message);
+            $('#chat-form').submit();
+        });
+
+        setInterval(function() {
+            var dots = $('.typing-dots');
+            if (dots.length > 0) {
+                var text = dots.text();
+                dots.text(text.length >= 3 ? '' : text + '.');
+            }
+        }, 500);
+    });
+</script>
+<script>
+    const baseUrl = "<?= base_url() ?>";
+    const userName = <?= json_encode($user->nama); ?>;
+    var activeController = "chat_test";
+    var variable1 = "A";
+
+    // Ambil elemen tombol
+    const btnA = document.getElementById("btnGantiA");
+    const btnB = document.getElementById("btnGantiB");
+
+    // Tambahkan class aktif untuk tombol A saat awal load
+    btnA.classList.add("bg-blue-700");
+
+    // Tampilkan output awal
+    document.getElementById("output").textContent = "Hasil: " + variable1;
+
+    // Fungsi untuk handle klik tombol
+    function setActive(value) {
+        variable1 = value;
+
+        // Reset style semua tombol
+        btnA.classList.remove("bg-blue-700");
+        btnB.classList.remove("bg-blue-700");
+
+        // Tambahkan class active ke tombol yang sesuai
+        if (value === "A") {
+            activeController = "chat_test";
+            console.log(activeController);
+            btnA.classList.add("bg-blue-700");
+        } else {
+            activeController = "chat";
+            console.log(activeController);
+            btnB.classList.add("bg-blue-700");
+        }
+
+        // Update UI
+        document.getElementById("output").textContent = "Hasil: " + variable1;
+    }
+
+    // Event listener
+    btnA.addEventListener("click", () => setActive("A"));
+    btnB.addEventListener("click", () => setActive("B"));
+</script>
