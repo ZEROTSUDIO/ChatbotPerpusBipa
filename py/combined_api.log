@@ -2491,3 +2491,608 @@
 2025-07-04 00:16:29,072 - __main__ - INFO - =============================================
 
 2025-07-04 00:16:29,072 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 00:16:29] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:09:49,542 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 19:10:32,492 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 19:32:16,411 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 19:32:28,470 - __main__ - INFO - Intent resources loaded successfully
+2025-07-04 19:32:28,485 - __main__ - INFO - Loaded 10 intent classes
+2025-07-04 19:32:28,485 - __main__ - INFO - Thresholds: {'energy_threshold': -6.981417655944824, 'msp_threshold': 0.8888697624206543}
+2025-07-04 19:32:28,485 - __main__ - INFO - Intent classification model loaded successfully!
+2025-07-04 19:32:28,532 - __main__ - INFO - BookRecommender initialized with model: all-minilm-l6-v2
+2025-07-04 19:32:28,642 - __main__ - INFO - Loaded configuration: model_name=all-MiniLM-L6-v2
+2025-07-04 19:32:28,704 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-07-04 19:32:28,704 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: C:\xampp\htdocs\ChatbotPerpusBipa\py\recommender_model\sentence_transformer
+2025-07-04 19:32:47,181 - __main__ - INFO - Model loaded from C:\xampp\htdocs\ChatbotPerpusBipa\py\recommender_model\sentence_transformer
+2025-07-04 19:32:47,447 - __main__ - INFO - Embeddings loaded: 9962 book vectors
+2025-07-04 19:32:47,915 - __main__ - INFO - DataFrame loaded: 9962 books
+2025-07-04 19:32:47,915 - __main__ - INFO - Book recommendation model loaded successfully!
+2025-07-04 19:32:48,259 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.3:5000
+2025-07-04 19:32:48,259 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-04 19:37:19,302 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:37:19,302 - __main__ - INFO - Input Text: hello
+2025-07-04 19:37:19,317 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:37:29,487 - __main__ - INFO - Logits: [[-1.3810474872589111, -1.2127768993377686, 0.26798564195632935, 0.6303923726081848, -1.5321248769760132, 1.9025918245315552, 5.664554119110107, -0.776907742023468, -1.1508127450942993, -2.00909161567688]]
+2025-07-04 19:37:29,847 - __main__ - INFO - Softmax Probabilities: [[0.000837651954498142, 0.0009911577217280865, 0.004357423633337021, 0.006260673049837351, 0.0007201974513009191, 0.022342413663864136, 0.9614564180374146, 0.001532633090391755, 0.001054516644217074, 0.0004469999694265425]]
+2025-07-04 19:37:29,878 - __main__ - INFO - Max Probability (Confidence): 0.9615
+2025-07-04 19:37:29,878 - __main__ - INFO - Predicted Index: 6
+2025-07-04 19:37:30,130 - __main__ - INFO - Energy Score: -5.7039
+2025-07-04 19:37:30,131 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:37:30,135 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:37:30,137 - __main__ - INFO - Predicted Intent: greeting
+2025-07-04 19:37:30,139 - __main__ - INFO - =============================================
+
+2025-07-04 19:37:30,176 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:37:30] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:37:57,560 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:37:57,560 - __main__ - INFO - Input Text: kapal kargo banyuwangi
+2025-07-04 19:37:57,560 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:37:58,205 - __main__ - INFO - Logits: [[-1.6134898662567139, 0.5370970368385315, -1.4089566469192505, -1.4610247611999512, 5.637577056884766, -1.8860270977020264, -1.0137137174606323, -0.3266701102256775, -0.477245569229126, 1.1645307540893555]]
+2025-07-04 19:37:58,205 - __main__ - INFO - Softmax Probabilities: [[0.0006910867523401976, 0.0059363660402596, 0.0008479306707158685, 0.0008049102034419775, 0.9741616249084473, 0.0005262245540507138, 0.001258960459381342, 0.002502599498257041, 0.0021527688950300217, 0.011117617599666119]]
+2025-07-04 19:37:58,220 - __main__ - INFO - Max Probability (Confidence): 0.9742
+2025-07-04 19:37:58,220 - __main__ - INFO - Predicted Index: 4
+2025-07-04 19:37:58,220 - __main__ - INFO - Energy Score: -5.6638
+2025-07-04 19:37:58,220 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:37:58,220 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:37:58,220 - __main__ - INFO - Predicted Intent: fasilitas
+2025-07-04 19:37:58,236 - __main__ - INFO - =============================================
+
+2025-07-04 19:37:58,236 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:37:58] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:38:20,479 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:38:20,484 - __main__ - INFO - Input Text: buah salak asli ngawi
+2025-07-04 19:38:20,492 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:38:22,926 - __main__ - INFO - Logits: [[-0.11160476505756378, 0.11652390658855438, -0.12370657175779343, -0.2625754177570343, 0.5554287433624268, 0.2178753763437271, 0.005023553967475891, -0.02316128835082054, 7.931687287054956e-05, -0.2461177408695221]]
+2025-07-04 19:38:22,932 - __main__ - INFO - Softmax Probabilities: [[0.08582763373851776, 0.10782069712877274, 0.08479521423578262, 0.07380085438489914, 0.1672307252883911, 0.11932143568992615, 0.09644464403390884, 0.09376432746648788, 0.09596898406744003, 0.07502549141645432]]
+2025-07-04 19:38:22,934 - __main__ - INFO - Max Probability (Confidence): 0.1672
+2025-07-04 19:38:22,937 - __main__ - INFO - Predicted Index: 4
+2025-07-04 19:38:22,979 - __main__ - INFO - Energy Score: -2.3438
+2025-07-04 19:38:22,992 - __main__ - INFO - OOD Detection -> is_ood: True
+2025-07-04 19:38:22,996 - __main__ - INFO - Prediction marked as OUT-OF-DISTRIBUTION.
+2025-07-04 19:38:22,998 - __main__ - INFO - Predicted Intent: fasilitas
+2025-07-04 19:38:23,001 - __main__ - INFO - =============================================
+
+2025-07-04 19:38:23,017 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:38:23] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:40:14,863 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:40:14,863 - __main__ - INFO - Input Text: whatsupp my nigga
+2025-07-04 19:40:14,863 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:40:15,412 - __main__ - INFO - Logits: [[-1.4699828624725342, -0.807954728603363, 0.17506511509418488, 0.45869171619415283, -1.1264764070510864, 0.7267105579376221, 5.819409370422363, -1.1285101175308228, -0.705100417137146, -2.000392436981201]]
+2025-07-04 19:40:15,412 - __main__ - INFO - Softmax Probabilities: [[0.0006692409515380859, 0.001297471229918301, 0.0034675109200179577, 0.00460463622584939, 0.0009435515385121107, 0.006019970402121544, 0.9802242517471313, 0.0009416345856152475, 0.0014380262000486255, 0.0003937573346775025]]
+2025-07-04 19:40:15,412 - __main__ - INFO - Max Probability (Confidence): 0.9802
+2025-07-04 19:40:15,412 - __main__ - INFO - Predicted Index: 6
+2025-07-04 19:40:15,428 - __main__ - INFO - Energy Score: -5.8394
+2025-07-04 19:40:15,428 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:40:15,428 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:40:15,428 - __main__ - INFO - Predicted Intent: greeting
+2025-07-04 19:40:15,428 - __main__ - INFO - =============================================
+
+2025-07-04 19:40:15,522 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:40:15] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:40:46,181 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:40:46,181 - __main__ - INFO - Input Text: boleh
+2025-07-04 19:40:46,181 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:40:46,579 - __main__ - INFO - Logits: [[-0.8753802180290222, -0.7850835919380188, 5.8931355476379395, 0.7562596797943115, -1.3455699682235718, -0.3791562020778656, -0.0464545339345932, -1.3362576961517334, -1.2548167705535889, -0.9418789148330688]]
+2025-07-04 19:40:46,579 - __main__ - INFO - Softmax Probabilities: [[0.0011311767157167196, 0.0012380712432786822, 0.9841458201408386, 0.00578285800293088, 0.000706853752490133, 0.001857966068200767, 0.0025913631543517113, 0.0007134670740924776, 0.000774004147388041, 0.0010584014235064387]]
+2025-07-04 19:40:46,579 - __main__ - INFO - Max Probability (Confidence): 0.9841
+2025-07-04 19:40:46,579 - __main__ - INFO - Predicted Index: 2
+2025-07-04 19:40:46,579 - __main__ - INFO - Energy Score: -5.9091
+2025-07-04 19:40:46,579 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:40:46,595 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:40:46,595 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 19:40:46,595 - __main__ - INFO - =============================================
+
+2025-07-04 19:40:46,595 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:40:46] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:40:57,533 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:40:57,533 - __main__ - INFO - Input Text: carikan buku
+2025-07-04 19:40:57,533 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:40:57,972 - __main__ - INFO - Logits: [[0.79975825548172, 6.245275497436523, -0.2841460406780243, -0.8669455647468567, 0.8011608719825745, -1.1718741655349731, -0.8491231203079224, -0.9900327324867249, -1.5923768281936646, -0.726723313331604]]
+2025-07-04 19:40:57,972 - __main__ - INFO - Softmax Probabilities: [[0.004254363011568785, 0.9858084917068481, 0.0014391328440979123, 0.0008035151986405253, 0.0042603337205946445, 0.0005923323333263397, 0.0008179644937627017, 0.0007104575634002686, 0.00038899449282325804, 0.0009244682150892913]]
+2025-07-04 19:40:57,972 - __main__ - INFO - Max Probability (Confidence): 0.9858
+2025-07-04 19:40:57,972 - __main__ - INFO - Predicted Index: 1
+2025-07-04 19:40:57,988 - __main__ - INFO - Energy Score: -6.2596
+2025-07-04 19:40:57,988 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:40:57,988 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:40:57,988 - __main__ - INFO - Predicted Intent: cari_buku
+2025-07-04 19:40:57,988 - __main__ - INFO - =============================================
+
+2025-07-04 19:40:58,004 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:40:58] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:50:32,559 - __main__ - INFO - Finding books similar to: 'gay black guy'
+2025-07-04 19:50:57,527 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 19:50:57,527 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:50:57] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 19:51:17,426 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:51:17,426 - __main__ - INFO - Input Text: yes
+2025-07-04 19:51:17,426 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:51:18,917 - __main__ - INFO - Logits: [[-1.01228928565979, -0.9006492495536804, 5.991918563842773, 0.9727210402488708, -1.3178935050964355, -0.2889564335346222, -0.4158647954463959, -1.0878195762634277, -1.2678786516189575, -1.0554325580596924]]
+2025-07-04 19:51:18,917 - __main__ - INFO - Softmax Probabilities: [[0.0008945126901380718, 0.00100016372743994, 0.9850884079933167, 0.006511265877634287, 0.0006589677650481462, 0.001843850826844573, 0.001624090364202857, 0.0008294381550513208, 0.000692764122504741, 0.0008567410986870527]]
+2025-07-04 19:51:18,933 - __main__ - INFO - Max Probability (Confidence): 0.9851
+2025-07-04 19:51:18,933 - __main__ - INFO - Predicted Index: 2
+2025-07-04 19:51:18,933 - __main__ - INFO - Energy Score: -6.0069
+2025-07-04 19:51:18,933 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:51:18,933 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:51:18,933 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 19:51:18,933 - __main__ - INFO - =============================================
+
+2025-07-04 19:51:18,995 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:51:18] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:51:30,947 - __main__ - INFO - Finding books similar to: 'William Bernard'
+2025-07-04 19:51:31,165 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 19:51:31,166 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:51:31] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 19:52:30,397 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:52:30,397 - __main__ - INFO - Input Text: yes
+2025-07-04 19:52:30,397 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:52:30,646 - __main__ - INFO - Logits: [[-1.01228928565979, -0.9006492495536804, 5.991918563842773, 0.9727210402488708, -1.3178935050964355, -0.2889564335346222, -0.4158647954463959, -1.0878195762634277, -1.2678786516189575, -1.0554325580596924]]
+2025-07-04 19:52:30,646 - __main__ - INFO - Softmax Probabilities: [[0.0008945126901380718, 0.00100016372743994, 0.9850884079933167, 0.006511265877634287, 0.0006589677650481462, 0.001843850826844573, 0.001624090364202857, 0.0008294381550513208, 0.000692764122504741, 0.0008567410986870527]]
+2025-07-04 19:52:30,646 - __main__ - INFO - Max Probability (Confidence): 0.9851
+2025-07-04 19:52:30,662 - __main__ - INFO - Predicted Index: 2
+2025-07-04 19:52:30,662 - __main__ - INFO - Energy Score: -6.0069
+2025-07-04 19:52:30,662 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:52:30,662 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:52:30,662 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 19:52:30,662 - __main__ - INFO - =============================================
+
+2025-07-04 19:52:30,662 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:52:30] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:52:34,651 - __main__ - INFO - Finding books similar to: 'jews is evil'
+2025-07-04 19:52:34,788 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 19:52:34,788 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:52:34] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 19:52:52,973 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:52:52,973 - __main__ - INFO - Input Text: yes
+2025-07-04 19:52:52,989 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:52:53,240 - __main__ - INFO - Logits: [[-1.01228928565979, -0.9006492495536804, 5.991918563842773, 0.9727210402488708, -1.3178935050964355, -0.2889564335346222, -0.4158647954463959, -1.0878195762634277, -1.2678786516189575, -1.0554325580596924]]
+2025-07-04 19:52:53,240 - __main__ - INFO - Softmax Probabilities: [[0.0008945126901380718, 0.00100016372743994, 0.9850884079933167, 0.006511265877634287, 0.0006589677650481462, 0.001843850826844573, 0.001624090364202857, 0.0008294381550513208, 0.000692764122504741, 0.0008567410986870527]]
+2025-07-04 19:52:53,240 - __main__ - INFO - Max Probability (Confidence): 0.9851
+2025-07-04 19:52:53,240 - __main__ - INFO - Predicted Index: 2
+2025-07-04 19:52:53,240 - __main__ - INFO - Energy Score: -6.0069
+2025-07-04 19:52:53,240 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:52:53,240 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:52:53,240 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 19:52:53,256 - __main__ - INFO - =============================================
+
+2025-07-04 19:52:53,256 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:52:53] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:52:55,499 - __main__ - INFO - Finding books similar to: 'gas the jew'
+2025-07-04 19:52:55,650 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 19:52:55,652 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:52:55] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 19:54:22,954 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:54:22,954 - __main__ - INFO - Input Text: iya boleh
+2025-07-04 19:54:22,954 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:54:23,281 - __main__ - INFO - Logits: [[-0.8683646321296692, -0.848069965839386, 5.923025608062744, 0.7177594304084778, -1.2358055114746094, -0.42284032702445984, -0.5165653824806213, -1.1837619543075562, -1.1830981969833374, -0.8043959736824036]]
+2025-07-04 19:54:23,281 - __main__ - INFO - Softmax Probabilities: [[0.0011071051703765988, 0.0011298030149191618, 0.985490083694458, 0.005407966207712889, 0.0007666751625947654, 0.0017285335343331099, 0.0015738867223262787, 0.0008076321100816131, 0.0008081683772616088, 0.0011802393710240722]]
+2025-07-04 19:54:23,281 - __main__ - INFO - Max Probability (Confidence): 0.9855
+2025-07-04 19:54:23,296 - __main__ - INFO - Predicted Index: 2
+2025-07-04 19:54:23,296 - __main__ - INFO - Energy Score: -5.9376
+2025-07-04 19:54:23,296 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:54:23,296 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:54:23,296 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 19:54:23,296 - __main__ - INFO - =============================================
+
+2025-07-04 19:54:23,312 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:54:23] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:54:34,235 - __main__ - INFO - Finding books similar to: 'how the jews manipulate america and they are evil'
+2025-07-04 19:54:34,391 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 19:54:34,391 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:54:34] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 19:56:02,246 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:56:02,246 - __main__ - INFO - Input Text: iya lanjutkan
+2025-07-04 19:56:02,246 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:56:02,589 - __main__ - INFO - Logits: [[-0.9828062653541565, -1.0158442258834839, 5.948039531707764, 1.0712541341781616, -1.3585656881332397, -0.04846770316362381, -0.6112476587295532, -0.996502697467804, -1.2583999633789062, -1.0518200397491455]]
+2025-07-04 19:56:02,589 - __main__ - INFO - Softmax Probabilities: [[0.0009610879933461547, 0.0009298542863689363, 0.9835382103919983, 0.00749601237475872, 0.0006600439664907753, 0.0024464777670800686, 0.0013935709139332175, 0.0009480140870437026, 0.0007295823306776583, 0.0008969964692369103]]
+2025-07-04 19:56:02,608 - __main__ - INFO - Max Probability (Confidence): 0.9835
+2025-07-04 19:56:02,611 - __main__ - INFO - Predicted Index: 2
+2025-07-04 19:56:02,613 - __main__ - INFO - Energy Score: -5.9646
+2025-07-04 19:56:02,625 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:56:02,625 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:56:02,625 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 19:56:02,625 - __main__ - INFO - =============================================
+
+2025-07-04 19:56:02,640 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:56:02] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:56:10,200 - __main__ - INFO - Finding books similar to: 'why we must kill the jews'
+2025-07-04 19:56:10,356 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 19:56:10,356 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:56:10] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 19:57:04,495 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:57:04,495 - __main__ - INFO - Input Text: no, fuck off
+2025-07-04 19:57:04,495 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:57:04,947 - __main__ - INFO - Logits: [[-1.3816099166870117, -1.8847706317901611, 1.453328251838684, 5.775790214538574, -1.5880680084228516, 1.2182551622390747, -0.5856403708457947, -1.139613151550293, -0.9764624238014221, -1.5681451559066772]]
+2025-07-04 19:57:04,947 - __main__ - INFO - Softmax Probabilities: [[0.0007562588434666395, 0.0004572467878460884, 0.012878593057394028, 0.970710813999176, 0.0006151866400614381, 0.010180695913732052, 0.0016763150924816728, 0.0009633150766603649, 0.0011340281926095486, 0.0006275657215155661]]
+2025-07-04 19:57:04,947 - __main__ - INFO - Max Probability (Confidence): 0.9707
+2025-07-04 19:57:04,962 - __main__ - INFO - Predicted Index: 3
+2025-07-04 19:57:04,962 - __main__ - INFO - Energy Score: -5.8055
+2025-07-04 19:57:04,962 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:57:04,962 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:57:04,962 - __main__ - INFO - Predicted Intent: denied
+2025-07-04 19:57:04,962 - __main__ - INFO - =============================================
+
+2025-07-04 19:57:04,962 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:57:04] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:57:12,898 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:57:12,898 - __main__ - INFO - Input Text: how do i borrow books?
+2025-07-04 19:57:12,961 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:57:13,393 - __main__ - INFO - Logits: [[5.777066707611084, -0.3177163600921631, -1.0436021089553833, -1.4456148147583008, -1.7028483152389526, -0.7318815588951111, -1.2427197694778442, -0.5888550877571106, 0.9188310503959656, 0.8672482967376709]]
+2025-07-04 19:57:13,394 - __main__ - INFO - Softmax Probabilities: [[0.9766760468482971, 0.0022020135074853897, 0.001065544900484383, 0.0007128198631107807, 0.0005511434283107519, 0.0014552921056747437, 0.0008731644484214485, 0.0016790581867098808, 0.007583077996969223, 0.00720183877274394]]
+2025-07-04 19:57:13,399 - __main__ - INFO - Max Probability (Confidence): 0.9767
+2025-07-04 19:57:13,399 - __main__ - INFO - Predicted Index: 0
+2025-07-04 19:57:13,399 - __main__ - INFO - Energy Score: -5.8007
+2025-07-04 19:57:13,399 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:57:13,399 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:57:13,399 - __main__ - INFO - Predicted Intent: cara_pinjam
+2025-07-04 19:57:13,399 - __main__ - INFO - =============================================
+
+2025-07-04 19:57:13,399 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:57:13] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:57:53,512 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:57:53,512 - __main__ - INFO - Input Text: i hate jewish people
+2025-07-04 19:57:53,556 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:57:54,054 - __main__ - INFO - Logits: [[-1.0931599140167236, -1.470392107963562, 2.0908608436584473, 5.675348281860352, -1.4659454822540283, -0.7426987886428833, -0.6603609323501587, -1.3826680183410645, -0.2757296860218048, -1.1928801536560059]]
+2025-07-04 19:57:54,054 - __main__ - INFO - Softmax Probabilities: [[0.0011069162283092737, 0.0007590751047246158, 0.026724975556135178, 0.9630313515663147, 0.0007624582503922284, 0.0015715132467448711, 0.001706384588032961, 0.0008286724332720041, 0.0025068025570362806, 0.0010018592001870275]]
+2025-07-04 19:57:54,054 - __main__ - INFO - Max Probability (Confidence): 0.9630
+2025-07-04 19:57:54,054 - __main__ - INFO - Predicted Index: 3
+2025-07-04 19:57:54,054 - __main__ - INFO - Energy Score: -5.7130
+2025-07-04 19:57:54,054 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:57:54,073 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:57:54,073 - __main__ - INFO - Predicted Intent: denied
+2025-07-04 19:57:54,082 - __main__ - INFO - =============================================
+
+2025-07-04 19:57:54,087 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:57:54] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:58:32,089 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:58:32,089 - __main__ - INFO - Input Text: cara daftar dan menjadi anggota terus fasiltasnya apa aja
+2025-07-04 19:58:32,089 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:58:32,786 - __main__ - INFO - Logits: [[0.7135528922080994, -2.02791166305542, -1.3714525699615479, -0.6968129277229309, -0.7288289666175842, -1.042082667350769, -1.034593939781189, -1.1330491304397583, 5.720646858215332, -0.3114723563194275]]
+2025-07-04 19:58:32,786 - __main__ - INFO - Softmax Probabilities: [[0.006578844040632248, 0.0004241765127517283, 0.0008177928393706679, 0.0016055927844718099, 0.0015550025273114443, 0.0011368069099262357, 0.0011453520273789763, 0.0010379598243162036, 0.9833380579948425, 0.0023604060988873243]]
+2025-07-04 19:58:32,786 - __main__ - INFO - Max Probability (Confidence): 0.9833
+2025-07-04 19:58:32,786 - __main__ - INFO - Predicted Index: 8
+2025-07-04 19:58:32,802 - __main__ - INFO - Energy Score: -5.7374
+2025-07-04 19:58:32,802 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:58:32,802 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:58:32,802 - __main__ - INFO - Predicted Intent: keanggotaan
+2025-07-04 19:58:32,802 - __main__ - INFO - =============================================
+
+2025-07-04 19:58:32,802 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:58:32] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 19:59:11,691 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 19:59:11,691 - __main__ - INFO - Input Text: permisi selamat siang, anoo, apakah anda bisa membimbing saya untuk menjadi anggota perpustakaan? terima kasih
+2025-07-04 19:59:11,691 - __main__ - INFO - Detection Method: combined
+2025-07-04 19:59:12,679 - __main__ - INFO - Logits: [[0.3162446916103363, -1.2436261177062988, -1.7981878519058228, -1.1506184339523315, -0.5702846646308899, -0.5384410619735718, 0.282703161239624, -1.1121759414672852, 5.3348259925842285, -1.216458797454834]]
+2025-07-04 19:59:12,683 - __main__ - INFO - Softmax Probabilities: [[0.0064508505165576935, 0.0013557316269725561, 0.0007786291535012424, 0.0014878748916089535, 0.002658288460224867, 0.0027443005237728357, 0.006238066591322422, 0.0015461862785741687, 0.9753470420837402, 0.0013930679997429252]]
+2025-07-04 19:59:12,687 - __main__ - INFO - Max Probability (Confidence): 0.9753
+2025-07-04 19:59:12,689 - __main__ - INFO - Predicted Index: 8
+2025-07-04 19:59:12,696 - __main__ - INFO - Energy Score: -5.3598
+2025-07-04 19:59:12,702 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 19:59:12,788 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 19:59:12,884 - __main__ - INFO - Predicted Intent: keanggotaan
+2025-07-04 19:59:12,897 - __main__ - INFO - =============================================
+
+2025-07-04 19:59:12,904 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 19:59:12] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 20:00:45,337 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 20:00:45,337 - __main__ - INFO - Input Text: nigga where my food?
+2025-07-04 20:00:45,337 - __main__ - INFO - Detection Method: combined
+2025-07-04 20:00:45,919 - __main__ - INFO - Logits: [[-2.4197440147399902, 0.9222162961959839, -1.3034260272979736, -0.9901118278503418, 5.0540971755981445, -1.6332484483718872, 0.6488896012306213, -0.7244128584861755, -0.8387560248374939, 0.611804723739624]]
+2025-07-04 20:00:45,922 - __main__ - INFO - Softmax Probabilities: [[0.0005397789063863456, 0.015261979773640633, 0.0016482638893648982, 0.002254744293168187, 0.95074462890625, 0.001185186323709786, 0.011611985974013805, 0.002940958132967353, 0.002623192733153701, 0.011189247481524944]]
+2025-07-04 20:00:45,924 - __main__ - INFO - Max Probability (Confidence): 0.9507
+2025-07-04 20:00:45,924 - __main__ - INFO - Predicted Index: 4
+2025-07-04 20:00:45,926 - __main__ - INFO - Energy Score: -5.1046
+2025-07-04 20:00:45,927 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 20:00:45,928 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 20:00:45,929 - __main__ - INFO - Predicted Intent: fasilitas
+2025-07-04 20:00:45,931 - __main__ - INFO - =============================================
+
+2025-07-04 20:00:45,935 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:00:45] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 20:31:32,913 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 20:31:32,944 - __main__ - INFO - Input Text: buah salak asli ngawi
+2025-07-04 20:31:32,944 - __main__ - INFO - Detection Method: combined
+2025-07-04 20:31:34,089 - __main__ - INFO - Logits: [[-0.11160476505756378, 0.11652390658855438, -0.12370657175779343, -0.2625754177570343, 0.5554287433624268, 0.2178753763437271, 0.005023553967475891, -0.02316128835082054, 7.931687287054956e-05, -0.2461177408695221]]
+2025-07-04 20:31:34,089 - __main__ - INFO - Softmax Probabilities: [[0.08582763373851776, 0.10782069712877274, 0.08479521423578262, 0.07380085438489914, 0.1672307252883911, 0.11932143568992615, 0.09644464403390884, 0.09376432746648788, 0.09596898406744003, 0.07502549141645432]]
+2025-07-04 20:31:34,089 - __main__ - INFO - Max Probability (Confidence): 0.1672
+2025-07-04 20:31:34,089 - __main__ - INFO - Predicted Index: 4
+2025-07-04 20:31:34,089 - __main__ - INFO - Energy Score: -2.3438
+2025-07-04 20:31:34,089 - __main__ - INFO - OOD Detection -> is_ood: True
+2025-07-04 20:31:34,089 - __main__ - INFO - Prediction marked as OUT-OF-DISTRIBUTION.
+2025-07-04 20:31:34,089 - __main__ - INFO - Predicted Intent: fasilitas
+2025-07-04 20:31:34,089 - __main__ - INFO - =============================================
+
+2025-07-04 20:31:34,120 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:31:34] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 20:33:04,937 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 20:33:04,937 - __main__ - INFO - Input Text: ayo dong
+2025-07-04 20:33:04,937 - __main__ - INFO - Detection Method: combined
+2025-07-04 20:33:05,486 - __main__ - INFO - Logits: [[-1.3235063552856445, -0.882946252822876, -0.0687088817358017, 0.24571408331394196, -1.3317022323608398, 1.1934374570846558, 5.986814498901367, -0.8125402927398682, -0.9871268272399902, -1.7661551237106323]]
+2025-07-04 20:33:05,486 - __main__ - INFO - Softmax Probabilities: [[0.0006563349743373692, 0.0010196673683822155, 0.0023018508218228817, 0.0031523131765425205, 0.0006509777158498764, 0.008132430724799633, 0.981652021408081, 0.0010940455831587315, 0.0009187838295474648, 0.00042158542782999575]]
+2025-07-04 20:33:05,532 - __main__ - INFO - Max Probability (Confidence): 0.9817
+2025-07-04 20:33:05,532 - __main__ - INFO - Predicted Index: 6
+2025-07-04 20:33:05,532 - __main__ - INFO - Energy Score: -6.0053
+2025-07-04 20:33:05,532 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 20:33:05,532 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 20:33:05,532 - __main__ - INFO - Predicted Intent: greeting
+2025-07-04 20:33:05,532 - __main__ - INFO - =============================================
+
+2025-07-04 20:33:05,532 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:33:05] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 20:34:38,287 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 20:34:38,287 - __main__ - INFO - Input Text: excuse me kalau mau buku caranya gimana?
+2025-07-04 20:34:38,289 - __main__ - INFO - Detection Method: combined
+2025-07-04 20:34:42,403 - __main__ - INFO - Logits: [[4.175570011138916, 4.375567436218262, -1.0012201070785522, -1.0110801458358765, -0.6739266514778137, -1.6403954029083252, -1.7622830867767334, -1.235788106918335, -0.06992568075656891, 0.07542677223682404]]
+2025-07-04 20:34:42,403 - __main__ - INFO - Softmax Probabilities: [[0.43831759691238403, 0.5353609323501587, 0.0024747848510742188, 0.002450503408908844, 0.003433042671531439, 0.0013060123892500997, 0.0011561440769582987, 0.0019573380704969168, 0.006280489731580019, 0.007263053208589554]]
+2025-07-04 20:34:42,403 - __main__ - INFO - Max Probability (Confidence): 0.5354
+2025-07-04 20:34:42,403 - __main__ - INFO - Predicted Index: 1
+2025-07-04 20:34:42,403 - __main__ - INFO - Energy Score: -5.0004
+2025-07-04 20:34:42,403 - __main__ - INFO - OOD Detection -> is_ood: True
+2025-07-04 20:34:42,403 - __main__ - INFO - Prediction marked as OUT-OF-DISTRIBUTION.
+2025-07-04 20:34:42,403 - __main__ - INFO - Predicted Intent: cari_buku
+2025-07-04 20:34:42,403 - __main__ - INFO - =============================================
+
+2025-07-04 20:34:42,450 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:34:42] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 20:35:13,272 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 20:35:13,272 - __main__ - INFO - Input Text: excuse me kalau mau cari buku caranya gimana?
+2025-07-04 20:35:13,272 - __main__ - INFO - Detection Method: combined
+2025-07-04 20:35:13,838 - __main__ - INFO - Logits: [[1.2237498760223389, 6.256846904754639, -0.6421658992767334, -1.0894747972488403, 0.7700976729393005, -1.4438787698745728, -0.9466442465782166, -0.9386060833930969, -1.3743314743041992, -0.4436569809913635]]
+2025-07-04 20:35:13,838 - __main__ - INFO - Softmax Probabilities: [[0.006416089832782745, 0.9842758178710938, 0.0009929187363013625, 0.0006348189781419933, 0.004076166544109583, 0.00044538360089063644, 0.000732285319827497, 0.0007381952018477023, 0.00047746128984726965, 0.0012109465897083282]]
+2025-07-04 20:35:13,838 - __main__ - INFO - Max Probability (Confidence): 0.9843
+2025-07-04 20:35:13,838 - __main__ - INFO - Predicted Index: 1
+2025-07-04 20:35:13,838 - __main__ - INFO - Energy Score: -6.2727
+2025-07-04 20:35:13,838 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 20:35:13,853 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 20:35:13,853 - __main__ - INFO - Predicted Intent: cari_buku
+2025-07-04 20:35:13,853 - __main__ - INFO - =============================================
+
+2025-07-04 20:35:13,853 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:35:13] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 20:35:38,421 - __main__ - INFO - Finding books similar to: 'buku'
+2025-07-04 20:35:39,374 - __main__ - INFO - Successfully generated 10 recommendations
+2025-07-04 20:35:39,406 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:35:39] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 20:35:55,183 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 20:35:55,187 - __main__ - INFO - Input Text: buku
+2025-07-04 20:35:55,190 - __main__ - INFO - Detection Method: combined
+2025-07-04 20:35:55,739 - __main__ - INFO - Logits: [[1.1398069858551025, 6.1100568771362305, -0.3007248342037201, -0.8536096215248108, 0.3595164120197296, -0.9630141854286194, -0.8699579238891602, -1.101948857307434, -1.4761016368865967, -0.6871671080589294]]
+2025-07-04 20:35:55,790 - __main__ - INFO - Softmax Probabilities: [[0.006826375611126423, 0.9834275841712952, 0.0016164981061592698, 0.0009299519006162882, 0.003128343727439642, 0.0008335788734257221, 0.0009148722747340798, 0.0007254511001519859, 0.0004990171873942018, 0.0010983620304614305]]
+2025-07-04 20:35:55,819 - __main__ - INFO - Max Probability (Confidence): 0.9834
+2025-07-04 20:35:55,822 - __main__ - INFO - Predicted Index: 1
+2025-07-04 20:35:55,839 - __main__ - INFO - Energy Score: -6.1268
+2025-07-04 20:35:55,882 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 20:35:55,899 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 20:35:55,899 - __main__ - INFO - Predicted Intent: cari_buku
+2025-07-04 20:35:55,899 - __main__ - INFO - =============================================
+
+2025-07-04 20:35:55,916 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 20:35:55] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 21:13:46,541 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:14:20,811 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:15:13,227 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:23:28,753 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:24:02,008 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:24:40,565 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:25:09,893 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:38:09,951 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:38:56,076 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:39:40,602 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:52:49,399 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:53:17,055 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:53:42,916 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:54:22,043 - __main__ - INFO - Loading intent resources from C:\xampp\htdocs\ChatbotPerpusBipa\py\model...
+2025-07-04 21:54:24,779 - __main__ - INFO - Intent resources loaded successfully
+2025-07-04 21:54:24,779 - __main__ - INFO - Loaded 10 intent classes
+2025-07-04 21:54:24,779 - __main__ - INFO - Thresholds: {'energy_threshold': -6.981417655944824, 'msp_threshold': 0.8888697624206543}
+2025-07-04 21:54:24,779 - __main__ - INFO - Intent classification model loaded successfully!
+2025-07-04 21:54:24,873 - __main__ - INFO - BookRecommender initialized with model: all-minilm-l6-v2
+2025-07-04 21:54:24,904 - __main__ - INFO - Loaded configuration: model_name=all-MiniLM-L6-v2
+2025-07-04 21:54:24,920 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-07-04 21:54:24,920 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: C:\xampp\htdocs\ChatbotPerpusBipa\py\recommender_model\sentence_transformer
+2025-07-04 21:54:34,891 - __main__ - INFO - Model loaded from C:\xampp\htdocs\ChatbotPerpusBipa\py\recommender_model\sentence_transformer
+2025-07-04 21:54:35,043 - __main__ - INFO - Embeddings loaded: 9962 book vectors
+2025-07-04 21:54:35,205 - __main__ - INFO - DataFrame loaded: 9962 books
+2025-07-04 21:54:35,205 - __main__ - INFO - Book recommendation model loaded successfully!
+2025-07-04 21:54:35,536 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.3:5000
+2025-07-04 21:54:35,536 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-04 22:02:24,004 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:02:24,019 - __main__ - INFO - Input Text: hello
+2025-07-04 22:02:24,019 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:02:35,971 - __main__ - INFO - Logits: [[-1.3810474872589111, -1.2127768993377686, 0.26798564195632935, 0.6303923726081848, -1.5321248769760132, 1.9025918245315552, 5.664554119110107, -0.776907742023468, -1.1508127450942993, -2.00909161567688]]
+2025-07-04 22:02:36,267 - __main__ - INFO - Softmax Probabilities: [[0.000837651954498142, 0.0009911577217280865, 0.004357423633337021, 0.006260673049837351, 0.0007201974513009191, 0.022342413663864136, 0.9614564180374146, 0.001532633090391755, 0.001054516644217074, 0.0004469999694265425]]
+2025-07-04 22:02:36,283 - __main__ - INFO - Max Probability (Confidence): 0.9615
+2025-07-04 22:02:36,314 - __main__ - INFO - Predicted Index: 6
+2025-07-04 22:02:36,470 - __main__ - INFO - Energy Score: -5.7039
+2025-07-04 22:02:36,470 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 22:02:36,486 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 22:02:36,486 - __main__ - INFO - Predicted Intent: greeting
+2025-07-04 22:02:36,486 - __main__ - INFO - =============================================
+
+2025-07-04 22:02:36,517 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:02:36] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 22:16:08,151 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:16:08,151 - __main__ - INFO - Input Text: sekarang jam berapa
+2025-07-04 22:16:08,151 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:16:10,131 - __main__ - INFO - Logits: [[-0.25654199719429016, -0.6758200526237488, -1.2176364660263062, -0.8549206852912903, -0.6812610030174255, -0.8211197257041931, 0.6765610575675964, 5.478116989135742, -0.7317207455635071, -0.5207540392875671]]
+2025-07-04 22:16:10,131 - __main__ - INFO - Softmax Probabilities: [[0.003153064986690879, 0.002073208335787058, 0.0012059657601639628, 0.0017332467250525951, 0.00206195842474699, 0.001792833674699068, 0.008016309700906277, 0.9755820035934448, 0.0019604936242103577, 0.0024209581315517426]]
+2025-07-04 22:16:10,131 - __main__ - INFO - Max Probability (Confidence): 0.9756
+2025-07-04 22:16:10,131 - __main__ - INFO - Predicted Index: 7
+2025-07-04 22:16:10,162 - __main__ - INFO - Energy Score: -5.5028
+2025-07-04 22:16:10,162 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 22:16:10,162 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 22:16:10,162 - __main__ - INFO - Predicted Intent: jam_layanan
+2025-07-04 22:16:10,162 - __main__ - INFO - =============================================
+
+2025-07-04 22:16:10,199 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:16:10] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 22:17:38,347 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:17:38,347 - __main__ - INFO - Input Text: apakah minggu buka
+2025-07-04 22:17:38,347 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:17:38,778 - __main__ - INFO - Logits: [[-0.01581500843167305, -0.4259187877178192, -1.1790276765823364, -1.0588804483413696, -0.6889556646347046, -0.98858642578125, -0.12997296452522278, 5.737632751464844, -0.6072384119033813, -0.234943225979805]]
+2025-07-04 22:17:38,778 - __main__ - INFO - Softmax Probabilities: [[0.0031177790369838476, 0.0020689000375568867, 0.0009742456022650003, 0.0010986204724758863, 0.001590391038917005, 0.0011786258546635509, 0.0027814230415970087, 0.9829599857330322, 0.0017258113948628306, 0.0025042572524398565]]
+2025-07-04 22:17:38,778 - __main__ - INFO - Max Probability (Confidence): 0.9830
+2025-07-04 22:17:38,793 - __main__ - INFO - Predicted Index: 7
+2025-07-04 22:17:38,793 - __main__ - INFO - Energy Score: -5.7548
+2025-07-04 22:17:38,793 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 22:17:38,793 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 22:17:38,793 - __main__ - INFO - Predicted Intent: jam_layanan
+2025-07-04 22:17:38,817 - __main__ - INFO - =============================================
+
+2025-07-04 22:17:38,823 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:17:38] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 22:22:37,034 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:22:37,034 - __main__ - INFO - Input Text: cara kembaliin buku gimana
+2025-07-04 22:22:37,034 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:22:37,976 - __main__ - INFO - Logits: [[5.047811985015869, 0.22819529473781586, -0.9843534827232361, -1.4201258420944214, -1.4956474304199219, -1.0895774364471436, -1.9894822835922241, -0.9730022549629211, 0.9399224519729614, 2.3475887775421143]]
+2025-07-04 22:22:38,058 - __main__ - INFO - Softmax Probabilities: [[0.9069787263870239, 0.007319208700209856, 0.002177012385800481, 0.0014080151449888945, 0.0013055958552286029, 0.001959579298272729, 0.0007967810379341245, 0.002201864728704095, 0.014912940561771393, 0.06094036623835564]]
+2025-07-04 22:22:38,063 - __main__ - INFO - Max Probability (Confidence): 0.9070
+2025-07-04 22:22:38,074 - __main__ - INFO - Predicted Index: 0
+2025-07-04 22:22:38,083 - __main__ - INFO - Energy Score: -5.1454
+2025-07-04 22:22:38,083 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 22:22:38,083 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 22:22:38,083 - __main__ - INFO - Predicted Intent: cara_pinjam
+2025-07-04 22:22:38,083 - __main__ - INFO - =============================================
+
+2025-07-04 22:22:38,228 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:22:38] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 22:23:41,761 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:23:41,761 - __main__ - INFO - Input Text: apakah ada aturan khusus ?
+2025-07-04 22:23:41,761 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:23:42,998 - __main__ - INFO - Logits: [[0.512747585773468, -2.332683563232422, -1.4450716972351074, -0.5103656053543091, -0.3039614260196686, -1.6327910423278809, -1.4840986728668213, -1.1288748979568481, 5.1916728019714355, 1.4094969034194946]]
+2025-07-04 22:23:42,998 - __main__ - INFO - Softmax Probabilities: [[0.008884705603122711, 0.0005162831512279809, 0.001254217466339469, 0.003193821059539914, 0.003926004748791456, 0.0010395548306405544, 0.0012062117457389832, 0.0017206614138558507, 0.956476628780365, 0.02178192138671875]]
+2025-07-04 22:23:43,014 - __main__ - INFO - Max Probability (Confidence): 0.9565
+2025-07-04 22:23:43,014 - __main__ - INFO - Predicted Index: 8
+2025-07-04 22:23:43,014 - __main__ - INFO - Energy Score: -5.2362
+2025-07-04 22:23:43,014 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 22:23:43,014 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 22:23:43,014 - __main__ - INFO - Predicted Intent: keanggotaan
+2025-07-04 22:23:43,014 - __main__ - INFO - =============================================
+
+2025-07-04 22:23:43,030 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:23:43] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 22:27:48,541 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:27:48,541 - __main__ - INFO - Input Text: Apa aja aturanye?
+2025-07-04 22:27:48,541 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:27:49,370 - __main__ - INFO - Logits: [[0.2504500448703766, -1.3766506910324097, -0.5839905142784119, -1.335607647895813, -0.29075515270233154, -1.2508925199508667, -1.4425681829452515, -0.6822269558906555, 0.5208305716514587, 5.872974872589111]]
+2025-07-04 22:27:49,370 - __main__ - INFO - Softmax Probabilities: [[0.003557264106348157, 0.0006989966495893896, 0.00154426961671561, 0.0007282827282324433, 0.002070492133498192, 0.0007926678517833352, 0.0006544064381159842, 0.0013997789938002825, 0.004661662969738245, 0.9838923215866089]]
+2025-07-04 22:27:49,370 - __main__ - INFO - Max Probability (Confidence): 0.9839
+2025-07-04 22:27:49,370 - __main__ - INFO - Predicted Index: 9
+2025-07-04 22:27:49,388 - __main__ - INFO - Energy Score: -5.8892
+2025-07-04 22:27:49,388 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 22:27:49,388 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 22:27:49,388 - __main__ - INFO - Predicted Intent: peraturan
+2025-07-04 22:27:49,404 - __main__ - INFO - =============================================
+
+2025-07-04 22:27:49,404 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:27:49] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 22:29:50,009 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 22:29:50,009 - __main__ - INFO - Input Text: buah salak asli ngawi
+2025-07-04 22:29:50,009 - __main__ - INFO - Detection Method: combined
+2025-07-04 22:29:50,692 - __main__ - INFO - Logits: [[-0.11160476505756378, 0.11652390658855438, -0.12370657175779343, -0.2625754177570343, 0.5554287433624268, 0.2178753763437271, 0.005023553967475891, -0.02316128835082054, 7.931687287054956e-05, -0.2461177408695221]]
+2025-07-04 22:29:50,692 - __main__ - INFO - Softmax Probabilities: [[0.08582763373851776, 0.10782069712877274, 0.08479521423578262, 0.07380085438489914, 0.1672307252883911, 0.11932143568992615, 0.09644464403390884, 0.09376432746648788, 0.09596898406744003, 0.07502549141645432]]
+2025-07-04 22:29:50,692 - __main__ - INFO - Max Probability (Confidence): 0.1672
+2025-07-04 22:29:50,692 - __main__ - INFO - Predicted Index: 4
+2025-07-04 22:29:50,692 - __main__ - INFO - Energy Score: -2.3438
+2025-07-04 22:29:50,692 - __main__ - INFO - OOD Detection -> is_ood: True
+2025-07-04 22:29:50,692 - __main__ - INFO - Prediction marked as OUT-OF-DISTRIBUTION.
+2025-07-04 22:29:50,692 - __main__ - INFO - Predicted Intent: fasilitas
+2025-07-04 22:29:50,708 - __main__ - INFO - =============================================
+
+2025-07-04 22:29:50,708 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 22:29:50] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 23:24:58,446 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 23:24:58,465 - __main__ - INFO - Input Text: carikan buku
+2025-07-04 23:24:58,466 - __main__ - INFO - Detection Method: combined
+2025-07-04 23:25:01,906 - __main__ - INFO - Logits: [[0.79975825548172, 6.245275497436523, -0.2841460406780243, -0.8669455647468567, 0.8011608719825745, -1.1718741655349731, -0.8491231203079224, -0.9900327324867249, -1.5923768281936646, -0.726723313331604]]
+2025-07-04 23:25:01,906 - __main__ - INFO - Softmax Probabilities: [[0.004254363011568785, 0.9858084917068481, 0.0014391328440979123, 0.0008035151986405253, 0.0042603337205946445, 0.0005923323333263397, 0.0008179644937627017, 0.0007104575634002686, 0.00038899449282325804, 0.0009244682150892913]]
+2025-07-04 23:25:01,906 - __main__ - INFO - Max Probability (Confidence): 0.9858
+2025-07-04 23:25:01,906 - __main__ - INFO - Predicted Index: 1
+2025-07-04 23:25:01,906 - __main__ - INFO - Energy Score: -6.2596
+2025-07-04 23:25:01,906 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 23:25:01,906 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 23:25:01,906 - __main__ - INFO - Predicted Intent: cari_buku
+2025-07-04 23:25:01,906 - __main__ - INFO - =============================================
+
+2025-07-04 23:25:01,922 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 23:25:01] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 23:25:06,860 - __main__ - INFO - Finding books similar to: 'java'
+2025-07-04 23:25:19,046 - __main__ - ERROR - Error generating recommendations: 
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ChatbotPerpusBipa\py\app3.py", line 126, in recommend_books
+    processed_query = self.preprocess_text(user_query)
+  File "C:\xampp\htdocs\ChatbotPerpusBipa\py\app3.py", line 74, in preprocess_text
+    tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word not in self.stop_words]
+  File "C:\xampp\htdocs\ChatbotPerpusBipa\py\app3.py", line 74, in <listcomp>
+    tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word not in self.stop_words]
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\stem\wordnet.py", line 85, in lemmatize
+    lemmas = self._morphy(word, pos)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\stem\wordnet.py", line 41, in _morphy
+    return wn._morphy(form, pos, check_exceptions)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\util.py", line 120, in __getattr__
+    self.__load()
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\util.py", line 89, in __load
+    corpus = self.__reader_cls(root, *self.__args, **self.__kwargs)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1214, in __init__
+    self.map30 = self.map_wn()
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1282, in map_wn
+    return self.map_to_one(version)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1254, in map_to_one
+    synset_to_many = self.map_to_many(version)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1239, in map_to_many
+    sensekey_map2 = self.index_sense()
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1228, in index_sense
+    with ixreader.open(fn) as fp:
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\api.py", line 231, in open
+    stream = self._root.join(file).open(encoding)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\data.py", line 434, in open
+    data = self._zipfile.read(self._entry)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\data.py", line 1030, in read
+    value = zipfile.ZipFile.read(self, name)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3568.0_x64__qbz5n2kfra8p0\lib\zipfile.py", line 1473, in read
+    return fp.read()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3568.0_x64__qbz5n2kfra8p0\lib\zipfile.py", line 910, in read
+    buf += self._read1(self.MAX_N)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3568.0_x64__qbz5n2kfra8p0\lib\zipfile.py", line 1000, in _read1
+    data = self._decompressor.decompress(data, n)
+MemoryError
+2025-07-04 23:25:20,456 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 23:25:20] "POST /api/recommend HTTP/1.1" 200 -
+2025-07-04 23:25:35,886 - __main__ - INFO - 
+========== INTENT PREDICTION DEBUG ==========
+2025-07-04 23:25:35,888 - __main__ - INFO - Input Text: yes
+2025-07-04 23:25:35,900 - __main__ - INFO - Detection Method: combined
+2025-07-04 23:25:36,381 - __main__ - INFO - Logits: [[-1.01228928565979, -0.9006492495536804, 5.991918563842773, 0.9727210402488708, -1.3178935050964355, -0.2889564335346222, -0.4158647954463959, -1.0878195762634277, -1.2678786516189575, -1.0554325580596924]]
+2025-07-04 23:25:36,381 - __main__ - INFO - Softmax Probabilities: [[0.0008945126901380718, 0.00100016372743994, 0.9850884079933167, 0.006511265877634287, 0.0006589677650481462, 0.001843850826844573, 0.001624090364202857, 0.0008294381550513208, 0.000692764122504741, 0.0008567410986870527]]
+2025-07-04 23:25:36,529 - __main__ - INFO - Max Probability (Confidence): 0.9851
+2025-07-04 23:25:36,580 - __main__ - INFO - Predicted Index: 2
+2025-07-04 23:25:36,596 - __main__ - INFO - Energy Score: -6.0069
+2025-07-04 23:25:36,596 - __main__ - INFO - OOD Detection -> is_ood: False
+2025-07-04 23:25:36,612 - __main__ - INFO - Prediction marked as IN-DISTRIBUTION.
+2025-07-04 23:25:36,612 - __main__ - INFO - Predicted Intent: confirm
+2025-07-04 23:25:36,612 - __main__ - INFO - =============================================
+
+2025-07-04 23:25:36,627 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 23:25:36] "POST /api/analyze HTTP/1.1" 200 -
+2025-07-04 23:25:55,734 - __main__ - INFO - Finding books similar to: 'sex'
+2025-07-04 23:26:07,262 - __main__ - ERROR - Error generating recommendations: 
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ChatbotPerpusBipa\py\app3.py", line 126, in recommend_books
+    processed_query = self.preprocess_text(user_query)
+  File "C:\xampp\htdocs\ChatbotPerpusBipa\py\app3.py", line 74, in preprocess_text
+    tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word not in self.stop_words]
+  File "C:\xampp\htdocs\ChatbotPerpusBipa\py\app3.py", line 74, in <listcomp>
+    tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word not in self.stop_words]
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\stem\wordnet.py", line 85, in lemmatize
+    lemmas = self._morphy(word, pos)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\stem\wordnet.py", line 41, in _morphy
+    return wn._morphy(form, pos, check_exceptions)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\util.py", line 120, in __getattr__
+    self.__load()
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\util.py", line 89, in __load
+    corpus = self.__reader_cls(root, *self.__args, **self.__kwargs)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1214, in __init__
+    self.map30 = self.map_wn()
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1282, in map_wn
+    return self.map_to_one(version)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1254, in map_to_one
+    synset_to_many = self.map_to_many(version)
+  File "C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nltk\corpus\reader\wordnet.py", line 1243, in map_to_many
+    for sensekey in set(sensekey_map1.keys()).intersection(
+MemoryError
+2025-07-04 23:26:07,387 - werkzeug - INFO - 127.0.0.1 - - [04/Jul/2025 23:26:07] "POST /api/recommend HTTP/1.1" 200 -

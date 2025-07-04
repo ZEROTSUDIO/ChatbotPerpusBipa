@@ -35,6 +35,41 @@ class Chat_model extends CI_Model
         return $this->db->get($table)->result_array(); // bukan ->result()
 
     }
+	public function getFullChatHistoryByUser($user_id)
+	{
+		// Ambil semua chat user
+		$this->db->select('c.id as chat_id, c.user_message, c.bot_response, c.timestamp, d.intent, d.confident_score, d.energy');
+		$this->db->from('chats c');
+		$this->db->join('chat_detail d', 'd.chat_id = c.id', 'left');
+		$this->db->where('c.user', $user_id);
+		$this->db->order_by('c.timestamp', 'asc');
+		$chats = $this->db->get()->result_array();
+
+		// Tambahkan class_probabilities untuk setiap chat
+		foreach ($chats as &$chat) {
+			if (!empty($chat['chat_id'])) {
+				// Cari detail id dari chat_detail
+				$this->db->select('id');
+				$this->db->from('chat_detail');
+				$this->db->where('chat_id', $chat['chat_id']);
+				$this->db->limit(1);
+				$detail = $this->db->get()->row_array();
+
+				$chat['class_probabilities'] = [];
+				if ($detail && isset($detail['id'])) {
+					$this->db->select('intent_class, probability');
+					$this->db->from('class_probabilities');
+					$this->db->where('prediction_id', $detail['id']);
+					$chat['class_probabilities'] = $this->db->get()->result_array();
+				}
+			} else {
+				$chat['class_probabilities'] = [];
+			}
+		}
+
+		return $chats;
+	}
+
     //========================================
 
     public function get_user_stats($user_id)

@@ -299,7 +299,7 @@ def predict_intent_with_enhanced_ood(text, model, tokenizer, intent_classes,
         logger.info("Prediction marked as IN-DISTRIBUTION.")
     
     # Get intent label
-    predicted_intent = intent_classes[pred_idx.item()] if not is_ood else "unknown"
+    predicted_intent = intent_classes[pred_idx.item()]
     logger.info(f"Predicted Intent: {predicted_intent}")
     logger.info("=============================================\n")
 

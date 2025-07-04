@@ -62,7 +62,7 @@
                 <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
                     <i class="fas fa-book"></i>
                 </div>
-                <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%] relative">
                     <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
                     <p>Halo <?= $user->nama; ?>, Ada yang bisa saya bantu dengan rekomendasikan buku?</p>
                     <div class="timestamp">Hari ini, <?php echo date('H:i'); ?></div>
@@ -84,7 +84,7 @@
 
             <?php foreach ($chats as $chat): ?>
                 <div class="flex items-end justify-end space-x-3 message-container">
-                    <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                    <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%] relative">
                         <p class="text-right font-bold handwriting text-lg"><?= $user->nama; ?></p>
                         <p><?= $chat['user_message'] ?></p>
                         <div class="timestamp text-right"><?= $chat['timestamp'] ?></div>
@@ -97,9 +97,38 @@
                     <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
                         <i class="fas fa-book"></i>
                     </div>
-                    <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
+                    <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%] relative">
                         <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
                         <p><?= $chat['bot_response'] ?></p>
+
+						<?php if (!empty($chat['intent']) || !empty($chat['confident_score']) || !empty($chat['energy']) || !empty($chat['class_probabilities'])): ?>
+							<div class="absolute top-2 right-2">
+								<button class="detail-toggle-btn text-gray-500 hover:text-black focus:outline-none">
+									<i class="fas fa-ellipsis-v"></i>
+								</button>
+							</div>
+							<div class="intent-detail hidden mt-2 text-sm border-t border-gray-300 pt-2">
+								<p><strong>Intent:</strong> <?= $chat['intent'] ?? '-' ?></p>
+								<p><strong>Confidence:</strong> <?= isset($chat['confident_score']) ? number_format($chat['confident_score'], 4) : '-' ?></p>
+								<p><strong>Energy:</strong> <?= isset($chat['energy']) ? number_format($chat['energy'], 4) : '-' ?></p>
+								<div class="mt-2">
+									<p class="font-semibold">Class Probabilities:</p>
+									<table class="text-sm mt-1">
+										<?php if (!empty($chat['class_probabilities'])): ?>
+											<?php foreach ($chat['class_probabilities'] as $prob): ?>
+												<tr>
+													<td class="pr-4 font-semibold"><?= $prob['intent_class'] ?></td>
+													<td><?= number_format($prob['probability'], 4) ?></td>
+												</tr>
+											<?php endforeach; ?>
+										<?php else: ?>
+											<tr><td colspan="2">-</td></tr>
+										<?php endif; ?>
+									</table>
+								</div>
+							</div>
+						<?php endif; ?>
+
                         <div class="timestamp"><?= $chat['timestamp'] ?></div>
                     </div>
                 </div>

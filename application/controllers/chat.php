@@ -39,7 +39,7 @@ class chat extends CI_Controller
 		$data = [
 			'suggestions' => $randomSuggestions,
 			'active_controller' => 'chat',
-			'chats' => $this->chatModel->getChatHistoryByUser('chats', $user_id), // Gunakan tabel 'chats2',
+			'chats' => $this->chatModel->getFullChatHistoryByUser($user_id),
 			'user' => $user
 		];
 		$this->load->view('chatForm', $data);
@@ -80,8 +80,11 @@ class chat extends CI_Controller
 				error_log("Flask API did not return an intent.");
 				$result['response'] = 'Terjadi kesalahan saat memproses intent.';
 			} else {
-				$intent = strtolower($responseData['intent']); // Ensure lowercase matching
+				$intent = strtolower($responseData['intent']);// Ensure lowercase matching				
 				$confidence = $responseData['confidence'] ?? 0;
+				if ($responseData['is_ood']==1){
+					$intent = "unknown";
+				}
 				error_log("Intent received: $intent, Confidence: $confidence");
 				$bot_output = get_bot_response($intent, $data);
 
@@ -128,7 +131,12 @@ class chat extends CI_Controller
 						'probability'         => $score
 					];
 					$this->chatModel->saveClassProbability('class_probabilities', $probData);
-				}				
+				}	
+				$result['intent'] = $responseData['intent'] ?? null;
+				$result['confidence'] = $responseData['confidence'] ?? null;
+				$result['energy'] = $responseData['energy_score'] ?? null;
+				$result['class_probabilities'] = $responseData['class_probabilities'] ?? [];
+				
 			}
 		} else {
 			error_log("Flask API error: HTTP $httpcode");
