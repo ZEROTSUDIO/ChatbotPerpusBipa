@@ -59,4 +59,21 @@ $route['api/stats/intent-performance'] = 'api/stats_intent_performance';
 $route['api/stats/recent-activity'] = 'api/stats_recent_activity';
 $route['api/stats/volume'] = 'api/stats_volume';
 
+// application/config/routes.php
+
+// Intent Analytics Routes
+$route['intent-analytics'] = 'intent_analytics/index';
+$route['intent-analytics/performance'] = 'intent_analytics/get_intent_performance';
+$route['intent-analytics/chat-details'] = 'intent_analytics/get_chat_details';
+$route['intent-analytics/probabilities/(:num)'] = 'intent_analytics/get_class_probabilities/$1';
+$route['intent-analytics/prediction-analysis'] = 'intent_analytics/get_prediction_analysis';
+$route['intent-analytics/confusion-matrix'] = 'intent_analytics/get_confusion_matrix';
+$route['intent-analytics/accuracy-metrics'] = 'intent_analytics/get_accuracy_metrics';
+$route['intent-analytics/export'] = 'intent_analytics/export_intent_performance';
+
+// API Routes (optional, for external access)
+$route['api/intent-analytics/performance'] = 'intent_analytics/get_intent_performance';
+$route['api/intent-analytics/chat-details'] = 'intent_analytics/get_chat_details';
+$route['api/intent-analytics/probabilities/(:num)'] = 'intent_analytics/get_class_probabilities/$1';
+$route['api/intent-analytics/metrics'] = 'intent_analytics/get_accuracy_metrics';
 
