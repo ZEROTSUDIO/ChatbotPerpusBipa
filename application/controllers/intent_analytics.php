@@ -57,14 +57,18 @@ class Intent_analytics extends CI_Controller
     }
 
     // API untuk Class Probabilities berdasarkan chat_id
-    public function get_class_probabilities($chat_id)
+    public function get_class_probabilities($chat_id = null)
     {
-        $probabilities = $this->Analytics_model->get_class_probabilities($chat_id);
+        if (!$chat_id) {
+            show_error("Chat ID required", 400);
+        }
 
+        $probabilities = $this->Analytics_model->get_class_probabilities($chat_id);
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($probabilities));
     }
+
 
     // API untuk Prediction Analysis
     public function get_prediction_analysis()

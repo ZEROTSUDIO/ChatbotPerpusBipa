@@ -74,6 +74,7 @@ class Analytics_model extends CI_Model
     }
 
     // Class Probabilities berdasarkan prediction_id (chat_id)
+
     public function get_class_probabilities($chat_id)
     {
         $this->db->select('intent_class, probability');
@@ -82,8 +83,14 @@ class Analytics_model extends CI_Model
         $this->db->order_by('probability', 'DESC');
 
         $query = $this->db->get();
-        return $query->result_array();
+        return array_map(function ($row) {
+            $row['probability'] = (float) $row['probability'];
+            return $row;
+        }, $query->result_array());
+        log_message('debug', json_encode($query->result_array()));
+
     }
+
 
     // Prediction Analysis - Comparison actual vs predicted
     public function get_prediction_analysis()
@@ -101,7 +108,7 @@ class Analytics_model extends CI_Model
                     ELSE 'Incorrect'
                 END as prediction_result
             FROM chat_detail cd
-            JOIN class_probabilities cp ON cd.chat_id = cp.prediction_id
+            JOIN class_probabilities cp ON cd.id = cp.prediction_id
             WHERE cp.probability = (
                 SELECT MAX(cp2.probability) 
                 FROM class_probabilities cp2 
@@ -122,7 +129,7 @@ class Analytics_model extends CI_Model
                 cp.intent_class as predicted,
                 COUNT(*) as count
             FROM chat_detail cd
-            JOIN class_probabilities cp ON cd.chat_id = cp.prediction_id
+            JOIN class_probabilities cp ON cd.id = cp.prediction_id
             WHERE cp.probability = (
                 SELECT MAX(cp2.probability) 
                 FROM class_probabilities cp2 
@@ -172,28 +179,20 @@ class Analytics_model extends CI_Model
         $query = $this->db->query("
             SELECT 
                 COUNT(*) as total_predictions,
-                SUM(CASE 
-                    WHEN cd.intent = cp.intent_class THEN 1 
-                    ELSE 0 
-                END) as correct_predictions,
-                ROUND(
-                    SUM(CASE WHEN cd.intent = cp.intent_class THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 
-                    2
-                ) as overall_accuracy,
+                SUM(CASE WHEN cd.intent = cp.intent_class THEN 1 ELSE 0 END) as correct_predictions,
+                ROUND(SUM(CASE WHEN cd.intent = cp.intent_class THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as overall_accuracy,
                 ROUND(AVG(cd.confident_score), 3) as avg_confidence_score,
                 ROUND(AVG(cp.probability), 3) as avg_prediction_probability,
                 SUM(CASE WHEN cd.ood = 1 THEN 1 ELSE 0 END) as ood_count,
-                ROUND(
-                    SUM(CASE WHEN cd.ood = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 
-                    2
-                ) as ood_percentage
+                ROUND(SUM(CASE WHEN cd.ood = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as ood_percentage
             FROM chat_detail cd
-            JOIN class_probabilities cp ON cd.chat_id = cp.prediction_id
+            JOIN class_probabilities cp ON cd.id = cp.prediction_id
             WHERE cp.probability = (
-                SELECT MAX(cp2.probability) 
+                SELECT MAX(cp2.probability)
                 FROM class_probabilities cp2 
                 WHERE cp2.prediction_id = cp.prediction_id
             )
+
         ");
 
         $overall_metrics = $query->row_array();
@@ -211,7 +210,7 @@ class Analytics_model extends CI_Model
                 ROUND(AVG(cd.confident_score), 3) as avg_confidence,
                 ROUND(AVG(cp.probability), 3) as avg_prediction_prob
             FROM chat_detail cd
-            JOIN class_probabilities cp ON cd.chat_id = cp.prediction_id
+            JOIN class_probabilities cp ON cd.id = cp.prediction_id
             WHERE cp.probability = (
                 SELECT MAX(cp2.probability) 
                 FROM class_probabilities cp2 

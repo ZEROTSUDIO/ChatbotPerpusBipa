@@ -332,6 +332,8 @@
             tbody.innerHTML = '';
 
             result.data.forEach(item => {
+                console.log(`Intent: ${item.intent_class}, Probability:`, item.probability, typeof item.probability);
+
                 const row = document.createElement('tr');
                 row.className = 'hover:bg-gray-50';
 
@@ -351,10 +353,11 @@
                         <td class="px-6 py-4 whitespace-nowrap">${oodBadge}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(item.timestamp).toLocaleString()}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <button onclick="showProbabilities(${item.chat_id})" class="text-blue-600 hover:text-blue-800">
+                            <button onclick="showProbabilities(${item.id})" class="text-blue-600 hover:text-blue-800">
                                 <i class="fas fa-chart-pie mr-1"></i>View Probabilities
                             </button>
                         </td>
+
                     `;
 
                 tbody.appendChild(row);

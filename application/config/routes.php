@@ -76,4 +76,6 @@ $route['api/intent-analytics/performance'] = 'intent_analytics/get_intent_perfor
 $route['api/intent-analytics/chat-details'] = 'intent_analytics/get_chat_details';
 $route['api/intent-analytics/probabilities/(:num)'] = 'intent_analytics/get_class_probabilities/$1';
 $route['api/intent-analytics/metrics'] = 'intent_analytics/get_accuracy_metrics';
+$route['intent-analytics/get_class_probabilities/(:num)'] = 'intent_analytics/get_class_probabilities/$1';
+
 
