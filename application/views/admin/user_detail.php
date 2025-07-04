@@ -29,12 +29,12 @@
                     <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                         <div class="flex items-center mb-6">
                             <div class="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mr-4">
-                                <?php echo strtoupper(substr($user->nama, 0, 1)); ?>
+                                <?php echo strtoupper(substr($the_user->nama, 0, 1)); ?>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-800"><?php echo htmlspecialchars($user->nama); ?></h2>
-                                <p class="text-gray-600"><?php echo htmlspecialchars($user->email); ?></p>
-                                <p class="text-sm text-gray-500">Bergabung: <?php echo date('d M Y', strtotime($user->date)); ?></p>
+                                <h2 class="text-2xl font-bold text-gray-800"><?php echo htmlspecialchars($the_user->nama); ?></h2>
+                                <p class="text-gray-600"><?php echo htmlspecialchars($the_user->email); ?></p>
+                                <p class="text-sm text-gray-500">Bergabung: <?php echo date('d M Y', strtotime($the_user->date)); ?></p>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

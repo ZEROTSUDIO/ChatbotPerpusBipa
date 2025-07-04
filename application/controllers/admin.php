@@ -39,7 +39,7 @@ class Admin extends CI_Controller
 
     public function index()
     {
-        $this->render('admin/dashboard');
+        redirect('admin/dashboard');;
     }
 
     public function dashboard()
@@ -344,8 +344,8 @@ class Admin extends CI_Controller
         }
 
         // Ambil data user
-        $data['user'] = $this->user_model->get_user_by_id($user_id);
-        if (!$data['user']) {
+        $data['the_user'] = $this->user_model->get_user_by_id($user_id);
+        if (!$data['the_user']) {
             show_404();
         }
 
@@ -365,7 +365,7 @@ class Admin extends CI_Controller
         $data['intents'] = $this->chat_model->get_user_intents($user_id);
 
         $data['user_id'] = $user_id;
-        $data['title'] = 'Detail Pengguna - ' . $data['user']->nama;
+        $data['title'] = 'Detail Pengguna - ' . $data['the_user']->nama;
 
         $this->render('admin/user_detail', $data);
     }

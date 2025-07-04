@@ -77,7 +77,8 @@
                                 }
                             }
                             $average = $totalCount > 0 ? $totalSum / $totalCount : 0;
-                            echo round($average, 4) . "%";
+							$average = $average*100;
+                            echo round($average, 1) . "%";
                             ?>
                         </p>
                     </div>

@@ -38,9 +38,11 @@ function get_bot_response($intent, $data = null)
         if ($intent === 'confirm') {
             $waitConfirmation = $data['wait_confirmation'] ?? false;
             if ($waitConfirmation) {
+				$result = ['response' => '<p><strong>?? Pencarian Buku:</strong><br>' .
+                            'Silakan masukkan kembali judul atau deskripsi buku Anda.</p>'];
                 $result['next_action'] = $intent_next_action_map[$intent];
             }
-        } else {
+        } else {					
             $result['next_action'] = $intent_next_action_map[$intent];
         }
     }

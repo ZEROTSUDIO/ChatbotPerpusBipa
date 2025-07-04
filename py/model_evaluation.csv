@@ -146,3 +146,29 @@ timestamp,input_text,predicted_intent,is_ood,confidence,energy_score,detection_m
 2025-06-27 17:27:40,jangan,denied,False,0.9823117256164551,-5.649569511413574,combined
 2025-06-27 17:28:02,anggota,unknown,True,0.7338886857032776,-4.137190341949463,combined
 2025-06-27 17:28:10,apa syarat jadi anggota,keanggotaan,False,0.9716783761978149,-5.228460788726807,combined
+2025-07-03 23:12:02,Apa aja aturanye?,peraturan,False,0.9838923215866089,-5.889213562011719,combined
+2025-07-03 23:12:31,halo selamat pagi,greeting,False,0.9806134700775146,-6.033394813537598,combined
+2025-07-03 23:13:01,Sampai Jumpa besok lagi yaaa!!,goodbye,False,0.9865715503692627,-6.349184036254883,combined
+2025-07-03 23:13:47,Carikan saya buku terbaru boleh?,cari_buku,False,0.9858633875846863,-6.3172101974487305,combined
+2025-07-03 23:15:56,"boleh, aku setuju",confirm,False,0.9843090772628784,-5.948315620422363,combined
+2025-07-03 23:16:33,tidak usah terima kasih,goodbye,False,0.9830617904663086,-6.099478721618652,combined
+2025-07-03 23:16:56,carikan buku,cari_buku,False,0.9858084917068481,-6.259568691253662,combined
+2025-07-03 23:17:04,tidak usah,denied,False,0.983635663986206,-5.9313836097717285,combined
+2025-07-03 23:17:52,"halo!, bagaimana cara mendafar menjadi anggota perpustakaan STMIk Bina Patria",keanggotaan,False,0.9834449291229248,-5.624341011047363,combined
+2025-07-03 23:18:51,apa saja fasilitas yang ada di perpus bipa?,fasilitas,False,0.9764087796211243,-5.7426066398620605,combined
+2025-07-03 23:19:27,bagaimana cara meminjam dan mengembalikan buku disini?,cara_pinjam,False,0.9825063943862915,-5.9423112869262695,combined
+2025-07-03 23:20:03,Apa Saja Peraturan yang ahrus dipatuhi disini?,peraturan,False,0.9877305626869202,-6.084413051605225,combined
+2025-07-03 23:20:23,WOI BUKA JAM BERAPA?,jam_layanan,False,0.9834728240966797,-5.775719165802002,combined
+2025-07-03 23:21:03,terimakasih atas bantuanya aku terbantu bye!,goodbye,False,0.985788881778717,-6.315165042877197,combined
+2025-07-03 23:23:34,hallo selamat siang,greeting,False,0.9772360324859619,-5.975660800933838,combined
+2025-07-03 23:25:19,"permisi, apakah anda menjual bakso?",fasilitas,False,0.9164345860481262,-5.0101494789123535,combined
+2025-07-03 23:25:31,Buah Salak Asli Ngawi,unknown,True,0.22872911393642426,-2.3967175483703613,combined
+2025-07-03 23:28:07,hello,greeting,False,0.9614564180374146,-5.703860282897949,combined
+2025-07-04 00:08:17,kapal kargo banyuwangi,fasilitas,False,0.9741616249084473,-5.663754940032959,combined
+2025-07-04 00:09:39,buaya putih sungai musi,unknown,True,0.48494064807891846,-2.932950496673584,combined
+2025-07-04 00:14:21,carikan saya buku,cari_buku,False,0.985824465751648,-6.2823100090026855,combined
+2025-07-04 00:14:35,ya,confirm,False,0.9734697937965393,-5.658174514770508,combined
+2025-07-04 00:15:12,carikan saya buku ,cari_buku,False,0.985824465751648,-6.2823100090026855,combined
+2025-07-04 00:15:28,yes,confirm,False,0.9850884079933167,-6.006942272186279,combined
+2025-07-04 00:16:03,buku pemrograman,cari_buku,False,0.9772191047668457,-5.834834098815918,combined
+2025-07-04 00:16:29,yes,confirm,False,0.9850884079933167,-6.006942272186279,combined
