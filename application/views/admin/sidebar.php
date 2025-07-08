@@ -30,6 +30,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url('admin/intent_reports'); ?>"
+                        class="sidebar-item <?php echo $this->uri->segment(2) == 'intent_reports' ? 'bg-blue-100 border-l-4 border-blue-500' : ''; ?> flex items-center px-3 py-3 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-table mr-3 text-lg"></i>
+                        <span>Intent Reports</span>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url('admin/intents'); ?>"
                         class="sidebar-item <?php echo $this->uri->segment(2) == 'intents' ? 'bg-blue-100 border-l-4 border-blue-500' : ''; ?> flex items-center px-3 py-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-robot mr-3 text-lg"></i>
@@ -63,6 +70,9 @@
                 <a href="#" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded">
                     <i class="fas fa-cog mr-2 text-xs"></i> Settings
                 </a-->
+                <a href="<?php echo base_url('chat'); ?>" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded text-red-600">
+                    <i class="fas fa-times mr-2 text-xs"></i> Keluar
+                </a>
                 <a href="<?php echo base_url('auth/logout'); ?>" class="flex items-center px-2 py-1 text-sm hover:bg-gray-200 rounded text-red-600">
                     <i class="fas fa-sign-out-alt mr-2 text-xs"></i> Logout
                 </a>

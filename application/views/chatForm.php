@@ -39,10 +39,10 @@
                             <p class="text-sm"><?= $user->email; ?></p>
                             <p class="text-xs text-gray-500">ID: <?= $user->id; ?></p>
                         </div>
-                        <?php if ($user->level==1): ?>
-                        <a href="<?php echo site_url('admin'); ?>" onclick="return confirm('pergi ke dashboard admin??')" class="flex items-center px-4 py-2 hover:bg-gray-100">
-                            <i class="fas fa-book mr-2"></i> Admin
-                        </a>
+                        <?php if ($user->level == 1): ?>
+                            <a href="<?php echo site_url('admin'); ?>" onclick="return confirm('pergi ke dashboard admin??')" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-book mr-2"></i> Admin
+                            </a>
                         <?php endif; ?>
                         <a href="<?php echo site_url($active_controller . '/clear'); ?>" onclick="return confirm('Yakin ingin menghapus semua riwayat chat Anda?')" class="flex items-center px-4 py-2 hover:bg-gray-100">
                             <i class="fas fa-trash mr-2"></i> Hapus Riwayat
@@ -101,33 +101,35 @@
                         <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
                         <p><?= $chat['bot_response'] ?></p>
 
-						<?php if (!empty($chat['intent']) || !empty($chat['confident_score']) || !empty($chat['energy']) || !empty($chat['class_probabilities'])): ?>
-							<div class="absolute top-2 right-2">
-								<button class="detail-toggle-btn text-gray-500 hover:text-black focus:outline-none">
-									<i class="fas fa-ellipsis-v"></i>
-								</button>
-							</div>
-							<div class="intent-detail hidden mt-2 text-sm border-t border-gray-300 pt-2">
-								<p><strong>Intent:</strong> <?= $chat['intent'] ?? '-' ?></p>
-								<p><strong>Confidence:</strong> <?= isset($chat['confident_score']) ? number_format($chat['confident_score'], 4) : '-' ?></p>
-								<p><strong>Energy:</strong> <?= isset($chat['energy']) ? number_format($chat['energy'], 4) : '-' ?></p>
-								<div class="mt-2">
-									<p class="font-semibold">Class Probabilities:</p>
-									<table class="text-sm mt-1">
-										<?php if (!empty($chat['class_probabilities'])): ?>
-											<?php foreach ($chat['class_probabilities'] as $prob): ?>
-												<tr>
-													<td class="pr-4 font-semibold"><?= $prob['intent_class'] ?></td>
-													<td><?= number_format($prob['probability'], 4) ?></td>
-												</tr>
-											<?php endforeach; ?>
-										<?php else: ?>
-											<tr><td colspan="2">-</td></tr>
-										<?php endif; ?>
-									</table>
-								</div>
-							</div>
-						<?php endif; ?>
+                        <?php if (!empty($chat['intent']) || !empty($chat['confident_score']) || !empty($chat['energy']) || !empty($chat['class_probabilities'])): ?>
+                            <div class="absolute top-2 right-2">
+                                <button class="detail-toggle-btn text-gray-500 hover:text-black focus:outline-none">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                            <div class="intent-detail hidden mt-2 text-sm border-t border-gray-300 pt-2">
+                                <p><strong>Intent:</strong> <?= $chat['intent'] ?? '-' ?></p>
+                                <p><strong>Confidence:</strong> <?= isset($chat['confident_score']) ? number_format($chat['confident_score'], 4) : '-' ?></p>
+                                <p><strong>Energy:</strong> <?= isset($chat['energy']) ? number_format($chat['energy'], 4) : '-' ?></p>
+                                <div class="mt-2">
+                                    <p class="font-semibold">Class Probabilities:</p>
+                                    <table class="text-sm mt-1">
+                                        <?php if (!empty($chat['class_probabilities'])): ?>
+                                            <?php foreach ($chat['class_probabilities'] as $prob): ?>
+                                                <tr>
+                                                    <td class="pr-4 font-semibold"><?= $prob['intent_class'] ?></td>
+                                                    <td><?= number_format($prob['probability'], 4) ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="2">-</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="timestamp"><?= $chat['timestamp'] ?></div>
                     </div>

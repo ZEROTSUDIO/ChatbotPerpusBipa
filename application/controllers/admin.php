@@ -16,6 +16,7 @@ class Admin extends CI_Controller
         $this->load->model('response_model');
         $this->load->model('user_model');
         $this->load->model('chat_model');
+        $this->load->model('analytics_model');
         //$this->load->model('statistic_model');
         //$this->load->model('user_detail_model');
         $this->load->library('pagination');
@@ -58,7 +59,7 @@ class Admin extends CI_Controller
         $data['ood_stats'] = $this->chat_model->get_the_ood_stats();
 
         // Ambil daftar intent untuk filter
-        $data['intents'] = $this->chat_model->get_intents();                
+        $data['intents'] = $this->chat_model->get_intents();
 
         $data['title'] = 'Dashboard';
         $this->render('admin/dashboard', $data);
@@ -101,11 +102,9 @@ class Admin extends CI_Controller
         $data = [
             'suggestions' => $randomSuggestions,
             'active_controller' => 'chat',
-            'chats' => $this->chat_model->getChatHistoryByUser('chats', $user_id), // Gunakan tabel 'chats2',
+            'chats' => $this->chat_model->getFullChatHistoryByUser($user_id),
             'user' => $user
         ];
-
-
         $this->render('admin/chats', $data);
     }
 
@@ -384,12 +383,37 @@ class Admin extends CI_Controller
     }
     public function get_chat_details_by_intent2()
     {
-        
+
         $intent = $this->input->post('intent');
 
         $chat_details = $this->chat_model->get_chat_details($intent);
 
-        echo json_encode($chat_details);        
+        echo json_encode($chat_details);
         log_message('error', 'POST intent: ' . $this->input->post('intent'));
+    }
+
+    public function intent_reports()
+    {
+        $data['title'] = 'Intent Analytics Reports';        
+        $this->render('admin/intent_report', $data);
+        //$this->render('admin/users', $data);     
+    }
+
+    public function get_intent_performance()
+    {
+        $performance_data = $this->analytics_model->get_intent_performance();
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($performance_data));
+    }
+
+    public function get_accuracy_metrics()
+    {
+        $metrics = $this->analytics_model->get_accuracy_metrics();
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($metrics));
     }
 }

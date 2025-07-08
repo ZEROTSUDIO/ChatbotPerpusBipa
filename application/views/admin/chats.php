@@ -75,6 +75,36 @@
                         <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
                             <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
                             <p><?= $chat['bot_response'] ?></p>
+
+                            <?php if (!empty($chat['intent']) || !empty($chat['confident_score']) || !empty($chat['energy']) || !empty($chat['class_probabilities'])): ?>
+                                <div class="absolute top-2 right-2">
+                                    <button class="detail-toggle-btn text-gray-500 hover:text-black focus:outline-none">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                                <div class="intent-detail hidden mt-2 text-sm border-t border-gray-300 pt-2">
+                                    <p><strong>Intent:</strong> <?= $chat['intent'] ?? '-' ?></p>
+                                    <p><strong>Confidence:</strong> <?= isset($chat['confident_score']) ? number_format($chat['confident_score'], 4) : '-' ?></p>
+                                    <p><strong>Energy:</strong> <?= isset($chat['energy']) ? number_format($chat['energy'], 4) : '-' ?></p>
+                                    <div class="mt-2">
+                                        <p class="font-semibold">Class Probabilities:</p>
+                                        <table class="text-sm mt-1">
+                                            <?php if (!empty($chat['class_probabilities'])): ?>
+                                                <?php foreach ($chat['class_probabilities'] as $prob): ?>
+                                                    <tr>
+                                                        <td class="pr-4 font-semibold"><?= $prob['intent_class'] ?></td>
+                                                        <td><?= number_format($prob['probability'], 4) ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="2">-</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                             <div class="timestamp"><?= $chat['timestamp'] ?></div>
                         </div>
                     </div>
@@ -254,17 +284,48 @@
                 success: function(response) {
                     $('#typing-indicator').remove();
 
+                    let intentDetailHtml = '';
+
+                    if (response.intent || response.confidence || response.energy || response.class_probabilities) {
+                        const probs = response.class_probabilities || {};
+                        let probRows = '';
+                        for (const [cls, score] of Object.entries(probs)) {
+                            probRows += `<tr><td class="pr-4 font-semibold">${cls}</td><td>${score !== null ? score.toFixed(4) : '-'}</td></tr>`;
+                        }
+
+                        intentDetailHtml = `
+						<div class="absolute top-2 right-2">
+							<button class="detail-toggle-btn text-gray-500 hover:text-black focus:outline-none">
+								<i class="fas fa-ellipsis-v"></i>
+							</button>
+						</div>
+						<div class="intent-detail hidden mt-2 text-sm border-t border-gray-300 pt-2">
+							<p><strong>Intent:</strong> ${response.intent || '-'}</p>
+							<p><strong>Confidence:</strong> ${response.confidence?.toFixed(4) || '-'}</p>
+							<p><strong>Energy:</strong> ${response.energy?.toFixed(4) || '-'}</p>
+							<div class="mt-2">
+								<p class="font-semibold">Class Probabilities:</p>
+								<table class="text-sm mt-1">
+									${probRows || '<tr><td colspan="2">-</td></tr>'}
+								</table>
+							</div>
+						</div>
+					`;
+                    }
+
                     let responseHtml = `
-                    <div class="flex items-start space-x-3 message-container">
-                        <div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%]">
-                            <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
-                            <div>${response.response}</div>
-                            <div class="timestamp">${timestamp}</div>
-                        </div>
-                    </div>`;
+				<div class="flex items-start space-x-3 message-container">
+					<div class="w-10 h-10 rounded-full border-2 border-black flex-shrink-0 flex items-center justify-center">
+						<i class="fas fa-book"></i>
+					</div>
+					<div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%] relative">
+						<p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
+						<div>${response.response}</div>
+						${intentDetailHtml}
+						<div class="timestamp">${timestamp}</div>
+					</div>
+				</div>`;
+
 
                     // Tambah tombol "Lihat lebih banyak rekomendasi" jika low_recommendation
                     if (response.low_recommendation) {
@@ -308,6 +369,12 @@
                     scrollToBottom();
                 }
             });
+        });
+
+        // Toggle intent detail
+        $('#chat-container').off('click', '.detail-toggle-btn').on('click', '.detail-toggle-btn', function() {
+            const detail = $(this).closest('.message-bubble').find('.intent-detail');
+            detail.toggleClass('hidden');
         });
 
         // Event delegation for handling "Lihat lebih banyak rekomendasi" button

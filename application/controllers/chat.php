@@ -88,6 +88,7 @@ class chat extends CI_Controller
 				error_log("Intent received: $intent, Confidence: $confidence");
 				$bot_output = get_bot_response($intent, $data);
 
+				//ambil respon dari rule based helper
 				$response_text = $bot_output['response'];
 				$next_action = isset($bot_output['next_action']) ? $bot_output['next_action'] : null;
 

@@ -203,3 +203,9 @@ timestamp,input_text,predicted_intent,is_ood,confidence,energy_score,detection_m
 2025-07-04 22:29:50,buah salak asli ngawi,fasilitas,True,0.1672307252883911,-2.3438096046447754,combined
 2025-07-04 23:25:01,carikan buku,cari_buku,False,0.9858084917068481,-6.259568691253662,combined
 2025-07-04 23:25:36,yes,confirm,False,0.9850884079933167,-6.006942272186279,combined
+2025-07-07 14:47:55,hello,greeting,False,0.9614564180374146,-5.703860282897949,combined
+2025-07-07 15:11:09,jam buja,jam_layanan,False,0.9767409563064575,-5.5332932472229,combined
+2025-07-07 15:17:26,"Permisi, perpusnya buka jam berapa ya?",jam_layanan,False,0.9832265973091125,-5.776810169219971,combined
+2025-07-07 15:19:28,sekarang jam bukanya jam berapa ya,jam_layanan,False,0.9779135584831238,-5.543695449829102,combined
+2025-07-07 15:23:06,hello,greeting,False,0.9614564180374146,-5.703860282897949,combined
+2025-07-07 15:24:33,carikan saya buku,cari_buku,False,0.985824465751648,-6.2823100090026855,combined
