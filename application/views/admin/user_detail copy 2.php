@@ -177,21 +177,16 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <?php echo date('d/m/Y H:i', strtotime($detail->timestamp)); ?>
                                     </td>
-                                    <?php
-                                    $userMessage = htmlspecialchars($detail->user_message, ENT_QUOTES, 'UTF-8');
-                                    $botResponse = htmlspecialchars($detail->bot_response, ENT_QUOTES, 'UTF-8');
-                                    ?>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <button
                                             class="text-blue-600 hover:text-blue-900"
                                             data-id="<?= $detail->id ?>"
-                                            data-user="<?= $userMessage ?>"
-                                            data-bot="<?= $botResponse ?>"
-                                            onclick="handleFullChatDetail(this)">
-                                            <i class="fas fa-eye mr-1"></i> View
+                                            data-user="<?= htmlspecialchars($detail->user_message, ENT_QUOTES, 'UTF-8') ?>"
+                                            data-bot="<?= htmlspecialchars($detail->bot_response, ENT_QUOTES, 'UTF-8') ?>"
+                                            onclick="handleChatButtonClick(this)">
+                                            <i class="fas fa-eye"></i>
                                         </button>
                                     </td>
-
                                 </tr>
                                 <?php $i++; // Increment the counter for the next iteration 
                                 ?>
@@ -205,7 +200,7 @@
         </div>
     </main>
 </div>
-<!-- Modal for Chat Detail 
+<!-- Modal for Chat Detail -->
 <div id="chatModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
     <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
         <div class="mt-3">
@@ -227,130 +222,8 @@
             </div>
         </div>
     </div>
-</div>-->
-
-<!-- Combined Modal -->
-<div id="fullChatModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
-    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-medium text-gray-900">Chat & Probabilities</h3>
-                <button onclick="closeFullChatModal()" class="text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-
-            <div class="mt-2 mb-6">
-                <h4 class="font-medium text-gray-700 mb-2">Pesan Pengguna:</h4>
-                <div id="modalUserMessage" class="bg-blue-50 p-3 rounded-lg text-gray-800 whitespace-pre-line"></div>
-            </div>
-
-            <div class="mb-6">
-                <h4 class="font-medium text-gray-700 mb-2">Respon Bot:</h4>
-                <div id="modalBotResponse" class="bg-gray-50 p-3 rounded-lg text-gray-800 prose prose-sm max-w-full"></div>
-            </div>
-
-            <div>
-                <h4 class="font-medium text-gray-700 mb-2">Class Probabilities:</h4>
-                <div id="modalProbabilityContent" class="overflow-x-auto"></div>
-            </div>
-        </div>
-    </div>
 </div>
-
-
-
 <script>
-    class TablePagination {
-        constructor(tableId, rowsPerPage, paginationId) {
-            this.table = document.getElementById(tableId);
-            this.tbody = this.table.querySelector('tbody');
-            this.pagination = document.getElementById(paginationId);
-            this.rowsPerPage = rowsPerPage;
-            this.currentPage = 1;
-
-            this.init();
-        }
-
-        init() {
-            this.rows = Array.from(this.tbody.querySelectorAll('tr'));
-            this.totalPages = Math.ceil(this.rows.length / this.rowsPerPage);
-
-            // Only show pagination if there are more rows than rowsPerPage
-            if (this.rows.length > this.rowsPerPage) {
-                this.displayRows(this.currentPage);
-                this.updatePagination();
-            } else {
-                // Clear pagination if not needed
-                this.pagination.innerHTML = '';
-                // Show all rows
-                this.rows.forEach(row => row.style.display = '');
-            }
-        }
-
-        displayRows(page) {
-            const start = (page - 1) * this.rowsPerPage;
-            const end = start + this.rowsPerPage;
-            this.rows.forEach((row, index) => {
-                row.style.display = (index >= start && index < end) ? '' : 'none';
-            });
-        }
-
-        updatePagination() {
-            this.pagination.innerHTML = '';
-
-            // Previous button
-            if (this.currentPage > 1) {
-                const prevBtn = document.createElement('button');
-                prevBtn.textContent = '← Previous';
-                prevBtn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
-                prevBtn.addEventListener('click', () => {
-                    this.currentPage--;
-                    this.displayRows(this.currentPage);
-                    this.updatePagination();
-                });
-                this.pagination.appendChild(prevBtn);
-            }
-
-            // Page numbers
-            for (let i = 1; i <= this.totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.textContent = i;
-                btn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
-                if (i === this.currentPage) {
-                    btn.classList.add('bg-blue-500', 'text-white');
-                    btn.classList.remove('hover:bg-gray-300');
-                }
-
-                btn.addEventListener('click', () => {
-                    this.currentPage = i;
-                    this.displayRows(this.currentPage);
-                    this.updatePagination();
-                });
-
-                this.pagination.appendChild(btn);
-            }
-
-            // Next button
-            if (this.currentPage < this.totalPages) {
-                const nextBtn = document.createElement('button');
-                nextBtn.textContent = 'Next →';
-                nextBtn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
-                nextBtn.addEventListener('click', () => {
-                    this.currentPage++;
-                    this.displayRows(this.currentPage);
-                    this.updatePagination();
-                });
-                this.pagination.appendChild(nextBtn);
-            }
-
-            // Show page info
-            const pageInfo = document.createElement('span');
-            pageInfo.textContent = ` Page ${this.currentPage} of ${this.totalPages} `;
-            pageInfo.className = 'px-3 py-1 text-sm text-gray-600';
-            this.pagination.appendChild(pageInfo);
-        }
-    }
     // Initialize Chart
     document.addEventListener('DOMContentLoaded', function() {
         paginationInstance = new TablePagination('myTableId', 10, 'myPaginationId');
@@ -452,7 +325,7 @@
                                     data-id="${detail.id}"
                                     data-user="${escapeHtml(detail.user_message)}"
                                     data-bot="${escapeHtml(detail.bot_response)}"
-                                    onclick="handleFullChatDetail(this)">
+                                    onclick="handleChatButtonClick(this)">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </td>
@@ -485,22 +358,21 @@
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
-    /*
-        // Modal functions
-        function handleChatButtonClick(button) {
-            const id = button.getAttribute('data-id');
-            const userMessage = button.getAttribute('data-user');
-            const botResponse = button.getAttribute('data-bot');
 
-            showChatDetail(id, userMessage, botResponse);
-        }
-        
-        function showChatDetail(id, userMessage, botResponse) {
-            document.getElementById('modalUserMessage').textContent = userMessage;
-            document.getElementById('modalBotResponse').innerHTML = botResponse;
-            document.getElementById('chatModal').classList.remove('hidden');
-        }
-            */
+    // Modal functions
+    function handleChatButtonClick(button) {
+        const id = button.getAttribute('data-id');
+        const userMessage = button.getAttribute('data-user');
+        const botResponse = button.getAttribute('data-bot');
+
+        showChatDetail(id, userMessage, botResponse);
+    }
+
+    function showChatDetail(id, userMessage, botResponse) {
+        document.getElementById('modalUserMessage').textContent = userMessage;
+        document.getElementById('modalBotResponse').innerHTML = botResponse;
+        document.getElementById('chatModal').classList.remove('hidden');
+    }
 
     function closeChatModal() {
         document.getElementById('chatModal').classList.add('hidden');
@@ -512,87 +384,95 @@
             closeChatModal();
         }
     });
-</script>
-<script>
-    async function handleFullChatDetail(button) {
-        const id = button.getAttribute('data-id');
-        const userMessage = button.getAttribute('data-user');
-        const botResponse = button.getAttribute('data-bot');
 
-        document.getElementById('modalUserMessage').textContent = userMessage;
-        document.getElementById('modalBotResponse').innerHTML = botResponse;
+    class TablePagination {
+        constructor(tableId, rowsPerPage, paginationId) {
+            this.table = document.getElementById(tableId);
+            this.tbody = this.table.querySelector('tbody');
+            this.pagination = document.getElementById(paginationId);
+            this.rowsPerPage = rowsPerPage;
+            this.currentPage = 1;
 
-        console.log("Chat ID:", id);
-        console.log("User Message:", userMessage);
-        console.log("Bot Response:", botResponse);
+            this.init();
+        }
 
-        // Fetch probability data
-        try {
-            const response = await fetch(`<?= base_url("intent_analytics/get_class_probabilities/") ?>${id}`);
-            const data = await response.json();
+        init() {
+            this.rows = Array.from(this.tbody.querySelectorAll('tr'));
+            this.totalPages = Math.ceil(this.rows.length / this.rowsPerPage);
 
-            const content = document.getElementById('modalProbabilityContent');
-            content.innerHTML = ''; // Clear previous
-
-            if (data.length > 0) {
-                const table = document.createElement('table');
-                table.className = 'min-w-full border border-gray-200 rounded-lg';
-
-                table.innerHTML = `
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Intent Class</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Probability</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Confidence</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                </tbody>
-            `;
-
-                const tbody = table.querySelector('tbody');
-
-                data.forEach((item, index) => {
-                    const row = document.createElement('tr');
-                    row.className = index === 0 ? 'bg-blue-50' : 'hover:bg-gray-50';
-
-                    const confidenceBar = Math.round(item.probability * 100);
-
-                    row.innerHTML = `
-                    <td class="px-4 py-2 text-sm font-medium text-gray-900">${item.intent_class}</td>
-                    <td class="px-4 py-2 text-sm text-gray-500">${item.probability.toFixed(4)}</td>
-                    <td class="px-4 py-2 text-sm">
-                        <div class="flex items-center">
-                            <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
-                                <div class="bg-blue-600 h-2 rounded-full" style="width: ${confidenceBar}%"></div>
-                            </div>
-                            <span class="text-xs text-gray-500">${confidenceBar}%</span>
-                        </div>
-                    </td>
-                `;
-
-                    tbody.appendChild(row);
-                });
-
-                content.appendChild(table);
+            // Only show pagination if there are more rows than rowsPerPage
+            if (this.rows.length > this.rowsPerPage) {
+                this.displayRows(this.currentPage);
+                this.updatePagination();
             } else {
-                content.innerHTML = '<p class="text-gray-500 text-center py-4">No probability data available</p>';
+                // Clear pagination if not needed
+                this.pagination.innerHTML = '';
+                // Show all rows
+                this.rows.forEach(row => row.style.display = '');
+            }
+        }
+
+        displayRows(page) {
+            const start = (page - 1) * this.rowsPerPage;
+            const end = start + this.rowsPerPage;
+            this.rows.forEach((row, index) => {
+                row.style.display = (index >= start && index < end) ? '' : 'none';
+            });
+        }
+
+        updatePagination() {
+            this.pagination.innerHTML = '';
+
+            // Previous button
+            if (this.currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.textContent = '← Previous';
+                prevBtn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
+                prevBtn.addEventListener('click', () => {
+                    this.currentPage--;
+                    this.displayRows(this.currentPage);
+                    this.updatePagination();
+                });
+                this.pagination.appendChild(prevBtn);
             }
 
-            document.getElementById('fullChatModal').classList.remove('hidden');
+            // Page numbers
+            for (let i = 1; i <= this.totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
+                if (i === this.currentPage) {
+                    btn.classList.add('bg-blue-500', 'text-white');
+                    btn.classList.remove('hover:bg-gray-300');
+                }
 
-        } catch (error) {
-            console.error('Error loading probabilities:', error);
+                btn.addEventListener('click', () => {
+                    this.currentPage = i;
+                    this.displayRows(this.currentPage);
+                    this.updatePagination();
+                });
+
+                this.pagination.appendChild(btn);
+            }
+
+            // Next button
+            if (this.currentPage < this.totalPages) {
+                const nextBtn = document.createElement('button');
+                nextBtn.textContent = 'Next →';
+                nextBtn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
+                nextBtn.addEventListener('click', () => {
+                    this.currentPage++;
+                    this.displayRows(this.currentPage);
+                    this.updatePagination();
+                });
+                this.pagination.appendChild(nextBtn);
+            }
+
+            // Show page info
+            const pageInfo = document.createElement('span');
+            pageInfo.textContent = ` Page ${this.currentPage} of ${this.totalPages} `;
+            pageInfo.className = 'px-3 py-1 text-sm text-gray-600';
+            this.pagination.appendChild(pageInfo);
         }
     }
-
-    function closeFullChatModal() {
-        document.getElementById('fullChatModal').classList.add('hidden');
-    }
-
-    document.getElementById('fullChatModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeProbabilityModal();
-        }
-    });
 </script>

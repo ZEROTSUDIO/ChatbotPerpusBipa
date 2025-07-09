@@ -73,7 +73,29 @@ class Analytics_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    // Class Probabilities berdasarkan prediction_id (chat_id)
+    // Class Probabilities berdasarkan prediction_id (chat_id)    
+    public function get_class_probabilities2($chat_id)
+    {
+        $this->db->select('id');
+        $this->db->from('chat_detail');
+        $this->db->where('chat_id', $chat_id);
+        $detail = $this->db->get()->row();
+
+        if (!$detail) {
+            return []; // No prediction found
+        }
+
+        $this->db->select('intent_class, probability');
+        $this->db->from('class_probabilities');
+        $this->db->where('prediction_id', $detail->id);
+        $this->db->order_by('probability', 'DESC');
+        $query = $this->db->get();
+
+        return array_map(function ($row) {
+            $row['probability'] = (float) $row['probability'];
+            return $row;
+        }, $query->result_array());
+    }
 
     public function get_class_probabilities($chat_id)
     {
@@ -88,7 +110,6 @@ class Analytics_model extends CI_Model
             return $row;
         }, $query->result_array());
         log_message('debug', json_encode($query->result_array()));
-
     }
 
 

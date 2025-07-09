@@ -63,7 +63,7 @@ class Intent_analytics extends CI_Controller
             show_error("Chat ID required", 400);
         }
 
-        $probabilities = $this->Analytics_model->get_class_probabilities($chat_id);
+        $probabilities = $this->Analytics_model->get_class_probabilities2($chat_id);
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($probabilities));
@@ -78,6 +78,7 @@ class Intent_analytics extends CI_Controller
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($analysis));
+            
     }
 
     // API untuk Confusion Matrix
