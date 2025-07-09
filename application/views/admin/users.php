@@ -14,7 +14,7 @@
         <div class="mb-6">
             <h1 class="handwriting text-4xl font-bold mb-4">User Management</h1>
             <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                <input type="text" placeholder="Search users..." class="px-4 py-2 border-2 border-black rounded-lg w-full sm:w-auto">
+                <input id="userSearchInput" type="text" placeholder="Search users..." class="px-4 py-2 border-2 border-black rounded-lg w-full sm:w-auto">
                 <button id="addNewUser" class="bg-blue-500 text-white px-4 py-2 border-2 border-black rounded-lg hover:bg-blue-600 transition-colors">
                     <i class="fas fa-plus mr-2"></i>Add User
                 </button>
@@ -23,7 +23,7 @@
 
         <div class="table-wrapper">
             <div class="overflow-x-auto">
-                <table class="w-full">
+                <table id="myTableId" class="w-full">
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
@@ -33,6 +33,9 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Join Date</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Chats</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                        <tr id="noUserRow" style="display: none;">
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No User found</td>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
@@ -95,6 +98,7 @@
                         <?php endif; ?>
                     </tbody>
                 </table>
+                <div id="myPaginationId" class="flex justify-center mt-4"></div>
             </div>
         </div>
     </main>
@@ -309,7 +313,7 @@
                     email: email,
                     level: level,
                     password: password,
-					confirm: confirm
+                    confirm: confirm
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -346,7 +350,7 @@
                 nama: name,
                 email: email,
                 level: level,
-				confirm: confirm
+                confirm: confirm
             };
 
             if (password !== '') {
@@ -388,5 +392,71 @@
 
         el.style.color = hsl;
         el.style.fontWeight = 'bold';
+    });
+</script>
+<script>
+    document.getElementById('userSearchInput').addEventListener('keyup', function() {
+        const searchQuery = this.value.toLowerCase();
+        const tableRows = document.querySelectorAll('#myTableId tbody tr');
+        const noResultRow = document.getElementById('noUserRow');
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            let matchFound = false;
+
+            cells.forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(searchQuery)) {
+                    matchFound = true;
+                }
+            });
+            if (matchFound) visibleCount++;
+            noResultRow.style.display = (visibleCount === 0) ? '' : 'none';
+
+            row.style.display = matchFound ? '' : 'none';
+        });
+    });
+
+    function paginateTable(tableId, rowsPerPage, paginationId) {
+        const table = document.getElementById(tableId);
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const pagination = document.getElementById(paginationId);
+        let currentPage = 1;
+
+        function displayRows(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            rows.forEach((row, index) => {
+                row.style.display = (index >= start && index < end) ? '' : 'none';
+            });
+        }
+
+        function updatePagination() {
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = 'px-3 py-1 mx-1 border rounded hover:bg-gray-300';
+                if (i === currentPage) btn.classList.add('bg-blue-500', 'text-white');
+
+                btn.addEventListener('click', () => {
+                    currentPage = i;
+                    displayRows(currentPage);
+                    updatePagination();
+                });
+
+                pagination.appendChild(btn);
+            }
+        }
+
+        // Initialize
+        displayRows(currentPage);
+        updatePagination();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        paginateTable('myTableId', 10, 'myPaginationId');
     });
 </script>

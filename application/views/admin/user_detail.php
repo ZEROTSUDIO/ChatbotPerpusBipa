@@ -131,7 +131,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Intent</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Confidence</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Energy</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">OOD Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
@@ -205,29 +205,6 @@
         </div>
     </main>
 </div>
-<!-- Modal for Chat Detail 
-<div id="chatModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
-    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-medium text-gray-900">Detail Percakapan</h3>
-                <button onclick="closeChatModal()" class="text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="mt-2">
-                <div class="mb-4">
-                    <h4 class="font-medium text-gray-700 mb-2">Pesan Pengguna:</h4>
-                    <div id="modalUserMessage" class="bg-blue-50 p-3 rounded-lg text-gray-800"></div>
-                </div>
-                <div>
-                    <h4 class="font-medium text-gray-700 mb-2">Respon Bot:</h4>
-                    <div id="modalBotResponse" class="bg-gray-50 p-3 rounded-lg text-gray-800"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
 
 <!-- Combined Modal -->
 <div id="fullChatModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
@@ -484,34 +461,7 @@
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
-    }
-    /*
-        // Modal functions
-        function handleChatButtonClick(button) {
-            const id = button.getAttribute('data-id');
-            const userMessage = button.getAttribute('data-user');
-            const botResponse = button.getAttribute('data-bot');
-
-            showChatDetail(id, userMessage, botResponse);
-        }
-        
-        function showChatDetail(id, userMessage, botResponse) {
-            document.getElementById('modalUserMessage').textContent = userMessage;
-            document.getElementById('modalBotResponse').innerHTML = botResponse;
-            document.getElementById('chatModal').classList.remove('hidden');
-        }
-            */
-
-    function closeChatModal() {
-        document.getElementById('chatModal').classList.add('hidden');
-    }
-
-    // Optional: Tutup modal jika klik di luar kotak konten
-    document.getElementById('chatModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeChatModal();
-        }
-    });
+    }    
 </script>
 <script>
     async function handleFullChatDetail(button) {

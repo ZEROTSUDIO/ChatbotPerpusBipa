@@ -64,7 +64,7 @@
                 </div>
                 <div class="bg-white p-4 rounded-lg border-2 border-black message-bubble max-w-[80%] relative">
                     <p class="font-bold handwriting text-lg">Perpus Bina Patria</p>
-                    <p>Halo <?= $user->nama; ?>, Ada yang bisa saya bantu dengan rekomendasikan buku?</p>
+                    <p>Halo <?= $user->nama; ?>, Ada yang bisa saya bantu?</p>
                     <div class="timestamp">Hari ini, <?php echo date('H:i'); ?></div>
                 </div>
             </div>
