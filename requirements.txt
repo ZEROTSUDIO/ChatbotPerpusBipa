@@ -1,0 +1,20 @@
+# Web & CORS
+flask
+flask-cors
+
+# Transformers & Tokenizers
+transformers
+sentence-transformers
+torch
+
+# Data & ML
+scikit-learn
+numpy
+
+# Misc utils
+nltk
+
+# For safe packaging (standard lib modules like os, json, re, etc., don't need to be included)
+
+# Optional: if you plan to deploy with Gunicorn
+gunicorn
