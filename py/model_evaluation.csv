@@ -209,3 +209,27 @@ timestamp,input_text,predicted_intent,is_ood,confidence,energy_score,detection_m
 2025-07-07 15:19:28,sekarang jam bukanya jam berapa ya,jam_layanan,False,0.9779135584831238,-5.543695449829102,combined
 2025-07-07 15:23:06,hello,greeting,False,0.9614564180374146,-5.703860282897949,combined
 2025-07-07 15:24:33,carikan saya buku,cari_buku,False,0.985824465751648,-6.2823100090026855,combined
+2025-07-16 09:45:11,Apa saja fasilitas disini?,fasilitas,False,0.9820537567138672,-5.837262153625488,combined
+2025-07-16 09:45:20,buku,cari_buku,False,0.9834275841712952,-6.126768112182617,combined
+2025-07-16 09:48:15,ya,confirm,False,0.9734697937965393,-5.658174514770508,combined
+2025-07-16 09:48:55,lanjutkan,confirm,False,0.9807103276252747,-5.903923988342285,combined
+2025-07-16 10:02:34,no,denied,False,0.982214629650116,-5.96721887588501,combined
+2025-07-16 10:02:41,selamat pagi,greeting,False,0.9664749503135681,-5.99476432800293,combined
+2025-07-16 10:02:51,selamat datang,goodbye,False,0.939146101474762,-6.043125152587891,combined
+2025-07-16 10:03:03,jawa sex\,greeting,False,0.9543095231056213,-5.7950263023376465,combined
+2025-07-16 10:03:33,omke gams,confirm,False,0.9847988486289978,-6.001015663146973,combined
+2025-07-16 10:04:55,fasilitas disini ada petunjuk cara cari buku?,cari_buku,False,0.9706558585166931,-6.0839338302612305,combined
+2025-07-16 10:05:41,apakah disini harus bayar?,keanggotaan,True,0.6435015201568604,-4.474045276641846,combined
+2025-07-16 11:17:37,halo selamat pagi,greeting,False,0.9806134700775146,-6.033394813537598,combined
+2025-07-16 11:17:51,apa fasilitas disni,fasilitas,False,0.9803807139396667,-5.776304721832275,combined
+2025-07-16 11:18:01,buka jam berapa,jam_layanan,False,0.9830473065376282,-5.761092662811279,combined
+2025-07-16 11:18:14,berapa banyak buku,cari_buku,False,0.9756191968917847,-5.974412441253662,combined
+2025-07-16 11:18:48,"see you, thanks",goodbye,False,0.9869978427886963,-6.329278945922852,combined
+2025-07-16 11:30:53,Bisa carikan saya buku?,cari_buku,False,0.9861733913421631,-6.341769695281982,combined
+2025-07-16 11:31:50,cara meminjam buku,cara_pinjam,False,0.9815733432769775,-5.87482213973999,combined
+2025-07-16 11:32:16,apakah saya bisa meminjam buku lebih dari 1,cara_pinjam,False,0.9801169037818909,-5.891574382781982,combined
+2025-07-16 11:32:54,ada fasiitas apa saja di perpustakaan,fasilitas,False,0.9759169220924377,-5.7574663162231445,combined
+2025-07-16 11:34:02,can i read some book,cari_buku,False,0.9843477010726929,-6.1738080978393555,combined
+2025-07-16 11:35:17,hallo,greeting,False,0.9642593264579773,-5.857007026672363,combined
+2025-07-16 11:35:38,tidak terima kasih,goodbye,False,0.9810788631439209,-6.070493221282959,combined
+2025-07-16 11:41:50,kapal kargo banyuwangi,fasilitas,False,0.9741616249084473,-5.663754940032959,combined

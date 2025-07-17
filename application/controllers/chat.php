@@ -52,12 +52,12 @@ class chat extends CI_Controller
 			return;
 		}
 		$user_id = $this->session->userdata('id');
-		log_message('error', 'AJAX - Session user_id: ' . print_r($user_id, true));
 		$data = json_decode(file_get_contents('php://input'), true);
 		$message = $data['message'] ?? '';
 
-		// Panggil API Flask untuk menganalisis intent
-		$ch = curl_init('http://localhost:5000/api/analyze');
+		$api_url = 'https://ZEROTSUDIOS-chatbot-bipa-api2.hf.space/api/analyze';
+		//$api_url = 'http://localhost:5000/api/analyze';
+		$ch = curl_init($api_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["text" => $message]));
@@ -66,88 +66,64 @@ class chat extends CI_Controller
 		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 
-		error_log("Raw Flask Response: " . $response); // Log Flask response
-
-		$result = [
-			'response' => '',
-			'next_action' => null
-		];
+		$result = ['response' => '', 'next_action' => null];
 
 		if ($httpcode == 200) {
 			$responseData = json_decode($response, true);
-
 			if (!isset($responseData['intent'])) {
-				error_log("Flask API did not return an intent.");
 				$result['response'] = 'Terjadi kesalahan saat memproses intent.';
 			} else {
-				$intent = strtolower($responseData['intent']);// Ensure lowercase matching				
-				$confidence = $responseData['confidence'] ?? 0;
-				if ($responseData['is_ood']==1){
+				$intent = strtolower($responseData['intent']);
+				if (!empty($responseData['is_ood'])) {
 					$intent = "unknown";
 				}
-				error_log("Intent received: $intent, Confidence: $confidence");
 				$bot_output = get_bot_response($intent, $data);
+				$result['response'] = $bot_output['response'];
+				$result['next_action'] = $bot_output['next_action'] ?? null;
 
-				//ambil respon dari rule based helper
-				$response_text = $bot_output['response'];
-				$next_action = isset($bot_output['next_action']) ? $bot_output['next_action'] : null;
-
-				$result['response'] = $response_text;
-				if ($next_action) {
-					$result['next_action'] = $next_action;
-				}
-				// Simpan percakapan ke database           
 				$chatData = [
-					'user'          => $user_id,
-					'user_message'  => $message,
-					'bot_response'  => $result['response']
+					'user' => $user_id,
+					'user_message' => $message,
+					'bot_response' => $result['response']
 				];
-				$this->db->db_debug = TRUE;
 				$this->chatModel->saveChat('chats', $chatData);
-
-				// Dapatkan chat_id yang baru saja di-insert
 				$chat_id = $this->db->insert_id();
 
-				// 2. Simpan detail prediksi ke chat_detail
 				$detailData = [
-					'user_id'        => $user_id,
-					'chat_id'        => $chat_id,
-					'intent'         => $responseData['intent'],
-					'confident_score'=> $responseData['confidence'],
-					'energy'         => $responseData['energy_score'],
-					'ood'            => $responseData['is_ood'] ? 1 : 0,
-					// 'timestamp'    => otomatis CURRENT_TIMESTAMP
+					'user_id' => $user_id,
+					'chat_id' => $chat_id,
+					'intent' => $responseData['intent'],
+					'confident_score' => $responseData['confidence'] ?? 0,
+					'energy' => $responseData['energy_score'] ?? 0,
+					'ood' => !empty($responseData['is_ood']) ? 1 : 0
 				];
 				$this->chatModel->saveChatDetail('chat_detail', $detailData);
-
-				// Dapatkan detail_id yang baru saja di-insert
 				$detail_id = $this->db->insert_id();
 
-				// 3. Simpan class probabilities ke class_probability
-				//$responseData['class_probabilities'] adalah array ['intent' => score, ...]
-				foreach ($responseData['class_probabilities'] as $cls => $score) {
-					$probData = [
-						'prediction_id'  => $detail_id,
-						'intent_class'  => $cls,
-						'probability'         => $score
-					];
-					$this->chatModel->saveClassProbability('class_probabilities', $probData);
-				}	
-				$result['intent'] = $responseData['intent'] ?? null;
+				// Save class probabilities if available
+				if (isset($responseData['class_probabilities'])) {
+					foreach ($responseData['class_probabilities'] as $cls => $score) {
+						$probData = [
+							'prediction_id' => $detail_id,
+							'intent_class' => $cls,
+							'probability' => (float)$score
+						];
+						$this->chatModel->saveClassProbability('class_probabilities', $probData);
+					}
+				}
+
+				$result['intent'] = $responseData['intent'];
 				$result['confidence'] = $responseData['confidence'] ?? null;
 				$result['energy'] = $responseData['energy_score'] ?? null;
 				$result['class_probabilities'] = $responseData['class_probabilities'] ?? [];
-				
 			}
 		} else {
-			error_log("Flask API error: HTTP $httpcode");
-			$result['response'] = 'Terjadi kesalahan saat menghubungi server. Silakan coba lagi.';
+			$result['response'] = 'Terjadi kesalahan saat menghubungi server.';
 		}
-
 		echo json_encode($result);
 	}
-
-
+		
+	
 	public function sendbook()
 	{
 		if (!$this->input->is_ajax_request()) {
@@ -173,7 +149,8 @@ class chat extends CI_Controller
 			'threshold' => 0.4
 		];
 
-		$ch = curl_init('http://localhost:5000/api/recommend'); // perhatikan endpoint-nya
+		$ch = curl_init('https://ZEROTSUDIOS-chatbot-bipa-api2.hf.space/api/recommend'); // perhatikan endpoint-nya
+		//$ch = curl_init('http://localhost:5000/api/recommend'); // perhatikan endpoint-nya
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($api_data));

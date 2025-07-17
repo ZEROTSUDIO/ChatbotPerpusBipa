@@ -17,7 +17,7 @@
 </head>
 
 <body class="h-screen flex items-center justify-center p-4">
-    <div class="chat-wrapper bg-white w-full max-w-4xl rounded-xl shadow-lg p-6 flex flex-col h-full border-2 border-black">
+    <div class="chat-wrapper bg-white w-full max-w-4xl rounded-xl shadow-lg p-3 flex flex-col h-full border-2 border-black">
         <!-- Header with profile and controls -->
         <div class="flex justify-between items-center mb-6 pb-3 border-b-2 border-gray-200">
             <div class="flex items-center">
@@ -147,6 +147,12 @@
             </form>
         </div>
     </div>
+	
+	<!-- Scroll to Bottom Button -->
+	<button id="scrollToBottomBtn" title="Scroll to Bottom"
+		class="hidden fixed bottom-20 right-5 bg-white border-2 border-black rounded-full p-3 shadow-lg hover:bg-gray-100 transition-opacity z-50">
+		<i class="fas fa-arrow-down"></i>
+	</button>
 
     <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
     <script>

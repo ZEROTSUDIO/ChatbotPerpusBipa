@@ -2,6 +2,29 @@ $(document).ready(function () {
     let waitingForRecommendation = false;
     let wait_confirmation = false;
 
+	const chatContainer = document.getElementById("chat-container");
+    const scrollBtn = document.getElementById("scrollToBottomBtn");
+	
+	chatContainer.addEventListener("scroll", function () {
+        const nearBottom = chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 100;
+        scrollBtn.classList.toggle("hidden", nearBottom);
+    });
+
+    // Scroll to bottom when clicked
+    scrollBtn.addEventListener("click", function () {
+        chatContainer.scrollTo({
+            top: chatContainer.scrollHeight,
+            behavior: 'smooth'
+        });
+    });
+
+    // Optional: scroll to bottom on initial page load
+    window.addEventListener("load", function () {
+        setTimeout(() => {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 100);
+    });
+	
     function scrollToBottom() {
         var chatContainer = document.getElementById('chat-container');
         chatContainer.scrollTop = chatContainer.scrollHeight;
