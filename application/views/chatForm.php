@@ -10,10 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet">   
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url(); ?>assets/img/favicon-32x32.png">
-
-
 </head>
 
 <body class="h-screen flex items-center justify-center p-4">
@@ -149,16 +147,48 @@
     </div>
 	
 	<!-- Scroll to Bottom Button -->
-	<button id="scrollToBottomBtn" title="Scroll to Bottom"
-		class="hidden fixed bottom-20 right-5 bg-white border-2 border-black rounded-full p-3 shadow-lg hover:bg-gray-100 transition-opacity z-50">
+	<button id="scrollToBottomBtn" title="Scroll to Bottom" class="hidden">
 		<i class="fas fa-arrow-down"></i>
 	</button>
+	
+	<!-- Toggle Chat Guide Button -->
+	<button id="toggleGuideBtn" title="Panduan Chatbot">
+		<i class="fas fa-question"></i>
+	</button>
+	
+	<!-- Guide Panel (Hidden by Default) -->
+	<div id="chatGuidePanel" class="hidden">
+		<div class="flex justify-between items-center mb-2">
+			<h2 class="text-lg font-bold font-handwriting">📌 Panduan Chat</h2>
+			<button id="closeGuideBtn" class="text-gray-700 hover:text-black">
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+		<ul class="list-disc list-inside text-sm space-y-1 font-handwriting">
+			<li>"Cari buku pemrograman"</li>
+			<li>"Jam buka perpustakaan"</li>
+			<li>"Apa saja fasilitasnya?"</li>
+			<li>"Cara jadi anggota"</li>
+			<li>"Rekomendasi buku AI"</li>
+			<li>"Siapa pengelola perpustakaan?"</li>
+		</ul>
+		<p class="mt-3 text-xs text-gray-600 italic">Gunakan bahasa natural, chatbot akan mengenali maksud Anda.</p>
+	</div>
 
     <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
     <script>
         const baseUrl = "<?= base_url() ?>";
         const userName = <?= json_encode($user->nama); ?>;
         var activeController = "<?php echo $active_controller; ?>";
+		$(document).ready(function () {
+        $('#toggleGuideBtn').click(function () {
+            $('#chatGuidePanel').toggleClass('hidden');
+        });
+
+        $('#closeGuideBtn').click(function () {
+            $('#chatGuidePanel').addClass('hidden');
+        });
+    });
     </script>
 </body>
 

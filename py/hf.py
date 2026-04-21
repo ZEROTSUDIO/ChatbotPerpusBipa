@@ -1,7 +1,8 @@
+import os
 from huggingface_hub import login, create_repo, upload_folder
 
 # 1. 🔐 Login using your HF token (get it from https://huggingface.co/settings/tokens)
-login("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")  # <--- ganti dengan token kamu
+login(os.getenv("HF_TOKEN"))  # <--- ganti dengan token kamu
 
 # 2. 📁 Create repo on Hugging Face (if belum dibuat). Ganti nama repo sesuai keinginan.
 repo_name = "Bipa-Classification"  # bebas, asal unik di akunmu

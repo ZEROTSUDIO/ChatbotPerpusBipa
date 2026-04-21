@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <div id="main-wrapper" class="main-wrapper">
     <!-- Header -->
     <header class="bg-white border-b-2 border-black p-4">
@@ -10,18 +13,22 @@
     <main class="p-6">
         <div class="container mx-auto px-4 py-8">
             <!-- Header -->
-            <div class="mb-8">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-800">Detail Pengguna</h1>
-                        <p class="text-gray-600 mt-2">Informasi lengkap dan riwayat chat pengguna</p>
-                    </div>
-                    <a href="<?php echo base_url('admin/users'); ?>" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        Kembali
-                    </a>
-                </div>
-            </div>
+            <div class="flex items-center justify-between">
+				<div>
+					<h1 class="text-3xl font-bold text-gray-800">Detail Pengguna</h1>
+					<p class="text-gray-600 mt-2">Informasi lengkap dan riwayat chat pengguna</p>
+				</div>
+				<div class="flex space-x-3">
+					<button id="savePdfBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center">
+						<i class="fas fa-file-pdf mr-2"></i>
+						Save as PDF
+					</button>
+					<a href="<?php echo base_url('admin/users'); ?>" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
+						<i class="fas fa-arrow-left mr-2"></i>
+						Kembali
+					</a>
+				</div>
+			</div>
 
             <!-- Profile Section -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -545,4 +552,90 @@
             closeProbabilityModal();
         }
     });
+</script>
+<script>
+document.getElementById('savePdfBtn').addEventListener('click', async function() {
+    const button = this;
+    const originalText = button.innerHTML;
+    
+    // Show loading state
+    button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generating PDF...';
+    button.disabled = true;
+    
+    try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        // Get user name for filename
+        const userName = '<?php echo addslashes($the_user->nama); ?>';
+        const filename = `user-detail-${userName.replace(/[^a-zA-Z0-9]/g, '-')}.pdf`;
+        
+        // Hide pagination and modal for cleaner PDF
+        const pagination = document.getElementById('myPaginationId');
+        const modal = document.getElementById('fullChatModal');
+        const originalPaginationDisplay = pagination.style.display;
+        const originalModalDisplay = modal.style.display;
+        
+        pagination.style.display = 'none';
+        modal.style.display = 'none';
+        
+        // Show all table rows for PDF
+        const tableRows = document.querySelectorAll('#chatDetailsTable tr');
+        tableRows.forEach(row => {
+            row.style.display = '';
+        });
+        
+        // Get the main wrapper content
+        const element = document.getElementById('main-wrapper');
+        
+        // Generate canvas from HTML
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            width: element.scrollWidth,
+            height: element.scrollHeight
+        });
+        
+        // Calculate dimensions
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 295; // A4 height in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+        
+        // Add first page
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        
+        // Add additional pages if content is longer
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+        
+        // Save the PDF
+        pdf.save(filename);
+        
+        // Restore original display states
+        pagination.style.display = originalPaginationDisplay;
+        modal.style.display = originalModalDisplay;
+        
+        // Restore pagination functionality
+        if (typeof paginationInstance !== 'undefined') {
+            paginationInstance.init();
+        }
+        
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        alert('Error generating PDF. Please try again.');
+    } finally {
+        // Restore button state
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }
+});
 </script>

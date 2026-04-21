@@ -169,6 +169,196 @@ button[type="submit"]:hover {
 }
 
 
+/* Chat Guide Layout Fixes */
+
+/* Fixed positioning for guide buttons */
+#toggleGuideBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    hover:bg-gray-100;
+    transition: all 0.3s ease;
+    z-index: 60;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#toggleGuideBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+    background-color: #f8f8f8;
+}
+
+/* Scroll to bottom button repositioning */
+#scrollToBottomBtn {
+    position: fixed;
+    bottom: 80px; /* Moved up to avoid overlap with guide button */
+    right: 20px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    transition: all 0.3s ease, opacity 0.3s ease;
+    z-index: 50;
+    opacity: 0.9;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scrollToBottomBtn:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+    background-color: #f8f8f8;
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+}
+
+/* Chat Guide Panel improvements */
+#chatGuidePanel {
+    position: fixed;
+    top: 100px; /* Moved down from top */
+    right: 20px;
+    width: 280px;
+    max-width: calc(100vw - 40px);
+    background: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+    padding: 20px;
+    z-index: 55;
+    transition: all 0.3s ease;
+    transform-origin: top right;
+}
+
+#chatGuidePanel.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9) translateY(-10px);
+}
+
+#chatGuidePanel:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+}
+
+/* Guide panel header */
+#chatGuidePanel .flex.justify-between.items-center {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#chatGuidePanel h2 {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#closeGuideBtn {
+    color: #666;
+    transition: color 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+#closeGuideBtn:hover {
+    color: #000;
+    background-color: #f3f4f6;
+}
+
+/* Guide panel content */
+#chatGuidePanel ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+#chatGuidePanel li {
+    margin-bottom: 6px;
+    color: #374151;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+#chatGuidePanel p.mt-3 {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px dotted #d1d5db;
+    color: #6b7280;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #toggleGuideBtn {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        padding: 10px;
+    }
+    
+    #scrollToBottomBtn {
+        bottom: 70px; /* Adjusted for mobile */
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        padding: 10px;
+    }
+    
+    #chatGuidePanel {
+        top: 80px;
+        right: 15px;
+        left: 15px;
+        width: auto;
+        max-width: none;
+        padding: 16px;
+    }
+    
+    #chatGuidePanel h2 {
+        font-size: 1rem;
+    }
+    
+    #chatGuidePanel li {
+        font-size: 0.85rem;
+    }
+    
+    #chatGuidePanel p.mt-3 {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #chatGuidePanel {
+        top: 70px;
+        padding: 14px;
+    }
+    
+    #toggleGuideBtn,
+    #scrollToBottomBtn {
+        width: 42px;
+        height: 42px;
+        padding: 8px;
+    }
+    
+    #scrollToBottomBtn {
+        bottom: 65px;
+    }
+}
+
+
 @media (max-width: 768px) {
     body {
         padding: 0;

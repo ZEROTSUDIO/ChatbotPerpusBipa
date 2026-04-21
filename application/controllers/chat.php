@@ -56,7 +56,7 @@ class chat extends CI_Controller
 		$message = $data['message'] ?? '';
 
 		$api_url = 'https://ZEROTSUDIOS-chatbot-bipa-api2.hf.space/api/analyze';
-		//$api_url = 'http://localhost:5000/api/analyze';
+		//$api_url = 'http://localhost:5000/api/analyze'; unused moved to huggingface
 		$ch = curl_init($api_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
